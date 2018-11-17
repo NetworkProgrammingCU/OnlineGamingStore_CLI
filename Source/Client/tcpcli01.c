@@ -1,10 +1,12 @@
 // ============================================
-// Programmer:      Nicholas Gautier
+// Programmers:     Nicholas Gautier
+//                  Justin Griffith
+//                  Marilyn Li
 // Class:           CS3013; Network Programming
-// Assignment #:    2
-// Due Date:        29.October.2018
+// Assignment #:    3
+// Due Date:        12.December.2018
 // Instructor:      Dr. Zhao
-// Description:     This program allows communication between the client and server.
+// Description:     TO-BE-DETERMINED
 // Credits:
 //  Base Source Code provided by W. Richard Stevens in
 //      Unix Network Programming, The Sockets Networking API
