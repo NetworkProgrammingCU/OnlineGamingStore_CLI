@@ -4,6 +4,10 @@
 //  original header file requires the relative
 //  paths to be resolved.
 
+// Guards
+#ifndef _MYUNP_H
+#define _MYUMP_H
+
 
 // Included Libraries
 // ============================
@@ -26,3 +30,6 @@
 #define SERV_PORT 6324      // LIVING ON THE EDGE!  - must be unique
 #define SA struct sockaddr  // SA definition
 // ============================
+
+// Concluding Guard
+#endif
