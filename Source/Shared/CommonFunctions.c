@@ -94,23 +94,6 @@ void DisplayPrompt()
 
 
 
-// Message Tag
-// ------------------------
-// Documentation
-//  This function will display a tag of the source of a message.
-// ------------------------
-// Parameters
-//  source [char*]
-//      Source of the message
-// ------------------------
-void MessageTag(char source[])
-{
-    printf("[%s]:", source);
-} // MessageTag()
-
-
-
-
 // Clear Buffer
 // ------------------------
 // Documentation
