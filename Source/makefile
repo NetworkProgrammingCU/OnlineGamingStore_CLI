@@ -21,12 +21,12 @@ svDriver := $(DIR)/Server/Driver.c
 ALL: server client
 server: $(svDriver)
 	@echo Compiling Server Build. . .
-	$(compiler) $(compilerArg) $(svOutput) $(svDriver)
+	@$(compiler) $(compilerArg) $(svOutput) $(svDriver)
 	@echo Successfully Compiled Build!
 client: Driver.c
 	@echo Compiling Client Build. . .
 	@echo Successfully Compiled Build!
 clean:
 	@echo Thrashing Compiled Builds. . .
-	rm $(svOutput)
+	@rm $(svOutput)
 	@echo Successfully Expunged Binary Builds!
