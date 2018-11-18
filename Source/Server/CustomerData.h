@@ -1,4 +1,4 @@
-typedef struct
+typedef struct CustomerData
 {
     char* firstName;            // The user's First Name
     char* lastName;             // The user's Last Name

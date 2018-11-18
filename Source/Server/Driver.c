@@ -26,6 +26,8 @@
 #include <stdlib.h>             // Pointer Memory Allocation
 #include "myunp.h"              // Our custom UNP Header file
 #include "CommonFunctions.h"    // Shared functions; to help minimize development cost between sub-projects.
+#include "CustomerData.h"       // Customer Data Object
+#include "GameData.h"           // Game Data Object
 // ===============================
 
 

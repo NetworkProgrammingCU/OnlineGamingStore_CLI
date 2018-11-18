@@ -1,4 +1,4 @@
-typedef struct
+typedef struct GameData
 {
     char* title;            // Title of the game
     char* description;      // Description of the game

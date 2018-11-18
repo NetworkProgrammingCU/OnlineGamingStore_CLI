@@ -17,7 +17,8 @@ shMyUNP := $(shDir)/myunp.h
 # Server files
 # =====================================================
 svOutput := server.binary
-svDriver := $(DIR)/Server/Driver.c
+svDir := $(DIR)/Server
+svDriver := $(svDir)/Driver.c
 
 # Client files
 # =====================================================
@@ -28,7 +29,7 @@ svDriver := $(DIR)/Server/Driver.c
 ALL: server client
 server:
 	@echo Compiling Server Build. . .
-	@$(compiler) $(compilerArg) $(svOutput) -I $(shDir) $(shComFun) $(svDriver)
+	@$(compiler) $(compilerArg) $(svOutput) -I $(shDir) -I $(svDir) $(shComFun) $(svDriver)
 	@echo Successfully Compiled Build!
 client: Driver.c
 	@echo Compiling Client Build. . .
