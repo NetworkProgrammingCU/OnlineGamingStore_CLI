@@ -1,0 +1,4 @@
+# Ignore all binary files
+#   This is necessary to ignore the 'server' and 'client' builds
+#   that are created from the makefile.
+*.binary
