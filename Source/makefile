@@ -7,6 +7,12 @@ DIR := ${CURDIR}
 compiler := cc
 compilerArg := -o
 
+# Shared files
+# =====================================================
+shDir := $(DIR)/Shared
+shComFun := $(shDir)/CommonFunctions.c
+shMyUNP := $(shDir)/myunp.h
+
 # Server files
 # =====================================================
 svOutput := server.binary
@@ -19,9 +25,9 @@ svDriver := $(DIR)/Server/Driver.c
 # Main Make Operation
 # =====================================================
 ALL: server client
-server: $(svDriver)
+server: $(shComFun) $(svDriver)
 	@echo Compiling Server Build. . .
-	@$(compiler) $(compilerArg) $(svOutput) $(svDriver)
+	$(compiler) $(compilerArg) $(svOutput) -I $(shDir) $(shComFun) $(shMyUNP) $(svDriver)
 	@echo Successfully Compiled Build!
 client: Driver.c
 	@echo Compiling Client Build. . .
