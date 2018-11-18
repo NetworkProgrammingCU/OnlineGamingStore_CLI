@@ -28,4 +28,5 @@ client: Driver.c
 	@echo Successfully Compiled Build!
 clean:
 	@echo Thrashing Compiled Builds. . .
+	rm $(svOutput)
 	@echo Successfully Expunged Binary Builds!
