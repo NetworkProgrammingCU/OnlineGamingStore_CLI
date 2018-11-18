@@ -24,8 +24,8 @@
 #include <ctype.h>                  // tolower() functions for user input
 #include <stddef.h>                 // NULLPTR; used for pointers
 #include <stdlib.h>                 // Pointer Memory Allocation
-//#include "myunp.h"              // Our custom UNP Header file
-//#include "CommonFunctions.c"    // This contains our common functions
+#include "myunp.h"              // Our custom UNP Header file
+#include "CommonFunctions.c"    // This contains our common functions
                                 //  will be available through out the
                                 //  entire program.
 // ===============================
