@@ -3,8 +3,6 @@
 
 
 
-#ifndef _COMMONFUNCTIONS_
-#define _COMMONFUNCTIONS_
 
 // Lowercase User Input
 // ------------------------
@@ -110,5 +108,3 @@ void ClearBuffer(char stringBuffer[], int bufferSize)
 {
     memset(stringBuffer, '\0', bufferSize);
 } // ClearBuffer()
-
-#endif
