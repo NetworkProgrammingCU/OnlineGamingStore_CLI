@@ -113,6 +113,8 @@ void DrawInstructionsMainMenu()
 // Draw Main Menu
 void DrawMenuMain()
 {
+    printf("Main Menu\n");
+    printf("------------------------------------------------\n\n");
     // View Store Catalogue
     printf("[1] - View Game Store\n");
     printf("       View what games are available within our store!\n");
