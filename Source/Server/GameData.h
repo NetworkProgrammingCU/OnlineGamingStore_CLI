@@ -6,4 +6,7 @@ typedef struct GameData
     char* developers;       // Developers (or company) that created the game
     char* genre;            // Genre of the game
     char* notes;            // Specialized notes regarding the game
+    
+    // Linked List Functionality
+    struct GameData *next;
 } GameData;
