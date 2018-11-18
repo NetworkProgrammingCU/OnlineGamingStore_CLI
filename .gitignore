@@ -2,3 +2,10 @@
 #   This is necessary to ignore the 'server' and 'client' builds
 #   that are created from the makefile.
 *.binary
+
+# Ignore backup files (xed)
+#   I think these backups are coming from the xed text buffer editor
+#   To avoid seeing them and mistakenly adding them to the project's
+#   repository, lets just ignore them.
+*~
+*.*~
