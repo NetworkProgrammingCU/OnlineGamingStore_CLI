@@ -20,7 +20,7 @@ svDriver := $(DIR)/Server/Driver.c
 ALL: server client
 server: $(svDriver)
 	@echo Compiling Server Build. . .
-	$(compiler) $(compilerArg) server $(svDriver)
+	$(compiler) $(compilerArg) server.binary $(svDriver)
 	@echo Successfully Compiled Build!
 client: Driver.c
 	@echo Compiling Client Build. . .
