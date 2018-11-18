@@ -43,13 +43,17 @@
 
 // Function Prototypes
 // ===============================
-void DrawInstructionsMainMenu();
-void DrawMenuMain();
-void DrawStorePage();
-void CloseProgram();
-void DrawHeader();
-void DrawAbout();
-void DrawUserLoggedIn();
+void DrawInstructionsMainMenu();    // Display the program instructions onto the terminal.
+void DrawMenuMain();                // Display the main menu to the user.
+void DrawStorePage();               // Display the store page to the user.
+void CloseProgram();                // Perform the termination protocol (if any).
+void DrawHeader();                  // Display the program header onto the terminal buffer.
+void DrawAbout();                   // Display the purpose of the program to the user.
+void DrawUserLoggedIn();            // Display who is viewing the store.
+void GenerateUserList(struct        // Generate predefined users.
+    CustomerData*);
+void GenerateGameList(struct        // Generate predefined games.
+    GameData*);
 // ===============================
 
 
@@ -68,6 +72,10 @@ int main(int argc, char **argv)
     // ----------------------------------
     //int sockfd;                     // Socket File Descriptor
     //struct sockaddr_in servaddr;    // Server Info Struct.
+    struct CustomerData*
+        customerList = NULL;        // Customer Data Linked-List
+    struct GameData*
+        gameList = NULL;            // Game Data Linked-List
     // ----------------------------------
     
     // Display the program's header
@@ -187,3 +195,57 @@ void DrawUserLoggedIn()
 {
     printf("You are logged in as: {{PLACEHOLDER}}\n");
 } // DrawUserLoggedIn()
+
+
+
+// Generate Customer List
+// -----------------------------------
+// Documentation
+//  This function will simply generate a small list of users that have an account within the store.
+// -----------------------------------
+// Parameters
+//  *cList [CustomerData]
+//      The 'head' or 'starting' position of the LinkedList of Customer Data.
+//      This list -WILL-BE-MODIFIED!
+// -----------------------------------
+void GenerateUserList(struct CustomerData* cList)
+{
+    // For right now, we will only create one object instance
+    cList->firstName = "Theodore";
+    cList->lastName = "Roosevelt";
+    cList->userID = "The Big Stick Teddy";
+    cList->userKey = "1h3_13ddY";
+    cList->email = "TheBigStick@yahoo.com";
+    cList->phoneNumber = "000-000.0000";
+    cList->addressCity = "Oyster Bay";
+    cList->addressState = "New York";
+    cList->addressCountry = "United States";
+    cList->addressStreet = "20 Sagamore Hill Rd";
+    cList->addressPostalCode = "11771";
+    cList->admin = 1;
+    cList->next = NULL;
+} // GenerateUserList()
+
+
+
+// Generate Game List
+// -----------------------------------
+// Documentation
+//  This function will merely provide a list of games that is available within the store.
+// -----------------------------------
+// Parameters
+//  *glist [GameData]
+//      The 'head' or 'starting' position of the LinkedList of Game Data.
+//      This list -WILL-BE-MODIFIED!
+// -----------------------------------
+void GenerateGameList(struct GameData* gList)
+{
+    // For right now, we will only create one object instance
+    gList->title = "The Ultimate Doom";
+    gList->description = "Hell has unleashed";
+    gList->publisher = "id Software";
+    gList->developers = "id Software";
+    gList->genre = "FPS";
+    gList->notes = "Nothing";
+    gList->next = NULL;
+} // GenerateGameList()
