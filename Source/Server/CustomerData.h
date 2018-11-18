@@ -15,4 +15,7 @@ typedef struct CustomerData
     char* addressStreet;        // The user's Address: Street
     char* addressPostalCode;    // The user's Address: Postal Code
     int admin;                  // Is this user part of the Administration team?
+    
+    // Linked List Functionality
+    struct CustomerData *next;
 } CustomerData;
