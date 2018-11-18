@@ -19,12 +19,13 @@
 
 // Included Libraries
 // ===============================
-#include <stdio.h>      // Input\Output Stream
-#include <stdbool.h>    // Because I was spoiled with C++ and C#, just give me the Bool data types!
-#include <ctype.h>      // tolower() functions for user input
-#include <stddef.h>     // NULLPTR; used for pointers
-#include <stdlib.h>     // Pointer Memory Allocation
-#include "myunp.h"      // Our custom UNP Header file
+#include <stdio.h>              // Input\Output Stream
+#include <stdbool.h>            // Because I was spoiled with C++ and C#, just give me the Bool data types!
+#include <ctype.h>              // tolower() functions for user input
+#include <stddef.h>             // NULLPTR; used for pointers
+#include <stdlib.h>             // Pointer Memory Allocation
+#include "myunp.h"              // Our custom UNP Header file
+#include "CommonFunctions.h"    // Shared functions; to help minimize development cost between sub-projects.
 // ===============================
 
 
@@ -86,7 +87,7 @@ int main(int argc, char **argv)
     DrawInstructionsMainMenu();
     DrawMenuMain();
     
-    
+
     return 0;
 } // main()
 
