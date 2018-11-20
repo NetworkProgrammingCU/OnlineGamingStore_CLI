@@ -77,8 +77,10 @@ int main(int argc, char **argv)
         customerList = NULL;        // Customer Data Linked-List
     struct GameData*
         gameList = NULL;            // Game Data Linked-List
-        
     // ----------------------------------
+    
+    // Randomize the seed
+    srand(time(NULL));      // This will come in handy when we do the randomization of information.
     
     // Display the program's header
     DrawHeader();
