@@ -24,6 +24,7 @@
 #include <ctype.h>              // tolower() functions for user input
 #include <stddef.h>             // NULLPTR; used for pointers
 #include <stdlib.h>             // Pointer Memory Allocation
+#include <time.h>               // time() function for randomized seeds
 #include "myunp.h"              // Our custom UNP Header file
 #include "CommonFunctions.h"    // Shared functions; to help minimize development cost between sub-projects.
 #include "CustomerData.h"       // Customer Data Object
@@ -76,6 +77,7 @@ int main(int argc, char **argv)
         customerList = NULL;        // Customer Data Linked-List
     struct GameData*
         gameList = NULL;            // Game Data Linked-List
+        
     // ----------------------------------
     
     // Display the program's header
