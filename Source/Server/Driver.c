@@ -34,7 +34,7 @@
 
 // Global Definitions
 // ===============================
-#define _NAME_ "Totally Not Steam!"         // Name of this program
+#define _NAME_ "The Exotic Hairy Pickle"    // Name of this program
 #define _VERSION_ "1.0"                     // Version of this program
 #define _VERSION_NAME_ "Squeeze"            // Version Code-Name
 // ===============================
