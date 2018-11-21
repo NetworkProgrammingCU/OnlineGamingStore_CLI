@@ -17,6 +17,7 @@
 
 
 
+
 // Included Libraries
 // ===============================
 #include <stdio.h>              // Input\Output Stream
@@ -33,12 +34,14 @@
 
 
 
+
 // Global Definitions
 // ===============================
 #define _NAME_ "The Exotic Hairy Pickle"    // Name of this program
 #define _VERSION_ "1.0"                     // Version of this program
 #define _VERSION_NAME_ "Squeeze"            // Version Code-Name
 // ===============================
+
 
 
 
@@ -55,7 +58,12 @@ void GenerateUserList(struct        // Generate predefined users.
     CustomerData*);
 void GenerateGameList(struct        // Generate predefined games.
     GameData*);
+int RandomNum(int randMin,          // Provides a random number within the given constraints.
+    int randMax);
+void Randomizer(char *charString,   // Generates a specific random number set for the supported types.
+    int randomType);
 // ===============================
+
 
 
 
@@ -140,10 +148,12 @@ void DrawMenuMain()
 
 
 
+
 void DrawStorePage()
 {
     
 }
+
 
 
 
@@ -159,6 +169,7 @@ void CloseProgram()
 
 
 
+
 // Draw Header
 // -----------------------------------
 // Documentation
@@ -170,6 +181,7 @@ void DrawHeader()
     printf("%s\n", _VERSION_NAME_);
     printf("-----------------------------------------------\n\n");
 } // DrawHeader()
+
 
 
 
@@ -190,6 +202,7 @@ void DrawAbout()
 
 
 
+
 // Draw User Logged-In Status
 // -----------------------------------
 // Documentation
@@ -199,6 +212,7 @@ void DrawUserLoggedIn()
 {
     printf("You are logged in as: {{PLACEHOLDER}}\n");
 } // DrawUserLoggedIn()
+
 
 
 
@@ -232,6 +246,7 @@ void GenerateUserList(struct CustomerData* cList)
 
 
 
+
 // Generate Game List
 // -----------------------------------
 // Documentation
@@ -253,3 +268,66 @@ void GenerateGameList(struct GameData* gList)
     gList->notes = "Nothing";
     gList->next = NULL;
 } // GenerateGameList()
+
+
+
+
+// Randomizer
+// -----------------------------------
+// Documentation
+//  This function all auto-populate numeric based values into a String.
+// -----------------------------------
+// Parameters
+//  *charString [Char[]]
+//      The character (string) that will be modified.
+//  randomType [int]
+//      The randomization type to be executed.
+//          0 = Phone Number
+//          1 = Zip Code
+// -----------------------------------
+void Randomizer(char *charString, int randomType)
+{
+    // Initializations and Declarations
+    // -----------------------------------
+    int i;  // Used for iterating through the char array.
+    // -----------------------------------
+    switch (randomType)
+    {
+        case 0:
+            // Phone Number
+            for (i = 0; i < 10; i++)
+                charString[i] = RandomNum(0, 10);   // Only generate a number between 0 - 9
+            break;
+        case 1:
+            // Zip Code
+            charString = RandomNum(10000, 99999);   // Only generate a random number within the given ranges to get our zip.
+            break;
+        default:
+            // Unknown error occurred; we can not determine what Random Type we are supposed to use from here,
+            //  thus, just supply '0' to assure everything continues to move smoothly.
+            printf("Unknown Switch Condition was passed!\n Condition Passed was [ %d ]\n", randomType);
+            charString[0] = "0\0";
+            break;
+    } // switch
+} // Randomizer()
+
+
+
+
+// Random Number
+// -----------------------------------
+// Documentation
+//  This function will generate a random set of numbers based on the provided range.
+// -----------------------------------
+// Parameters
+//  randMin [int]
+//      The lowest boundary to produce from the randomizer (inclusive).
+//  randMax [int]
+//      The highest boundary to produce from the randomizer (exclusive).
+// -----------------------------------
+// Output
+//  A random number provided by the specific ranges.
+int RandomNum(int randMin, int randMax)
+{
+    return (rand() % randMax + randMin);
+} // RandomNum()
