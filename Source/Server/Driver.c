@@ -253,7 +253,7 @@ void DrawUserLoggedIn()
 // -----------------------------------
 static void GenerateUserList(struct CustomerData** cList)
 {
-    for (int i = 0; i < 1; i++)
+    for (int i = 0; i < 3; i++)
         switch (i)
         {
         case 0:
@@ -270,6 +270,36 @@ static void GenerateUserList(struct CustomerData** cList)
                             "20 Sagamore Hill Rd",
                             "11771",
                             1);
+            break;
+        case 1:
+            CreateNewCustomer(cList,
+                            "Al",
+                            "Bundy",
+                            "AlDaddyBundy",
+                            "shootme",
+                            "AlBimby@GarysShoes.com",
+                            "000-000.0000",
+                            "Chicago",
+                            "Illinois",
+                            "United States",
+                            "9764 Jeopardy Lane",
+                            "60015",
+                            0);
+            break;
+        case 2:
+            CreateNewCustomer(cList,
+                            "Hana",
+                            "Eris",
+                            "Hana",
+                            "1234",
+                            "HanaErie@gmail.com",
+                            "000-000.0000",
+                            "El Paso",
+                            "Texas",
+                            "United States",
+                            "4389 Brosius Cir.",
+                            "79904",
+                            0);
             break;
         } // switch
 } // GenerateUserList()
