@@ -57,8 +57,8 @@ void CloseProgram();                // Perform the termination protocol (if any)
 void DrawHeader();                  // Display the program header onto the terminal buffer.
 void DrawAbout();                   // Display the purpose of the program to the user.
 void DrawUserLoggedIn();            // Display who is viewing the store.
-void GenerateUserList(struct        // Generate predefined users.
-    CustomerData*);
+static void GenerateUserList(struct // Generate predefined users.
+    CustomerData**);
 void GenerateGameList(struct        // Generate predefined games.
     GameData*);
 int RandomNum(int randMin,          // Provides a random number within the given constraints.
