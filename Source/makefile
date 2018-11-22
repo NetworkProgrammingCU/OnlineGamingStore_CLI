@@ -20,6 +20,7 @@ svOutput := server.binary
 svDir := $(DIR)/Server
 svDriver := $(svDir)/Driver.c
 svProgInfo := $(svDir)/ProgInformation.c
+svGameLL := $(svDir)/GameLinkedList.c
 
 # Client files
 # =====================================================
@@ -30,7 +31,7 @@ svProgInfo := $(svDir)/ProgInformation.c
 ALL: server client
 server:
 	@echo Compiling Server Build. . .
-	@$(compiler) $(compilerArg) $(svOutput) -I $(shDir) -I $(svDir) $(shComFun) $(svProgInfo) $(svDriver)
+	@$(compiler) $(compilerArg) $(svOutput) -I $(shDir) -I $(svDir) $(shComFun) $(svProgInfo) $(svGameLL) $(svDriver)
 	@echo Successfully Compiled Build!
 client: Driver.c
 	@echo Compiling Client Build. . .

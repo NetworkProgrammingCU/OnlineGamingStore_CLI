@@ -1,3 +1,8 @@
+// Guards
+#ifndef _CUSTOMERDATASTRUCT_H_
+#define _CUSTOMERDATASTRUCT_H_
+
+
 typedef struct CustomerData
 {
     char* firstName;            // The user's First Name
@@ -19,3 +24,8 @@ typedef struct CustomerData
     // Linked List Functionality
     struct CustomerData *next;
 } CustomerData;
+
+
+
+// Concluding Guard
+#endif

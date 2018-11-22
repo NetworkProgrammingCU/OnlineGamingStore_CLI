@@ -1,3 +1,8 @@
+// Guards
+#ifndef _GAMEDATASTRUCT_H_
+#define _GAMEDATASTRUCT_H_
+
+
 typedef struct GameData
 {
     char* title;            // Title of the game
@@ -10,3 +15,7 @@ typedef struct GameData
     // Linked List Functionality
     struct GameData *next;
 } GameData;
+
+
+// Concluding Guard
+#endif

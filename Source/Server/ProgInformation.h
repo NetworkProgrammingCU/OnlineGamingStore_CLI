@@ -2,7 +2,7 @@
 // Used for Program Information and Instructions
 
 
-
+// Guards
 #ifndef _PROGINFORMATION_H_
 #define _PROGINFORMATION_H_
 
@@ -15,4 +15,5 @@ void DrawAbout();                   // Display the purpose of the program to the
 // -----------------------------------
 
 
+// Concluding Guard
 #endif
