@@ -29,20 +29,12 @@
 #include <stddef.h>             // NULLPTR; used for pointers
 #include <stdlib.h>             // Pointer Memory Allocation
 #include <time.h>               // time() function for randomized seeds
+#include "GlobalDefs.h"         // Program Macro-Definitions
 #include "myunp.h"              // Our custom UNP Header file
 #include "CommonFunctions.h"    // Shared functions; to help minimize development cost between sub-projects.
 #include "CustomerData.h"       // Customer Data Object
 #include "GameData.h"           // Game Data Object
-// ===============================
-
-
-
-
-// Global Definitions
-// ===============================
-#define _NAME_ "The Exotic Hairy Pickle"    // Name of this program
-#define _VERSION_ "1.0"                     // Version of this program
-#define _VERSION_NAME_ "Squeeze"            // Version Code-Name
+#include "ProgInformation.h"    // Instructions and Informational Output
 // ===============================
 
 
@@ -50,17 +42,15 @@
 
 // Function Prototypes
 // ===============================
-void DrawInstructionsMainMenu();    // Display the program instructions onto the terminal.
 void DrawMenuMain();                // Display the main menu to the user.
 void DrawStorePage();               // Display the store page to the user.
 void CloseProgram();                // Perform the termination protocol (if any).
-void DrawHeader();                  // Display the program header onto the terminal buffer.
-void DrawAbout();                   // Display the purpose of the program to the user.
+
 void DrawUserLoggedIn();            // Display who is viewing the store.
 static void GenerateUserList(struct // Generate predefined users.
     CustomerData**);
-void GenerateGameList(struct        // Generate predefined games.
-    GameData*);
+static void GenerateGameList(struct // Generate predefined games.
+    GameData**);
 int RandomNum(int randMin,          // Provides a random number within the given constraints.
     int randMax);
 void Randomizer(char *charString,   // Generates a specific random number set for the supported types.
@@ -73,7 +63,13 @@ static void CreateNewCustomer(CustomerData**,  // Create a new Customer entry
                                 const char*, const char*,
                                 const char*, int);
 static void AppendNewCustomer(CustomerData**,  // Add the new customer to the primary Linked-List.
-                    CustomerData *);
+                                CustomerData *);
+static void CreateNewGame(GameData**,           // Create a new Game entry
+                                const char*, const char*,
+                                const char*, const char*,
+                                const char*, const char);
+static void AppendNewGame(GameData**,           // Add the new game to the primary Linked-List.
+                            GameData*);
 // ===============================
 
 
@@ -97,13 +93,26 @@ int main(int argc, char **argv)
         customerList = malloc(sizeof(CustomerData));    // Customer Data Linked-List
     struct GameData*
         gameList = malloc(sizeof(GameData));            // Game Data Linked-List
+    struct CustomerData*
+        sessionUser = malloc(sizeof(CustomerData));     // The user for this session
     // ----------------------------------
     
-    // Head points to NULL
-    customerList = NULL;
-    
+    // Immediate Execution
+    // ===================================
     // Randomize the seed
     srand((unsigned)time(NULL));      // This will come in handy when we do the randomization of information.
+    
+    // All Linked-List heads point to NULL
+    customerList = NULL;    // Customer List
+    gameList = NULL;        // Game List
+    
+    // Prepare the linked-lists
+    GenerateUserList(&customerList);    // Create the Customer List
+    GenerateGameList(&gameList);        // Create the Game List (our catalogue)
+    // ===================================
+    
+    
+
     
     // Display the program's header
     DrawHeader();
@@ -123,10 +132,7 @@ int main(int argc, char **argv)
     // Draw the Main Menu
     DrawInstructionsMainMenu();
     DrawMenuMain();
-    
-    // Create the customer list
-    GenerateUserList(&customerList);
-    
+        
     // Get some data
     // DEBUG STUFF
     printf("First name: %s\n", customerList->firstName);
@@ -137,20 +143,6 @@ int main(int argc, char **argv)
     
     return 0;
 } // main()
-
-
-
-
-// Draw Instructions
-// -----------------------------------
-// Documentation
-//  This function will provide the instructions to the client,
-//  in regards into how to use the main menu screen.
-// -----------------------------------
-void DrawInstructionsMainMenu()
-{
-    printf("Select the following options from the screen:\n");
-} // DrawInstructions()
 
 
 
@@ -191,39 +183,6 @@ void CloseProgram()
 {
     printf("Closing program. . .\n\n\n");
 } // CloseProgram()
-
-
-
-
-// Draw Header
-// -----------------------------------
-// Documentation
-//  This function is designed to provide a header to the top-most space on the terminal buffer.
-// -----------------------------------
-void DrawHeader()
-{
-    printf("%s - Version: %s\n", _NAME_, _VERSION_);
-    printf("%s\n", _VERSION_NAME_);
-    printf("-----------------------------------------------\n\n");
-} // DrawHeader()
-
-
-
-
-// Draw About
-// -----------------------------------
-// Documentation
-//  This function provides the 'About' section of the program
-// -----------------------------------
-void DrawAbout()
-{
-    printf("Welcome to the %s Store!\n", _NAME_);
-    printf("--------------------------------------------\n");
-    printf("Browse through our collection of games and purchase as many games as you want.  When you purchase a game, the game will be sent to your house by the slowest means possible.  Do note that the game you purchase is mere copies of the game, thus it is a non-genuine copy of the game.  Because of that, we charge extra for the activation or authentication keys.  In addition, there is no refunds if any game CD's and\\or floppies are damaged during shipping.\n");
-    printf("--------\n");
-    printf("See what others are saying about us!\n");
-    printf("Reviewer from NY Times: Stay clear from this store!  I ordered a game from there and the experience was totally crappy!  The game took three months to arrive in the mail and the company is merely two __BLOCKS__ away from my house!  The CD I ordered was badly scratch - but magically my computer could still read it just fine.  But what caught me off guard, I need an Activation Key in order to play my game!  I called the company furiously over the phone, but the representatives promptly laughed at me while saying \"SUCKER\"!  Seriously, STAY_AWAY_FROM_THIS_STORE!\n");
-} // DrawAbout()
 
 
 
@@ -317,17 +276,99 @@ static void GenerateUserList(struct CustomerData** cList)
 //      The 'head' or 'starting' position of the LinkedList of Game Data.
 //      This list -WILL-BE-MODIFIED!
 // -----------------------------------
-void GenerateGameList(struct GameData* gList)
+void GenerateGameList(struct GameData** gList)
 {
-    // For right now, we will only create one object instance
-    gList->title = "The Ultimate Doom";
-    gList->description = "Hell has unleashed";
-    gList->publisher = "id Software";
-    gList->developers = "id Software";
-    gList->genre = "FPS";
-    gList->notes = "Nothing";
-    gList->next = NULL;
+    for (int i = 0; i < 1; ++i)
+    switch(i)
+    {
+        case 0:
+            CreateNewGame(gList,
+                            "The Ultimate Doom",
+                            "Hell has unleashed",
+                            "id Software",
+                            "id Software",
+                            "FPS",
+                            "Nothing");
+            break;
+    } // switch
 } // GenerateGameList()
+
+
+
+
+// Create New Game Entry
+// -----------------------------------
+// Documentation:
+//  This function will create a new node into the link-list
+// -----------------------------------
+// Parameters:
+//  gList [GameData]
+//      The game list Linked-List obj. that will be modified.
+//  title [char *]
+//      Title of the game.
+//  description [char *]
+//      Description of the game.
+//  publisher [char *]
+//      Game publisher
+//  developers [char *]
+//      Developers for the game
+//  genre [char *]
+//      The game's genre.
+//  notes [char *]
+//      Notes regarding the game.
+// -----------------------------------
+static void CreateNewGame(GameData** gList,
+                            const char *title,
+                            const char *description,
+                            const char *publisher,
+                            const char *developers,
+                            const char *genre,
+                            const char *notes)
+{
+    // Create a new Node to store the new information
+    GameData* tempGList = (struct GameData*)malloc(sizeof(CustomerData));
+    
+    // Generate the required fields.
+    tempGList->title = (char *)title;
+    tempGList->description = (char *)description;
+    tempGList->publisher = (char *)publisher;
+    tempGList->developers = (char *)developers;
+    tempGList->genre = (char *)genre;
+    tempGList->notes = (char *)notes;
+    
+    // Update the next pointer
+    tempGList->next = NULL;
+    
+    // Add the entry into the linked-list.
+    AppendNewGame(gList, tempGList);
+} // GenerateNewGame()
+
+
+
+
+// Append New Customer
+// -----------------------------------
+// Documentation:
+//  This function will take the primary list and append the new list.
+// -----------------------------------
+// Parameters:
+//  cList [CustomerData]
+//      The primary Linked-List; this will be modified
+//  newCList [CustomerData]
+//      The temporary list, which will be added to the primary list.
+// -----------------------------------
+static void AppendNewCustomer(CustomerData **cList, CustomerData *newCList)
+{
+    // Empty list; merely append it
+    if (cList == NULL)
+        *cList = newCList;
+    else
+    {
+        // Add the new customer to the front of the list, all others is pushed back.
+        newCList->next = *cList;
+        *cList = newCList;
+    } // else
+} // AppendNewCustomer()
 
 
 
@@ -462,6 +503,7 @@ static void CreateNewCustomer(CustomerData **cList,
     // Update the next pointer
     tempCList->next = NULL;
 
+    // Add the entry into the linked-list.
     AppendNewCustomer(cList, tempCList);
 } // CreateNewCustomer()
 
