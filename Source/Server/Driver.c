@@ -103,7 +103,7 @@ int main(int argc, char **argv)
     customerList = NULL;
     
     // Randomize the seed
-    srand(time(NULL));      // This will come in handy when we do the randomization of information.
+    srand((unsigned)time(NULL));      // This will come in handy when we do the randomization of information.
     
     // Display the program's header
     DrawHeader();
