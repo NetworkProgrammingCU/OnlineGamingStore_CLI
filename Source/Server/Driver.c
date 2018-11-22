@@ -67,7 +67,7 @@ static void AppendNewCustomer(CustomerData**,  // Add the new customer to the pr
 static void CreateNewGame(GameData**,           // Create a new Game entry
                                 const char*, const char*,
                                 const char*, const char*,
-                                const char*, const char);
+                                const char*, const char*);
 static void AppendNewGame(GameData**,           // Add the new game to the primary Linked-List.
                             GameData*);
 // ===============================
@@ -346,29 +346,29 @@ static void CreateNewGame(GameData** gList,
 
 
 
-// Append New Customer
+// Append New Game
 // -----------------------------------
 // Documentation:
 //  This function will take the primary list and append the new list.
 // -----------------------------------
 // Parameters:
-//  cList [CustomerData]
+//  gList [GameData]
 //      The primary Linked-List; this will be modified
-//  newCList [CustomerData]
+//  newGList [GameData]
 //      The temporary list, which will be added to the primary list.
 // -----------------------------------
-static void AppendNewCustomer(CustomerData **cList, CustomerData *newCList)
+static void AppendNewGame(GameData **gList, GameData *newGList)
 {
     // Empty list; merely append it
-    if (cList == NULL)
-        *cList = newCList;
+    if (gList == NULL)
+        *gList = newGList;
     else
     {
-        // Add the new customer to the front of the list, all others is pushed back.
-        newCList->next = *cList;
-        *cList = newCList;
+        // Add the new game to the front of the list, all others is pushed back.
+        newGList->next = *gList;
+        *gList = newGList;
     } // else
-} // AppendNewCustomer()
+} // AppendNewGame()
 
 
 
