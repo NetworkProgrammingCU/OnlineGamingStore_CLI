@@ -416,17 +416,17 @@ static void CreateNewCustomer(CustomerData **cList,
     CustomerData* tempCList = (struct CustomerData*)malloc(sizeof(CustomerData));
 
     // Generate the required fields
-    tempCList->firstName = firstName;
-    tempCList->lastName = lastName;
-    tempCList->userID = userID;
-    tempCList->userKey = userKey;
-    tempCList->email = email;
-    tempCList->phoneNumber = phoneNumber;
-    tempCList->addressCity = addressCity;
-    tempCList->addressState = addressState;
-    tempCList->addressCountry = addressCountry;
-    tempCList->addressStreet = addressStreet;
-    tempCList->addressPostalCode = addressPostalCode;
+    tempCList->firstName = (char *)firstName;
+    tempCList->lastName = (char *)lastName;
+    tempCList->userID = (char *)userID;
+    tempCList->userKey = (char *)userKey;
+    tempCList->email = (char *)email;
+    tempCList->phoneNumber = (char *)phoneNumber;
+    tempCList->addressCity = (char *)addressCity;
+    tempCList->addressState = (char *)addressState;
+    tempCList->addressCountry = (char *)addressCountry;
+    tempCList->addressStreet = (char *)addressStreet;
+    tempCList->addressPostalCode = (char *)addressPostalCode;
     tempCList->admin = adminRights;
 
     // Update the next pointer
