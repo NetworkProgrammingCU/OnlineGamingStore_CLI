@@ -407,7 +407,8 @@ void Randomizer(char *charString, int randomType)
             // Unknown error occurred; we can not determine what Random Type we are supposed to use from here,
             //  thus, just supply '0' to assure everything continues to move smoothly.
             printf("Unknown Switch Condition was passed!\n Condition Passed was [ %d ]\n", randomType);
-            charString[0] = "0\0";
+            charString[0] = '0';
+            charString[1] = '\0';
             break;
     } // switch
 } // Randomizer()
