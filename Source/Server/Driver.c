@@ -8,6 +8,9 @@
 // Instructor:      Dr. Zhao
 // Description:     TO-BE-DETERMINED
 // Credits:
+//      Lewisk3 (from the ZDoom Community) [NG]
+//          Greatly helped me unfuck the Pointeramania issues
+//          Seriously, it was bad - like really bad.
 //  Base Source Code provided by W. Richard Stevens in
 //      Unix Network Programming, The Sockets Networking API
 //      Volume 1, 3rd edition.  All credit goes to him for the framework
@@ -62,6 +65,15 @@ int RandomNum(int randMin,          // Provides a random number within the given
     int randMax);
 void Randomizer(char *charString,   // Generates a specific random number set for the supported types.
     int randomType);
+static void CreateNewCustomer(CustomerData**,  // Create a new Customer entry
+                                const char*, const char*,
+                                const char*, const char*,
+                                const char*, const char*,
+                                const char*, const char*,
+                                const char*, const char*,
+                                const char*, int);
+static void AppendNewCustomer(CustomerData**,  // Add the new customer to the primary Linked-List.
+                    CustomerData *);
 // ===============================
 
 
@@ -82,10 +94,13 @@ int main(int argc, char **argv)
     //int sockfd;                     // Socket File Descriptor
     //struct sockaddr_in servaddr;    // Server Info Struct.
     struct CustomerData*
-        customerList = NULL;        // Customer Data Linked-List
+        customerList = malloc(sizeof(CustomerData));    // Customer Data Linked-List
     struct GameData*
-        gameList = NULL;            // Game Data Linked-List
+        gameList = malloc(sizeof(GameData));            // Game Data Linked-List
     // ----------------------------------
+    
+    // Head points to NULL
+    customerList = NULL;
     
     // Randomize the seed
     srand(time(NULL));      // This will come in handy when we do the randomization of information.
@@ -109,7 +124,17 @@ int main(int argc, char **argv)
     DrawInstructionsMainMenu();
     DrawMenuMain();
     
-
+    // Create the customer list
+    GenerateUserList(&customerList);
+    
+    // Get some data
+    // DEBUG STUFF
+    printf("First name: %s\n", customerList->firstName);
+    printf("User ID: %s\n", customerList->userID);
+    printf("Phone Number: %s\n", customerList->phoneNumber);
+    printf("ZIP Code: %s\n", customerList->addressPostalCode);
+    // END OF DEBUG STUFF
+    
     return 0;
 } // main()
 
@@ -226,22 +251,27 @@ void DrawUserLoggedIn()
 //      The 'head' or 'starting' position of the LinkedList of Customer Data.
 //      This list -WILL-BE-MODIFIED!
 // -----------------------------------
-void GenerateUserList(struct CustomerData* cList)
+static void GenerateUserList(struct CustomerData** cList)
 {
-    // For right now, we will only create one object instance
-    cList->firstName = "Theodore";
-    cList->lastName = "Roosevelt";
-    cList->userID = "The Big Stick Teddy";
-    cList->userKey = "1h3_13ddY";
-    cList->email = "TheBigStick@yahoo.com";
-    cList->phoneNumber = "000-000.0000";
-    cList->addressCity = "Oyster Bay";
-    cList->addressState = "New York";
-    cList->addressCountry = "United States";
-    cList->addressStreet = "20 Sagamore Hill Rd";
-    cList->addressPostalCode = "11771";
-    cList->admin = 1;
-    cList->next = NULL;
+    for (int i = 0; i < 1; i++)
+        switch (i)
+        {
+        case 0:
+            CreateNewCustomer(cList,
+                            "Theodore",
+                            "Roosevelt",
+                            "The Big Stick Teddy",
+                            "1h3_13ddY",
+                            "TheBigStick@yahoo.com",
+                            "000-000.0000",
+                            "Oyster Bay",
+                            "New York",
+                            "United States",
+                            "20 Sagamore Hill Rd",
+                            "11771",
+                            1);
+            break;
+        } // switch
 } // GenerateUserList()
 
 
@@ -331,3 +361,103 @@ int RandomNum(int randMin, int randMax)
 {
     return (rand() % randMax + randMin);
 } // RandomNum()
+
+
+
+
+// Create a New Customer Node
+// -----------------------------------
+// Documentation
+//  This function will create a new node into the link-list
+// -----------------------------------
+// Parameters (god help me)
+//  cList [CustomerData]
+//      The customer list Linked-List obj. that will be modified
+//  firstName [char*]
+//      The customer's first name
+//  lastName [char*]
+//      The customer's last name
+//  userID [char*]
+//      The customer's User ID to log into the store
+//  userKey [char*]
+//      The customer's Password to log into the store
+//  email [char*]
+//      The customer's email address
+//  phoneNumber [char*]
+//      The customer's phone number
+//  addressCity [char*]
+//      The customer's Address information: City
+//  addressState [char*]
+//      The customer's Address information: State
+//  addressCountry [char*]
+//      The customer's Address information: Country
+//  addressStreet [char*]
+//      The customer's Address information: Street
+//  addressPostalCode [char*]
+//      The customer's Address information: Zip Code (without +4)
+//  adminRights
+//      when '1' or 'true', the user is considered an Administrator
+// -----------------------------------
+static void CreateNewCustomer(CustomerData **cList,
+                        const char *firstName,
+                        const char *lastName,
+                        const char *userID,
+                        const char *userKey,
+                        const char *email,
+                        const char *phoneNumber,
+                        const char *addressCity,
+                        const char *addressState,
+                        const char *addressCountry,
+                        const char *addressStreet,
+                        const char *addressPostalCode,
+                        int adminRights)
+{
+    // Create a new Node to store the new information
+    CustomerData* tempCList = (struct CustomerData*)malloc(sizeof(CustomerData));
+
+    // Generate the required fields
+    tempCList->firstName = firstName;
+    tempCList->lastName = lastName;
+    tempCList->userID = userID;
+    tempCList->userKey = userKey;
+    tempCList->email = email;
+    tempCList->phoneNumber = phoneNumber;
+    tempCList->addressCity = addressCity;
+    tempCList->addressState = addressState;
+    tempCList->addressCountry = addressCountry;
+    tempCList->addressStreet = addressStreet;
+    tempCList->addressPostalCode = addressPostalCode;
+    tempCList->admin = adminRights;
+
+    // Update the next pointer
+    tempCList->next = NULL;
+
+    AppendNewCustomer(cList, tempCList);
+} // CreateNewCustomer()
+
+
+
+
+// Append New Customer
+// -----------------------------------
+// Documentation:
+//  This function will take the primary list and append the new list.
+// -----------------------------------
+// Parameters:
+//  cList [CustomerData]
+//      The primary Linked-List; this will be modified
+//  newCList [CustomerData]
+//      The temporary list, which will be added to the primary list.
+// -----------------------------------
+static void AppendNewCustomer(CustomerData **cList, CustomerData *newCList)
+{
+    // Empty list; merely append it
+    if (cList == NULL)
+        *cList = newCList;
+    else
+    {
+        // Add the new customer to the front of the list, all others is pushed back.
+        newCList->next = *cList;
+        *cList = newCList;
+    } // else
+} // AppendNewCustomer()
