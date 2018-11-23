@@ -30,6 +30,8 @@ static void CreateNewCustomer(CustomerData**,       // Create a new Customer ent
                             const char*, int);
 static void AppendNewCustomer(CustomerData**,       // Add the new customer to
                                 CustomerData *);    //   the primary Linked-List.
+void ManuallyCreateNewUser(struct CustomerData**);  // Manually create a new user
+                                                    //  account for our store.
 // -----------------------------------
 
 

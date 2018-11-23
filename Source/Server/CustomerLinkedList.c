@@ -11,9 +11,11 @@
 
 // Included Libraries
 // ===============================
+#include <stdio.h>              // Required for input and output
 #include <stddef.h>             // NULLPTR; used for pointers
 #include <stdlib.h>             // Pointer Memory Allocation
 #include "CustomerData.h"       // Game Data Object
+#include "CommonFunctions.h"    // Prompt
 // ===============================
 
 
@@ -182,3 +184,124 @@ void GenerateUserList(struct CustomerData** cList)
             break;
         } // switch
 } // GenerateUserList()
+
+
+
+
+// Manually Create a New User Account
+// -----------------------------------
+// Documentation:
+//  This function will guide the user into creating a new
+//  account into the store.  This function will provide
+//  step-by-step procedure into creating an account.
+// -----------------------------------
+// Parameters:
+//  cList [CustomerData]
+//      The primary Linked-List that will be modified to
+//      retain the new user account.
+// -----------------------------------
+void ManuallyCreateNewUser(struct CustomerData** cList)
+{
+    // Declarations and Initializations
+    // ----------------------------------
+    const int charSize = 128;   // Character pointer array size.
+    int adminRights = 0;        // By default, the new user can not be an administrator.
+    char *firstName         = malloc(charSize*sizeof(char));   // First Name
+    char *lastName          = malloc(charSize*sizeof(char));   // Last Name
+    char *userID            = malloc(charSize*sizeof(char));   // User Login
+    char *userKey           = malloc(charSize*sizeof(char));   // User Password
+    char *email             = malloc(charSize*sizeof(char));   // E-Mail Address
+    char *phoneNumber       = malloc(charSize*sizeof(char));   // Phone Number
+    char *addressCity       = malloc(charSize*sizeof(char));   // Address (city)
+    char *addressState      = malloc(charSize*sizeof(char));   // Address (state)
+    char *addressCountry    = malloc(charSize*sizeof(char));   // Address (country)
+    char *addressStreet     = malloc(charSize*sizeof(char));   // Address (street)
+    char *addressPostalCode = malloc(charSize*sizeof(char));   // Address (Zip Code)
+    // ----------------------------------
+    
+    // Tell the user that we're gathering information from them
+    printf("In order to register an account in this store, we're going to need a bit of information from you.");
+    printf("Please provide the following information:\n");
+    
+    
+    // Capture input from the user
+    // -------------------------------
+    // User Login ID
+    printf("Provide User Login Screen Name:\n");
+    DisplayPrompt();
+    fgets(userID, charSize, stdin);
+    
+    // User Login Password
+    printf("Provide User Login Password:\n");
+    DisplayPrompt();
+    fgets(userKey, charSize, stdin);
+    
+    // User E-Mail Account
+    printf("Provide an E-Mail Account:\n");
+    DisplayPrompt();
+    fgets(email, charSize, stdin);
+    
+    // User First Name
+    printf("Provide your First Name:\n");
+    DisplayPrompt();
+    fgets(firstName, charSize, stdin);
+    
+    // User Last Name
+    printf("Provide your Last Name:\n");
+    DisplayPrompt();
+    fgets(lastName, charSize, stdin);
+    
+    // User Phone Number
+    printf("Provide your Phone Number:\n");
+    DisplayPrompt();
+    fgets(phoneNumber, charSize, stdin);
+    
+    // User Address [city]
+    printf("Provide your Address (City):\n");
+    DisplayPrompt();
+    fgets(addressCity, charSize, stdin);
+    
+    // User Address [state]
+    printf("Provide your Address (State):\n");
+    DisplayPrompt();
+    fgets(addressState, charSize, stdin);
+    
+    // User Address [country]
+    printf("Provide your Address (Country):\n");
+    DisplayPrompt();
+    fgets(addressCountry, charSize, stdin);
+    
+    // User Address [street]
+    printf("Provide your Address (Street):\n");
+    DisplayPrompt();
+    fgets(addressStreet, charSize, stdin);
+    
+    // User Address [zip]
+    printf("Provide your Address (ZIP-Code):\n");
+    DisplayPrompt();
+    fgets(addressPostalCode, charSize, stdin);
+    
+    
+    // Tell the user that we creating the account for them.
+    printf("Please wait, creating your account. . .\n");
+    
+    
+    // With the data provided from the user, throw the information to the
+    //  customer Linked-List for further use.
+    CreateNewCustomer(cList,
+                    firstName,
+                    lastName,
+                    userID,
+                    userKey,
+                    email,
+                    phoneNumber,
+                    addressCity,
+                    addressState,
+                    addressCountry,
+                    addressStreet,
+                    addressPostalCode,
+                    adminRights);
+                    
+    // Tell the user that their account has been successfully created
+    printf("Your account has been created!\n");
+} // ManuallyCreateNewUser()
