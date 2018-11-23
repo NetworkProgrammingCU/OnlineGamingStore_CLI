@@ -1,5 +1,11 @@
 // Common Functions
-//  To avoid redundancy within the program
+// ================================
+// ================================
+// This file will hold common functions that may be necessary
+//  for both the server program and the client program.  With
+//  the use of this file, it is possibly to share common
+//  resources with minimal redundancies as possible and minimal
+//  impact on code maintanance.
 
 
 

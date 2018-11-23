@@ -1,9 +1,22 @@
-// Common Functions Header
+// Common Functions
+// ================================
+// ================================
+// This file will hold common functions that may be necessary
+//  for both the server program and the client program.  With
+//  the use of this file, it is possibly to share common
+//  resources with minimal redundancies as possible and minimal
+//  impact on code maintanance.
 
 
 
-#ifndef _COMMONFUNCTIONS_H
-#define _COMMONFUNCTIONS_H
+
+// Inclusion Guard
+// -----------------
+#ifndef _COMMONFUNCTIONS_H_
+#define _COMMONFUNCTIONS_H_
+// -----------------
+
+
 
 
 // Function Prototypes
@@ -15,4 +28,7 @@ void ClearBuffer(char [], int);         // Clear the buffer
 // -----------------------------------
 
 
+
+
+// Concluding Inclusion Guard
 #endif
