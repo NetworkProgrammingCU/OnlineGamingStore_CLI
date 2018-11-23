@@ -14,6 +14,8 @@
 #include <stdio.h>              // Required for input and output
 #include <stddef.h>             // NULLPTR; used for pointers
 #include <stdlib.h>             // Pointer Memory Allocation
+#include <stdbool.h>            // Because I was spoiled with C++ and C#, just give me the Bool data types!
+#include <string.h>             // strcmp() for User Account Authentication Challenge
 #include "CustomerData.h"       // Game Data Object
 #include "CommonFunctions.h"    // Prompt
 // ===============================
@@ -305,3 +307,82 @@ void ManuallyCreateNewUser(struct CustomerData** cList)
     // Tell the user that their account has been successfully created
     printf("Your account has been created!\n");
 } // ManuallyCreateNewUser()
+
+
+
+
+// Find User _AND_ Return User Information
+// -----------------------------------
+// Documentation:
+//  This function will scan the Primary Linked-List for the user's account.
+//  If an account exists, then we will provide the user's card and provide
+//  a successful status.  But, if the account does not exist or the credentials
+//  are incorrect, the user's card is NULL with a failure status.
+// -----------------------------------
+// Parameters:
+//  cList [CustomerData]
+//      The Primary Linked-List to reference from.
+//  userCard [CustomerData]
+//      The User's Account Information; if exists in Database, return the
+//      user's information for general program use.
+//  userID [char*]
+//      User's Screen Name (or  Login ID) to access the store via user account.
+//  UserKey [char*]
+//      User's Password to access their account.
+// -----------------------------------
+// Output:
+//  True ( 0 < x)
+//      Credentials matched against the Database.
+//      Found user's account
+//      User's Card has been initialized
+//  False ( 0 )
+//      Credentials didn't match against the Database.
+//      OR Failure to find the user's account.
+//      User's Card remains NULL.
+// -----------------------------------
+bool FindUser_ReturnUserInfo(CustomerData *cList,
+                            CustomerData **userCard,
+                            char *userID,
+                            char *userKey)
+{ 
+    // Traverse through the Linked-List until we find the user's ID or reach NULL.
+    while (cList != NULL && (0 != strcmp(cList->userID, userID)))
+        cList = cList->next;
+        
+    // Once we leave the loop, determine what happened.
+    //  Because we left the loop, we don't know if we found the user's account
+    //  or if we reached NULL within the Linked-List.
+    if (cList == NULL)
+    {
+        // Reached end of the Linked List, user's account was not found.
+        userCard = NULL;        // If incase it was not done so previously, NULL the card now.
+        return false;           // Return a failure signal.
+    } // if :: NULL
+    else if (0 == strcmp(cList->userID, userID))
+    {   // Found the User's ID!
+        // Check if the user's password challenge matches
+        if (0 == strcmp(cList->userKey, userKey))
+        {
+            userCard = &cList;
+            return true;
+        } // if :: Successful!
+        
+        // Else, the password was incorrect.
+        userCard = NULL;        // If incase it was not done so previously, NULL the card now.
+        return false;           // Return a failure signal.
+    } // if :: Found User Account!
+    else
+    {
+        // Something went horribly wrong; if we reach here - throw a hard-crash.
+        printf("    <!> CRITICAL FAILURE <!>\n");
+        printf("------------------------------------\n");
+        printf("Unable to successfully obtain account details.  Some reasons for this nasty message:\n");
+        printf(" *Linked-List was corrupted\n");
+        printf(" *Improper Conditional Checks\n");
+        printf(" *Or worse, a very unknown error\n");
+        printf("Please send your complaints to the slave monkey coders.  We don't pay them anything, so please be some-what nice to them!\n");
+        
+        // Send a hard-crash-out.
+        exit(1);
+    } // Something went horribly wrong....
+} // FindUser_ReturnUserInfo()

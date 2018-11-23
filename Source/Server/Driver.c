@@ -16,6 +16,7 @@
 //      Volume 1, 3rd edition.  All credit goes to him for the framework
 // Return Codes:
 //  0 = Successful Operation
+//  1 = User Account Validation Failure (Login failure)
 // ============================================
 
 
