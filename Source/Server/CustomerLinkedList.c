@@ -138,49 +138,49 @@ void GenerateUserList(struct CustomerData** cList)
         switch (i)
         {
         case 0:
-            CreateNewCustomer(cList,
-                            "Theodore",
-                            "Roosevelt",
-                            "The Big Stick Teddy",
-                            "1h3_13ddY",
-                            "TheBigStick@yahoo.com",
-                            "000-000.0000",
-                            "Oyster Bay",
-                            "New York",
-                            "United States",
-                            "20 Sagamore Hill Rd",
-                            "11771",
-                            1);
+            CreateNewCustomer(cList,                    // Customer Linked-List
+                            "Theodore",                 // First Name
+                            "Roosevelt",                // Last Name
+                            "The Big Stick Teddy",      // User ID
+                            "1h3_13ddY",                // User Password
+                            "TheBigStick@yahoo.com",    // E-Mail
+                            "000-000.0000",             // Phone Number
+                            "Oyster Bay",               // Address (City)
+                            "New York",                 // Address (State)
+                            "United States",            // Address (Country)
+                            "20 Sagamore Hill Rd",      // Address (Street)
+                            "11771",                    // Address (Zip Code)
+                            1);                         // Administrator?
             break;
         case 1:
-            CreateNewCustomer(cList,
-                            "Al",
-                            "Bundy",
-                            "AlDaddyBundy",
-                            "shootme",
-                            "AlBimby@GarysShoes.com",
-                            "000-000.0000",
-                            "Chicago",
-                            "Illinois",
-                            "United States",
-                            "9764 Jeopardy Lane",
-                            "60015",
-                            0);
+            CreateNewCustomer(cList,                    // Customer Linked-List
+                            "Al",                       // First Name
+                            "Bundy",                    // Last Name
+                            "AlDaddyBundy",             // User ID
+                            "shootme",                  // User Password
+                            "AlBimby@GarysShoes.com",   // E-Mail
+                            "000-000.0000",             // Phone Number
+                            "Chicago",                  // Address (City)
+                            "Illinois",                 // Address (State)
+                            "United States",            // Address (Country)
+                            "9764 Jeopardy Lane",       // Address (Street)
+                            "60015",                    // Address (Zip Code)
+                            0);                         // Administrator?
             break;
         case 2:
-            CreateNewCustomer(cList,
-                            "Hana",
-                            "Eris",
-                            "Hana",
-                            "1234",
-                            "HanaErie@gmail.com",
-                            "000-000.0000",
-                            "El Paso",
-                            "Texas",
-                            "United States",
-                            "4389 Brosius Cir.",
-                            "79904",
-                            0);
+            CreateNewCustomer(cList,                    // Customer Linked-List
+                            "Hana",                     // First Name
+                            "Eris",                     // Last Name
+                            "Hana",                     // User ID
+                            "1234",                     // User Password
+                            "HanaErie@gmail.com",       // E-Mail
+                            "000-000.0000",             // Phone Number
+                            "El Paso",                  // Address (City)
+                            "Texas",                    // Address (State)
+                            "United States",            // Address (Country)
+                            "4389 Brosius Cir.",        // Address (Street)
+                            "79904",                    // Address (Zip Code)
+                            0);                         // Administrator?
             break;
         } // switch
 } // GenerateUserList()
@@ -288,19 +288,19 @@ void ManuallyCreateNewUser(struct CustomerData** cList)
     
     // With the data provided from the user, throw the information to the
     //  customer Linked-List for further use.
-    CreateNewCustomer(cList,
-                    firstName,
-                    lastName,
-                    userID,
-                    userKey,
-                    email,
-                    phoneNumber,
-                    addressCity,
-                    addressState,
-                    addressCountry,
-                    addressStreet,
-                    addressPostalCode,
-                    adminRights);
+    CreateNewCustomer(cList,            // Customer Linked-List
+                    firstName,          // First Name
+                    lastName,           // Last Name
+                    userID,             // User ID
+                    userKey,            // User Password
+                    email,              // E-Mail
+                    phoneNumber,        // Phone Number
+                    addressCity,        // Address (City)
+                    addressState,       // Address (State)
+                    addressCountry,     // Address (Country)
+                    addressStreet,      // Address (Street)
+                    addressPostalCode,  // Address (Zip Code)
+                    adminRights);       // Administrator?
                     
     // Tell the user that their account has been successfully created
     printf("Your account has been created!\n");
