@@ -18,7 +18,7 @@ The project will provide each student with an opportunity to design and develop 
 | HOLD   | Filter Catelog           | Display the catelog that is returned by the search; only show the filtered list |
 | HOLD   | Display full Game Info   | When the user selects the game, display the game contents |
 | HOLD   | Purchase the game        | Allow the user to 'purchase' the game |
-| HOLD   | User Log-in              | Allow the ability for the user to log into the store to make purchases |
+| WIP    | User Log-in              | Allow the ability for the user to log into the store to make purchases |
 | Done   | Create a new user acc.   | Allow new users to create a new account |
 | HOLD   | Update user account Info | Allow the user to modify their personal information |
 | HOLD   | Netcode Implementation   | Implement the netcode; client\server architecture, using either select() or fork() |
