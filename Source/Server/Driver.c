@@ -47,14 +47,7 @@
 void DrawMenuMain();                // Display the main menu to the user.
 void DrawStorePage();               // Display the store page to the user.
 void CloseProgram();                // Perform the termination protocol (if any).
-
 void DrawUserLoggedIn();            // Display who is viewing the store.
-
-
-int RandomNum(int randMin,          // Provides a random number within the given constraints.
-    int randMax);
-void Randomizer(char *charString,   // Generates a specific random number set for the supported types.
-    int randomType);
 // ===============================
 
 
