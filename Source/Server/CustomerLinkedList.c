@@ -220,8 +220,8 @@ void ManuallyCreateNewUser(struct CustomerData** cList)
     // ----------------------------------
     
     // Tell the user that we're gathering information from them
-    printf("In order to register an account in this store, we're going to need a bit of information from you.");
-    printf("Please provide the following information:\n");
+    printf("In order to register an account in this store, we're going to need a bit of information from you.\n");
+    printf("Please provide the following information:\n\n");
     
     
     // Capture input from the user
