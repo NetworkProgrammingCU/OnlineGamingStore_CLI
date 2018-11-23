@@ -90,8 +90,9 @@ int main(int argc, char **argv)
     GenerateGameList(&gameList);        // Create the Game List (our catalog)
     // ===================================
     
+    UserLogin(customerList, &sessionUser);
     // Manually create a new user account to the store
-    ManuallyCreateNewUser(&customerList);
+    //ManuallyCreateNewUser(&customerList);
 
     
     // Display the program's header
