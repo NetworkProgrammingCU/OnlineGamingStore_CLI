@@ -1,37 +1,36 @@
 // Included Libraries
 // ===============================
+#include <stddef.h>             // NULLPTR; used for pointers
+#include <stdlib.h>             // Pointer Memory Allocation
 #include "GameData.h"           // Game Data Object
 // ===============================
 
 
 
 
-// Generate Game List
+// Append New Game
 // -----------------------------------
-// Documentation
-//  This function will merely provide a list of games that is available within the store.
+// Documentation:
+//  This function will take the primary list and append the new list.
 // -----------------------------------
-// Parameters
-//  *glist [GameData]
-//      The 'head' or 'starting' position of the LinkedList of Game Data.
-//      This list -WILL-BE-MODIFIED!
+// Parameters:
+//  gList [GameData]
+//      The primary Linked-List; this will be modified
+//  newGList [GameData]
+//      The temporary list, which will be added to the primary list.
 // -----------------------------------
-void GenerateGameList(struct GameData** gList)
+static void AppendNewGame(GameData **gList, GameData *newGList)
 {
-    for (int i = 0; i < 1; ++i)
-    switch(i)
+    // Empty list; merely append it
+    if (gList == NULL)
+        *gList = newGList;
+    else
     {
-        case 0:
-            CreateNewGame(gList,
-                            "The Ultimate Doom",
-                            "Hell has unleashed",
-                            "id Software",
-                            "id Software",
-                            "FPS",
-                            "Nothing");
-            break;
-    } // switch
-} // GenerateGameList()
+        // Add the new game to the front of the list, all others is pushed back.
+        newGList->next = *gList;
+        *gList = newGList;
+    } // else
+} // AppendNewGame()
 
 
 
@@ -66,7 +65,7 @@ static void CreateNewGame(GameData** gList,
                             const char *notes)
 {
     // Create a new Node to store the new information
-    GameData* tempGList = (struct GameData*)malloc(sizeof(CustomerData));
+    GameData* tempGList = (struct GameData*)malloc(sizeof(GameData));
     
     // Generate the required fields.
     tempGList->title = (char *)title;
@@ -86,26 +85,29 @@ static void CreateNewGame(GameData** gList,
 
 
 
-// Append New Game
+// Generate Game List
 // -----------------------------------
-// Documentation:
-//  This function will take the primary list and append the new list.
+// Documentation
+//  This function will merely provide a list of games that is available within the store.
 // -----------------------------------
-// Parameters:
-//  gList [GameData]
-//      The primary Linked-List; this will be modified
-//  newGList [GameData]
-//      The temporary list, which will be added to the primary list.
+// Parameters
+//  *glist [GameData]
+//      The 'head' or 'starting' position of the LinkedList of Game Data.
+//      This list -WILL-BE-MODIFIED!
 // -----------------------------------
-static void AppendNewGame(GameData **gList, GameData *newGList)
+static void GenerateGameList(struct GameData** gList)
 {
-    // Empty list; merely append it
-    if (gList == NULL)
-        *gList = newGList;
-    else
+    for (int i = 0; i < 1; ++i)
+    switch(i)
     {
-        // Add the new game to the front of the list, all others is pushed back.
-        newGList->next = *gList;
-        *gList = newGList;
-    } // else
-} // AppendNewGame()
+        case 0:
+            CreateNewGame(gList,
+                            "The Ultimate Doom",
+                            "Hell has unleashed",
+                            "id Software",
+                            "id Software",
+                            "FPS",
+                            "Nothing");
+            break;
+    } // switch
+} // GenerateGameList()
