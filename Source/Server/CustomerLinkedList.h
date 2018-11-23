@@ -32,6 +32,9 @@ static void AppendNewCustomer(CustomerData**,       // Add the new customer to
                                 CustomerData *);    //   the primary Linked-List.
 void ManuallyCreateNewUser(struct CustomerData**);  // Manually create a new user
                                                     //  account for our store.
+bool FindUser_ReturnUserInfo(CustomerData*,         // Provides the ability to scan
+                            CustomerData**,         //  for a user and checks if the
+                            char*, char*);          //  credentials match.
 // -----------------------------------
 
 
