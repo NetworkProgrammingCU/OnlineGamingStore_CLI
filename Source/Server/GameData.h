@@ -1,8 +1,24 @@
-// Guards
+// Game Data Structure
+// ================================
+// ================================
+// This file holds the Game Data's Structure.  This will hold all of the
+//  information necessary for the Linked-List Node-Chain.  Thus allowing
+//  a basic template for holding the game data.
+
+
+
+
+// Inclusion Guard
+// -----------------
 #ifndef _GAMEDATASTRUCT_H_
 #define _GAMEDATASTRUCT_H_
+// -----------------
 
 
+
+
+// Game Data Structure
+// -----------------------------------
 typedef struct GameData
 {
     char* title;            // Title of the game
@@ -17,5 +33,7 @@ typedef struct GameData
 } GameData;
 
 
-// Concluding Guard
+
+
+// Concluding Inclusion Guard
 #endif

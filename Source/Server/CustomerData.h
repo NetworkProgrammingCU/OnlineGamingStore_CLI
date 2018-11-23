@@ -1,8 +1,24 @@
-// Guards
+// Customer Data Structure
+// ================================
+// ================================
+// This file holds the Customer Data's Structure.  This will hold all of the 
+//  information necessary for the Linked-List Node-Chain.  Thus allowing
+//  a basic template for holding user data.
+
+
+
+
+// Inclusion Guard
+// -----------------
 #ifndef _CUSTOMERDATASTRUCT_H_
 #define _CUSTOMERDATASTRUCT_H_
+// -----------------
 
 
+
+
+// Customer Data Structure
+// -----------------------------------
 typedef struct CustomerData
 {
     char* firstName;            // The user's First Name
@@ -27,5 +43,6 @@ typedef struct CustomerData
 
 
 
-// Concluding Guard
+
+// Concluding Inclusion Guard
 #endif
