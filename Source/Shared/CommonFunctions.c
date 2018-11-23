@@ -114,3 +114,65 @@ void ClearBuffer(char stringBuffer[], int bufferSize)
 {
     memset(stringBuffer, '\0', bufferSize);
 } // ClearBuffer()
+
+
+
+
+// Filter User's Input [Buffer]
+// -----------------------------------
+// Documentation:
+//  This function will filter the user's input within
+//  the buffer by determining where the user's input 'ended'
+//  and applying a terminator at that point.  Otherwise,
+//  the buffer will contain the null terminator at the end
+//  of the array.
+// -----------------------------------
+// Methodology:
+//  Scan the array for a white space and check if the next index
+//  also contains a white space.  If there are two consecutive
+//  white spaces, _assume_ that the rest is empty.
+//  At the first white-space of the two consecutive spaces, add
+//  the termination at that index.  For example:
+//      +---+---+---+---+---+--+--+--+--+--+--+
+//      | H | E | L | L | O |  |  |  |  |  |\0|
+//      +---+---+---+---+---+--+--+--+--+--+--+
+//  We will add the '\o' at the next index after
+//  'O', because following 'O' we have atleast two
+//  consecutive spaces (more than that, actually).
+//  HOWEVER, this leads to an issue where the buffer
+//  purposely cut out any text that may exist after the two
+//  spaces.  For example:
+//      +---+---+---+---+---+--+--+---+---+---+---+--+
+//      | H | E | L | L | O |  |  | C | A | T | S |\0|
+//      +---+---+---+---+---+--+--+---+---+---+---+--+
+//  "CATS" will be ignored because of the two consecutive spaces
+//  after the 'O' in "HELLO".  Meaning, all that exists is
+//  simply:
+//      +---+---+---+---+---+--+--+---+---+---+---+--+
+//      | H | E | L | L | O |\0|  | C | A | T | S |\0|
+//      +---+---+---+---+---+--+--+---+---+---+---+--+
+//  Or simply "HELLO".
+//
+//  The methodology is simple by design and because of that
+//  it is subjectable to it's own limitations.
+// -----------------------------------
+// Parameters:
+//  buffer[] [char]
+//      The buffer used to get user input.
+//  bufferSize [int]
+//      The size of the buffer.
+// -----------------------------------
+void FilterUserInputArray(char buffer[], int bufferSize)
+{
+    // We are going to inspect the buffer
+    for (int i = 0; i < bufferSize; ++i
+    {
+        // Is the current index a white space and is the
+        //  space following is a white space?
+        if(buffer[i] == ' ' && buffer[i+1] == ' ')
+        {
+            buffer[i] = '\0';
+            return;
+        } // if :: Two White Spaces
+    } // for()
+} // FilterUserInputArray()

@@ -25,6 +25,7 @@ void LowerCaseUserInput(char []);       // Lower cases the entire string provide
 int CheckForUserQuit(char [], int);     // Inspect user's input for a quit\exit request.
 void DisplayPrompt();                   // Display the Python'ish prompt to the end-user
 void ClearBuffer(char [], int);         // Clear the buffer
+void FilterUserInputArray(char[], int); // Clean the user's input by removing extra spacing.
 // -----------------------------------
 
 
