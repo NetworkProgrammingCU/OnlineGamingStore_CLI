@@ -5,7 +5,7 @@
 
 // Function Prototypes
 // ===============================
-static void GenerateGameList(struct             // Generate predefined games.
+void GenerateGameList(struct             // Generate predefined games.
     GameData**);
 static void CreateNewGame(GameData**,           // Create a new Game entry
                     const char*, const char*,

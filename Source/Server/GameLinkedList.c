@@ -95,7 +95,7 @@ static void CreateNewGame(GameData** gList,
 //      The 'head' or 'starting' position of the LinkedList of Game Data.
 //      This list -WILL-BE-MODIFIED!
 // -----------------------------------
-static void GenerateGameList(struct GameData** gList)
+void GenerateGameList(struct GameData** gList)
 {
     for (int i = 0; i < 1; ++i)
     switch(i)
