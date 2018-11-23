@@ -103,8 +103,8 @@ int main(int argc, char **argv)
     gameList = NULL;        // Game List
     
     // Prepare the linked-lists
-    GenerateUserList(&customerList);    // Create the Customer List
-    GenerateGameList(&gameList);        // Create the Game List (our catalogue)
+    //GenerateUserList(&customerList);    // Create the Customer List
+    GenerateGameList(&gameList);        // Create the Game List (our catalog)
     // ===================================
     
     
