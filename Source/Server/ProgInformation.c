@@ -1,7 +1,18 @@
+// Program Information and Instructions
+// ================================
+// ================================
+// This file holds some of the program information and instructions
+//  that could be useful for the user within the program.  Allowing
+//  the user read some of the program's contents and help documentation
+//  if any are to be provided.
+
+
+
+
 // Included Libraries
 // ===============================
-#include "GlobalDefs.h"         // Program Macro-Definitions
 #include <stdio.h>              // Input\Output Stream
+#include "GlobalDefs.h"         // Program Macro-Definitions
 // ===============================
 
 

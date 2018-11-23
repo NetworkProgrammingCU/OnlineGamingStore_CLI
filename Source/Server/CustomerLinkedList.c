@@ -1,3 +1,14 @@
+// Customer Linked List Functionality
+// ================================
+// ================================
+// This file holds functions related into supporting the Customer
+//  Data Linked-List object.  With the functions provided in this
+//  file, the functions will allow scanning through, generating,
+//  and manipulate the list and nodes as necessary.
+
+
+
+
 // Included Libraries
 // ===============================
 #include <stddef.h>             // NULLPTR; used for pointers
