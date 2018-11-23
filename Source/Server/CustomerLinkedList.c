@@ -386,3 +386,72 @@ bool FindUser_ReturnUserInfo(CustomerData *cList,
         exit(1);
     } // Something went horribly wrong....
 } // FindUser_ReturnUserInfo()
+
+
+
+
+// Ask User for Login Details
+// -----------------------------------
+// Documentation:
+//  This function will ask the user for their login
+//  details.  The information that they provide
+//  be checked against the database in the later
+//  process.
+// -----------------------------------
+// Parameters:
+//  userID [char]
+//      User's screen name, User ID, or account ID.
+//  userKey [char]
+//      User's password for that account.
+// -----------------------------------
+void AskUserLogin(char **userID, char **userKey)
+{
+    // Ask the user for their User ID
+    printf("Please provide your User Name:\n");
+    DisplayPrompt();
+    fgets(*userID, 128, stdin);
+    
+    // By chance, did the user request to leave this program?
+    if (CheckForUserQuit(*userID, 128))
+        printf("User Requested to Leave!\n\n\n");
+    
+    // Ask the user for their password
+    printf("Please provide the password for this account:\n");
+    DisplayPrompt();
+    fgets(*userKey, 128, stdin);
+} // AskUserLogin()
+
+
+
+
+// User Login (Procedural)
+// -----------------------------------
+// Documentation:
+//  This function is a procedural function, which will assure
+//  that the login-system is executed as it should.  Because
+//  this entire system is slightly complex, we want to assure
+//  that everything works as intended.
+// -----------------------------------
+// Parameters:
+//  cList [CustomerData]
+//      Customer Primary Linked-List; the list that will
+//      scanned to find the user's account.
+//  userCard [CustomerData]
+//      Contains the user's account information, provided
+//      that the user's account exists and that credentials
+//      matched against the database.
+// -----------------------------------
+void UserLogin(CustomerData* cList, CustomerData **userCard)
+{
+    // Declarations and Initializations
+    // ----------------------------------
+    char *userID = malloc(128*sizeof(char));    // User's account ID
+    char *userKey = malloc(128*sizeof(char));   // User's password for the account
+    // ----------------------------------
+    
+    // Ask the user for their account details
+    AskUserLogin(&userID, &userKey);
+    
+    // Check their account details against the database
+    printf("Validation returned: %d\n", FindUser_ReturnUserInfo(cList, userCard, userID, userKey));
+} // UserLogin()

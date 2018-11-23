@@ -35,6 +35,10 @@ void ManuallyCreateNewUser(struct CustomerData**);  // Manually create a new use
 bool FindUser_ReturnUserInfo(CustomerData*,         // Provides the ability to scan
                             CustomerData**,         //  for a user and checks if the
                             char*, char*);          //  credentials match.
+void UserLogin(CustomerData*,                       // This will provide the procedures
+                    CustomerData**);                //  for the login system.
+void AskUserLogin(char**, char**);                  // Ask the user for login information
+                                                    //  Required for the login system.
 // -----------------------------------
 
 
