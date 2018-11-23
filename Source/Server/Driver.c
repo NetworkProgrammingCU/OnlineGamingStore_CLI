@@ -16,7 +16,8 @@
 //      Volume 1, 3rd edition.  All credit goes to him for the framework
 // Return Codes:
 //  0 = Successful Operation
-//  1 = User Account Validation Failure (Login failure)
+//  1 = User Requested to leave at Login (normal exit)
+//  2 = User Account Validation Failure (Login failure)
 // ============================================
 
 
