@@ -412,7 +412,7 @@ void AskUserLogin(char **userID, char **userKey)
     fgets(*userID, 128, stdin);
     
     // By chance, did the user request to leave this program?
-    if (CheckForUserQuit(*userID, 128))
+    if (!CheckForUserQuit(*userID, 128))
         printf("User Requested to Leave!\n\n\n");
     
     // Ask the user for their password
