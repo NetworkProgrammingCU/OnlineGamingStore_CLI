@@ -50,6 +50,9 @@ void DrawMenuMain();                // Display the main menu to the user.
 void DrawStorePage();               // Display the store page to the user.
 void CloseProgram();                // Perform the termination protocol (if any).
 void DrawUserLoggedIn();            // Display who is viewing the store.
+//~ ~ ~ ~ ~ ~
+void WelcomeMessage();              // Displays the welcome message to the end-user.
+int WelcomeProtocol();              // Provides the Welcome Protocols
 // ===============================
 
 
@@ -90,6 +93,27 @@ int main(int argc, char **argv)
     GenerateUserList(&customerList);    // Create the Customer List
     GenerateGameList(&gameList);        // Create the Game List (our catalog)
     // ===================================
+    
+    
+
+    
+    // Capture the user's input
+    char userInput[128];
+    fgets(userInput, 128, stdin);
+    
+    // Determine the user's request
+    switch ()
+    {
+        case 0:
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+    } // switch()
+    
+    
+    
     
     UserLogin(customerList, &sessionUser);
     // Manually create a new user account to the store
@@ -178,3 +202,59 @@ void DrawUserLoggedIn()
 {
     printf("You are logged in as: {{PLACEHOLDER}}\n");
 } // DrawUserLoggedIn()
+
+
+
+
+// Welcome Protocol
+// -----------------------------------
+// Documentation:
+//  This function will help to provide the necessary Welcome or Start
+//  protocol - guiding the user through the protocol.
+// -----------------------------------
+// Parameters:
+//  cList
+//  userCard
+// -----------------------------------
+// Output:
+//  User Request
+// -----------------------------------
+int WelcomeProtocol()
+{
+    void WelcomeMessage();
+} // WelcomeProtocol()
+
+
+
+
+// Welcome Message
+// -----------------------------------
+// Documentation:
+//  This function will provide the welcome message
+//  and the options available when first accessing
+//  the store.
+// -----------------------------------
+void WelcomeMessage()
+{
+    // Welcome Page
+    // -------------------------
+    printf("Welcome to the %s Store!\n", _NAME_);
+    printf("------------------------------------\n");
+    printf("------------------------------------\n");
+    printf("\n");
+    printf("In order to access the store, you must have an account with this service.\n");
+    printf("If you don't have an account, you can easily create a new account!\n");
+    printf("Because of a tight budget and thinking of maximizing our profits, we require that you use your keyboard in order to navigate in this store.  If you would like a nice graphical interface, feel free to donate us unlimited supply of financial currency (NOT MONOPOLY MONEY!)\n);
+    printf("\n");
+    printf("\n");
+    printf("Please use your keyboard to interact with the store.\n");
+    printf("\n");
+    printf("\n");
+    printf("Other Options\n");
+    printf("--------------\n");
+    printf("[Log]  - Login\n");
+    printf("[Reg]  - Register a new account\n");
+    printf("[Exit] - Leave the store\n");
+    printf("--------------\n");
+    printf("\n");
+} // WelcomeMessage()
