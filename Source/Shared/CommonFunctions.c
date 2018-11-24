@@ -155,6 +155,7 @@ void ClearBuffer(char stringBuffer[], int bufferSize)
 //
 //  The methodology is simple by design and because of that
 //  it is subjectable to it's own limitations.
+//  NOTE: This rule now also applies to the '\n' character.
 // -----------------------------------
 // Parameters:
 //  buffer[] [char]
@@ -165,14 +166,13 @@ void ClearBuffer(char stringBuffer[], int bufferSize)
 void FilterUserInputArray(char buffer[], int bufferSize)
 {
     // We are going to inspect the buffer
-    for (int i = 0; i < bufferSize; ++i
+    for (int i = 0; i < bufferSize; ++i)
     {
-        // Is the current index a white space and is the
-        //  space following is a white space?
-        if(buffer[i] == ' ' && buffer[i+1] == ' ')
+        if((buffer[i] == ' ' && buffer[1+i] == ' ')     // Two consecutive white spaces?
+            || buffer[i] == '\n')                       // Or did we find the '\n' char?
         {
-            buffer[i] = '\0';
-            return;
+            buffer[i] = '\0';                           // Replace that instance with a null-terminator.                           
+            return;                                     // Leave the function, we are done here!
         } // if :: Two White Spaces
     } // for()
 } // FilterUserInputArray()

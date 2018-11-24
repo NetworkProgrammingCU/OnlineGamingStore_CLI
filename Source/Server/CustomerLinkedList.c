@@ -345,29 +345,20 @@ bool FindUser_ReturnUserInfo(CustomerData *cList,
                             char *userID,
                             char *userKey)
 { 
-    printf("User ID to find: [%s]\n", userID);
     // Traverse through the Linked-List until we find the user's ID or reach NULL.
     while (cList != NULL && (0 != strcmp(cList->userID, userID)))
-    {
-        printf("!!! Previous Node: [%s]\n", cList->userID);
-        printf("&&& Result from strcmp; %d\n\n", strcmp(cList->userID, userID));
-        printf("*** Index 2 [%c]\n", cList->userID[0]);
         cList = cList->next;
-     }   
-    printf("Customer Node: %s\n", cList->firstName);
+
     // Once we leave the loop, determine what happened.
     //  Because we left the loop, we don't know if we found the user's account
     //  or if we reached NULL within the Linked-List.
     if (cList == NULL)
-    {
-    printf("~~~REACHED NULL!\n");
-        // Reached end of the Linked List, user's account was not found.
-        userCard = NULL;        // If incase it was not done so previously, NULL the card now.
-        return false;           // Return a failure signal.
+    {   // Reached end of the Linked List, user's account was not found.
+        userCard = NULL;    // If incase it was not done so previously, NULL the card now.
+        return false;       // Return a failure signal.
     } // if :: NULL
     else if (0 == strcmp(cList->userID, userID))
     {   // Found the User's ID!
-    printf("~~~FOUND USER!\n");
         // Check if the user's password challenge matches
         if (0 == strcmp(cList->userKey, userKey))
         {
@@ -423,20 +414,33 @@ void AskUserLogin(char **userID, char **userKey)
     
     
     // Ask the user for their User ID
-    printf("Please provide your User Name:\n");
-    DisplayPrompt();
-    fgets(rawUserID, inputSize, stdin);
-    //scanf("%[^\n]s", *userID);
+    printf("Please provide your User Name:\n");     // Tell the user what we are wanting
+    DisplayPrompt();                                // Display the Prompt msg.
+    fgets(rawUserID, inputSize, stdin);             // Capture the user's input
     
+    // Filter the user's input
+    FilterUserInputArray(rawUserID, inputSize);     // Filter the user's input; because
+                                                    //  it contains the '\n' and will cause
+                                                    //  the strcmp() to fail.
+    strcpy(*userID, rawUserID);                     // Copy the result that in which will be
+                                                    //  returned.
+                                                    
     // By chance, did the user request to leave this program?
     if (!CheckForUserQuit(*userID, inputSize))
         exit(1);    // Leave the program by user request
     
+    
     // Ask the user for their password
-    printf("Please provide the password for this account:\n");
-    DisplayPrompt();
-    fgets(rawUserID, inputSize, stdin);
-    //scanf("%[^\n]s", *userKey);
+    printf("Please provide the password for this account:\n");// Tell the user what we are wanting
+    DisplayPrompt();                                // Display the Prompt msg.
+    fgets(rawUserKey, inputSize, stdin);            // Capture the user's input.
+    
+    // Filter the user's input again
+    FilterUserInputArray(rawUserKey, inputSize);    // Filter the user's input; because
+                                                    //  it contains the '\n' and will cause
+                                                    // the strcmp() to fail.
+    strcpy(*userKey, rawUserKey);                   // Copy the result that in which will be
+                                                    //  returned.
 } // AskUserLogin()
 
 
