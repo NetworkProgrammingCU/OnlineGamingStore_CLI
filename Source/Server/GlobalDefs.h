@@ -22,6 +22,8 @@
 #define _NAME_ "The Exotic Hairy Pickle"    // Name of this program
 #define _VERSION_ "1.0"                     // Version of this program
 #define _VERSION_NAME_ "Squeeze"            // Version Code-Name
+#define _MAX_CHAR_INPUT_ 128                // Contains the maximum characters
+                                            //  available from the user's input.
 // -----------------------------------
 
 
