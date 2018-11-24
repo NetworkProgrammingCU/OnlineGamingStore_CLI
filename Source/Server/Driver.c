@@ -53,6 +53,8 @@ void DrawUserLoggedIn();            // Display who is viewing the store.
 //~ ~ ~ ~ ~ ~
 void WelcomeMessage();              // Displays the welcome message to the end-user.
 int WelcomeProtocol();              // Provides the Welcome Protocols
+void WelcomeMenu();                 // Display the welcome menu
+int WelcomeFetchInput();            // Fetch input regarding the welcome menu
 // ===============================
 
 
@@ -95,27 +97,31 @@ int main(int argc, char **argv)
     // ===================================
     
     
-
-    
     // Capture the user's input
-    char userInput[128];
-    fgets(userInput, 128, stdin);
+    //char userInput[128];
+    //fgets(userInput, 128, stdin);
     
     // Determine the user's request
-    switch ()
+    switch (WelcomeProtocol())
     {
         case 0:
+            printf("User requested to login\n");
             break;
         case 1:
+            printf("User requested to register\n");
             break;
         case 2:
+            printf("User requested to leave\n");
+            break;
+        default:
+            printf("Unknown request\n");
             break;
     } // switch()
     
     
     
     
-    UserLogin(customerList, &sessionUser);
+    //UserLogin(customerList, &sessionUser);
     // Manually create a new user account to the store
     //ManuallyCreateNewUser(&customerList);
 
@@ -212,17 +218,72 @@ void DrawUserLoggedIn()
 //  This function will help to provide the necessary Welcome or Start
 //  protocol - guiding the user through the protocol.
 // -----------------------------------
-// Parameters:
-//  cList
-//  userCard
-// -----------------------------------
 // Output:
 //  User Request
+//      0 = Login Request
+//      1 = Register Request
+//      2 = Exit Request
+//      255 = Fatal Error; unknown request
 // -----------------------------------
 int WelcomeProtocol()
 {
-    void WelcomeMessage();
+    WelcomeMessage();   // Display the welcome message
+    WelcomeMenu();      // Display the Welcome Menu
+    
+    return WelcomeFetchInput(); // Return the user's request
 } // WelcomeProtocol()
+
+
+
+
+// Welcome Message
+// -----------------------------------
+// Documentation:
+//  This function will ask the user for input based on the
+//  welcome menu.  This function will also depend on another
+//  function to analyze the user input.
+// -----------------------------------
+// Output:
+//  User Request
+//      0 = Login Request
+//      1 = Register Request
+//      2 = Exit Request
+//      255 = Fatal Error; unknown request
+int WelcomeFetchInput()
+{
+    // Declarations and Initializations
+    // ----------------------------------
+    char userInput[_MAX_CHAR_INPUT_];   // This will be used to capture the user's input.
+    // ----------------------------------
+    
+    DisplayPrompt();    // Show the prompt to the user.
+    fgets(userInput, _MAX_CHAR_INPUT_, stdin);
+    
+    FilterUserInputArray(userInput, _MAX_CHAR_INPUT_);
+    LowerCaseUserInput(userInput);
+    
+    // Analyze the user input and return the desired request
+    if(strcmp(userInput, "log") == 0)
+    {   // User Requested to Log Into the store
+        return 0;
+    } // Logging Request
+    else if (strcmp(userInput, "reg") == 0)
+    {   // User Requested to Register to the store
+        return 1;
+    } // Register Request
+    else if (CheckForUserQuit(userInput, _MAX_CHAR_INPUT_) == 0)
+    {   // User Requested to leave from the store
+        return 2;
+    } // Terminate Request
+    else
+    {
+        printf("<!> FATAL ERROR <!>\n");
+        printf("-------------------------------\n");
+        printf("Unable to determine user request; program will now terminate.\n");
+        printf(" User Requested [%s]\n", userInput);
+        return 255;
+    } // Fatal Error \ Unknown Request
+} // WelcomeFetchInput()
 
 
 
@@ -244,9 +305,21 @@ void WelcomeMessage()
     printf("\n");
     printf("In order to access the store, you must have an account with this service.\n");
     printf("If you don't have an account, you can easily create a new account!\n");
-    printf("Because of a tight budget and thinking of maximizing our profits, we require that you use your keyboard in order to navigate in this store.  If you would like a nice graphical interface, feel free to donate us unlimited supply of financial currency (NOT MONOPOLY MONEY!)\n);
+    printf("Because of a tight budget and thinking of maximizing our profits, we require that you use your keyboard in order to navigate in this store.  If you would like a nice graphical interface, feel free to donate us unlimited supply of financial currency (NOT MONOPOLY MONEY!)\n");
     printf("\n");
     printf("\n");
+} // WelcomeMessage()
+
+
+
+
+// Welcome Menu
+// -----------------------------------
+// Documentation:
+//  This function will display the welcome on the user's terminal.
+// -----------------------------------
+void WelcomeMenu()
+{
     printf("Please use your keyboard to interact with the store.\n");
     printf("\n");
     printf("\n");
@@ -257,4 +330,4 @@ void WelcomeMessage()
     printf("[Exit] - Leave the store\n");
     printf("--------------\n");
     printf("\n");
-} // WelcomeMessage()
+} // WelcomeMenu()

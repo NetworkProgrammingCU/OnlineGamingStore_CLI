@@ -73,6 +73,10 @@ int CheckForUserQuit(char string[], int stringSize)
         return 0; // Match!
     else if (strcmp("quit\n", workingString) == 0)
         return 0; // Match!
+    else if (strcmp("exit", workingString) == 0)
+        return 0; // Match!
+    else if (strcmp("quit", workingString) == 0)
+        return 0; // Match!
     else
         return 1; // Not a match!
 } // CheckForUserQuit()
