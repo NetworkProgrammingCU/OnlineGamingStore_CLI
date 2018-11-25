@@ -122,6 +122,21 @@ void ClearBuffer(char stringBuffer[], int bufferSize)
 
 
 
+// Clear Screen
+// -----------------------------------
+// Documentation:
+//  This function will provide enough spacing to avoid having a cluttered
+//  wall of text.  Thus, providing a cleaner look when accessing a new
+//  option or field.
+// -----------------------------------
+void ClearScreen()
+{
+    printf("\n\n\n\n\n\n\n");
+} // ClearScreen()
+
+
+
+
 // Filter User's Input [Buffer]
 // -----------------------------------
 // Documentation:
