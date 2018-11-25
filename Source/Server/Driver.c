@@ -136,14 +136,6 @@ int main(int argc, char **argv)
     // Draw the Main Menu
     DrawInstructionsMainMenu();
     DrawMenuMain();
-        
-    // Get some data
-    // DEBUG STUFF
-    printf("First name: %s\n", sessionUser->firstName);
-    printf("User ID: %s\n", sessionUser->userID);
-    printf("Phone Number: %s\n", sessionUser->phoneNumber);
-    printf("ZIP Code: %s\n", sessionUser->addressPostalCode);
-    // END OF DEBUG STUFF
     
     return 0;
 } // main()
