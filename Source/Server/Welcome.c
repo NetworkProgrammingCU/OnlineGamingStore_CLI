@@ -34,14 +34,28 @@
 //      0 = Login Request
 //      1 = Register Request
 //      2 = Exit Request
-//      255 = Fatal Error; unknown request
 // -----------------------------------
 int WelcomeProtocol()
 {
-    WelcomeMessage();   // Display the welcome message
-    WelcomeMenu();      // Display the Welcome Menu
+    // Declarations and Initializations
+    // ----------------------------------
+    int userRequest;        // Record the user's request
+    // ----------------------------------
     
-    return WelcomeFetchInput(); // Return the user's request
+    // Protocol to get the user's input
+    do
+    {
+        WelcomeMessage();       // Display the welcome message
+        WelcomeMenu();          // Display the Welcome Menu
+        
+        userRequest = WelcomeFetchInput();  // Record the user's request
+        
+        if (userRequest != 255) // If the user's request is valid, return it.
+            return userRequest;
+        
+        
+        ClearScreen();          // User's request was not valid; retry again.
+    } while(1);
 } // WelcomeProtocol()
 
 
@@ -85,9 +99,9 @@ int WelcomeFetchInput()
         return 2;
     else
     {
-        printf("<!> FATAL ERROR <!>\n");
+        printf("<!> BAD REQUEST <!>\n");
         printf("-------------------------------\n");
-        printf("Unable to determine user request; program will now terminate.\n");
+        printf("Please select an option from the menu provided\n");
         printf(" User Requested [%s]\n", userInput);
         return 255;
     } // Fatal Error \ Unknown Request
