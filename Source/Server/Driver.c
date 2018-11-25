@@ -115,6 +115,9 @@ int main(int argc, char **argv)
             break;
     } // switch()
     
+    // Clear some space for the main menu screen
+    ClearScreen();
+    
     // Display the program's header
     DrawHeader();
     
