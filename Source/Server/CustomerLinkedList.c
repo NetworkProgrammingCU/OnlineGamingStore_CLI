@@ -485,11 +485,11 @@ void UserLogin(CustomerData* cList, CustomerData **userCard)
         
         // Credentials did not match
         retryCounter++;     // Update the country
-        printf("Incorrect username or password\n");
+        printf("Incorrect username or password\n\n");
     } while (retryCounter <= maxRetries);
     
     // If we are still executing, then the user exceeded the amount of retries.
     // Terminate the session.
-    printf("Maximum retries has been exceeded!  Connection to the store has been terminated!\n");
+    printf("Maximum retries has been exceeded!  Connection to the store has been terminated!\n\n\n");
     exit(3);
 } // UserLogin()
