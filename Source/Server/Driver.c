@@ -19,6 +19,7 @@
 //  1 = User Requested to leave at Login (normal exit)
 //  2 = User Account Validation Failure (Login failure)
 //  3 = User Exceeded Login Retries (Bad credentials used)
+//  255 = Vague error; usually something really bad.
 // ============================================
 
 
@@ -99,25 +100,21 @@ int main(int argc, char **argv)
     {
         case 0:
             printf("User requested to login\n");
+            UserLogin(customerList, &sessionUser);
             break;
         case 1:
             printf("User requested to register\n");
+            ManuallyCreateNewUser(&customerList);
             break;
         case 2:
             printf("User requested to leave\n");
+            exit(1);
             break;
         default:
             printf("Unknown request\n");
+            exit(255);
             break;
     } // switch()
-    
-    
-    
-    
-    //UserLogin(customerList, &sessionUser);
-    // Manually create a new user account to the store
-    //ManuallyCreateNewUser(&customerList);
-
     
     // Display the program's header
     DrawHeader();
