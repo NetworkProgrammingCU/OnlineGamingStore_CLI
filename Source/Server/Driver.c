@@ -264,17 +264,14 @@ int WelcomeFetchInput()
     
     // Analyze the user input and return the desired request
     if(strcmp(userInput, "log") == 0)
-    {   // User Requested to Log Into the store
+        // User Requested to Log Into the store
         return 0;
-    } // Logging Request
     else if (strcmp(userInput, "reg") == 0)
-    {   // User Requested to Register to the store
+        // User Requested to Register to the store
         return 1;
-    } // Register Request
     else if (CheckForUserQuit(userInput, _MAX_CHAR_INPUT_) == 0)
-    {   // User Requested to leave from the store
+        // User Requested to leave from the store
         return 2;
-    } // Terminate Request
     else
     {
         printf("<!> FATAL ERROR <!>\n");
