@@ -111,7 +111,6 @@ int main(int argc, char **argv)
             exit(1);
             break;
         default:
-            printf("Unknown request\n");
             exit(255);
             break;
     } // switch()
