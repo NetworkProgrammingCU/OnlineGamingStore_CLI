@@ -202,14 +202,11 @@ void UpdateUserInfoMenu(CustomerData **userCard)
     userRequest =                           // Get the user's request and cache the value
         UpdateUserInfoMenuGetInput();       //  to process it.
     
-    printf("User Request == %d\n", userRequest);
     // Inspect the user's input
     if (userRequest < 10)       // Execute the user's request
-        printf("Request\n");
-        //UpdateUserInfoMenuUpdateChoice(userCard, userRequest);
+        UpdateUserInfoMenuUpdateChoice(userCard, userRequest);
     else if (userRequest == 10) // Return to main menu
-        printf("Exit\n");
-        //isContinue = false;
+        isContinue = false;
     else
         printf("<!> BAD REQUEST <!>\n");
         printf("-------------------------------\n");
