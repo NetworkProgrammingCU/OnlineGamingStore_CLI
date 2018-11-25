@@ -18,6 +18,7 @@
 //  0 = Successful Operation
 //  1 = User Requested to leave at Login (normal exit)
 //  2 = User Account Validation Failure (Login failure)
+//  3 = User Exceeded Login Retries (Bad credentials used)
 // ============================================
 
 

@@ -469,11 +469,27 @@ void UserLogin(CustomerData* cList, CustomerData **userCard)
     // ----------------------------------
     char *userID = malloc(128*sizeof(char));    // User's account ID
     char *userKey = malloc(128*sizeof(char));   // User's password for the account
+    const int maxRetries = 2;                   // How many times can the user retry to login after so many failed attempts.
+    int retryCounter = 0;                       // How many attempts has the user made thus far?
     // ----------------------------------
     
-    // Ask the user for their account details
-    AskUserLogin(&userID, &userKey);
+    do
+    {
+        // Ask the user for their account details
+        AskUserLogin(&userID, &userKey);
+        
+        // Check their account details against the database
+        if (FindUser_ReturnUserInfo(cList, userCard, userID, userKey))
+            // Credentials matched!
+            return;     // Leave the function; success!
+        
+        // Credentials did not match
+        retryCounter++;     // Update the country
+        printf("Incorrect username or password\n");
+    } while (retryCounter <= maxRetries);
     
-    // Check their account details against the database
-    printf("Validation returned: %d\n", FindUser_ReturnUserInfo(cList, userCard, userID, userKey));
+    // If we are still executing, then the user exceeded the amount of retries.
+    // Terminate the session.
+    printf("Maximum retries has been exceeded!  Connection to the store has been terminated!\n");
+    exit(3);
 } // UserLogin()
