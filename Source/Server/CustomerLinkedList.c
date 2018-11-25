@@ -362,7 +362,7 @@ bool FindUser_ReturnUserInfo(CustomerData *cList,
         // Check if the user's password challenge matches
         if (0 == strcmp(cList->userKey, userKey))
         {
-            userCard = &cList;
+            *userCard = cList;
             return true;
         } // if :: Successful!
         

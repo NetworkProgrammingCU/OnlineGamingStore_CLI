@@ -136,10 +136,10 @@ int main(int argc, char **argv)
         
     // Get some data
     // DEBUG STUFF
-    printf("First name: %s\n", customerList->firstName);
-    printf("User ID: %s\n", customerList->userID);
-    printf("Phone Number: %s\n", customerList->phoneNumber);
-    printf("ZIP Code: %s\n", customerList->addressPostalCode);
+    printf("First name: %s\n", sessionUser->firstName);
+    printf("User ID: %s\n", sessionUser->userID);
+    printf("Phone Number: %s\n", sessionUser->phoneNumber);
+    printf("ZIP Code: %s\n", sessionUser->addressPostalCode);
     // END OF DEBUG STUFF
     
     return 0;
