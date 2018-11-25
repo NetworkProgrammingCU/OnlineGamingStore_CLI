@@ -23,6 +23,7 @@ svProgInfo := $(svDir)/ProgInformation.c
 svGameLL := $(svDir)/GameLinkedList.c
 svCustomerLL := $(svDir)/CustomerLinkedList.c
 svWelcome := $(svDir)/Welcome.c
+svMainMenu := $(svDir)/MainMenu.c
 
 # Client files
 # =====================================================
@@ -33,7 +34,7 @@ svWelcome := $(svDir)/Welcome.c
 ALL: server client
 server:
 	@echo Compiling Server Build. . .
-	@$(compiler) $(compilerArg) $(svOutput) -I $(shDir) -I $(svDir) $(shComFun) $(svProgInfo) $(svGameLL) $(svCustomerLL) $(svWelcome) $(svDriver)
+	@$(compiler) $(compilerArg) $(svOutput) -I $(shDir) -I $(svDir) $(shComFun) $(svProgInfo) $(svGameLL) $(svCustomerLL) $(svWelcome) $(svMainMenu) $(svDriver)
 	@echo Successfully Compiled Build!
 client: Driver.c
 	@echo Compiling Client Build. . .
