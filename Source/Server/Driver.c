@@ -104,7 +104,7 @@ int main(int argc, char **argv)
             break;
         case 1:
             printf("User requested to register\n");
-            ManuallyCreateNewUser(&customerList);
+            ManuallyCreateNewUser(&customerList, &sessionUser);
             break;
         case 2:
             printf("User requested to leave\n");

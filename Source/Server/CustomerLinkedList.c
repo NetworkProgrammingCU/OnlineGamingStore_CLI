@@ -201,8 +201,11 @@ void GenerateUserList(struct CustomerData** cList)
 //  cList [CustomerData]
 //      The primary Linked-List that will be modified to
 //      retain the new user account.
+//  userCard [CustomerData]
+//      The userCard contains information about the current
+//      user that is currently active within the session.
 // -----------------------------------
-void ManuallyCreateNewUser(struct CustomerData** cList)
+void ManuallyCreateNewUser(struct CustomerData** cList, struct CustomerData** userCard)
 {
     // Declarations and Initializations
     // ----------------------------------
@@ -304,6 +307,20 @@ void ManuallyCreateNewUser(struct CustomerData** cList)
                     addressPostalCode,  // Address (Zip Code)
                     adminRights);       // Administrator?
                     
+    // Generate the UserCard here as well
+    (*userCard)->firstName = firstName;
+    (*userCard)->lastName = lastName;
+    (*userCard)->userID = userID;
+    (*userCard)->userKey = userKey;
+    (*userCard)->email = email;
+    (*userCard)->phoneNumber = phoneNumber;
+    (*userCard)->addressCity = addressCity;
+    (*userCard)->addressState = addressState;
+    (*userCard)->addressCountry = addressCountry;
+    (*userCard)->addressStreet = addressStreet;
+    (*userCard)->addressPostalCode = addressPostalCode;
+    (*userCard)->admin = 0;
+    
     // Tell the user that their account has been successfully created
     printf("Your account has been created!\n");
 } // ManuallyCreateNewUser()
