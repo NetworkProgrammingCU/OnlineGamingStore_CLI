@@ -83,6 +83,9 @@ int MainMenuUserRequest()
     else if (userInput[0] == 'x')
         // Exit from the Store
         return 2;
+    else if (!CheckForUserQuit(userInput, _MAX_CHAR_INPUT_))
+        // Exit from the store (Exit or Quit keywords)
+        return 2;
     else
         // Unknown Request
         return 3;    
