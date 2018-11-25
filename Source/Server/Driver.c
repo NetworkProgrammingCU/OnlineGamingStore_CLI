@@ -166,6 +166,46 @@ int main(int argc, char **argv)
 
 
 
+// Update User Information Menu
+// -----------------------------------
+// Documentation:
+//  This will provide the user with the ability
+//  to choose what they want to update regarding
+//  their personal information that is stored on
+//  their account.
+// -----------------------------------
+void UpdateUserInfoMenu(CustomerData **userCard)
+{
+
+} // UpdateUserInfoMenu()
+
+
+
+
+// Update User Information - Get Input
+// -----------------------------------
+// Documentation:
+//  
+// -----------------------------------
+int UpdateUserInfoMenuGetInput()
+{
+
+} // UpdateUserInfoMenuGetInput()
+
+
+
+
+// -----------------------------------
+// Documentation:
+//  
+// -----------------------------------
+void UpdateUserInfoMenuUpdateChoice(CustomerData **userCard)
+{
+
+} // UpdateUserInfoMenuUpdateChoice()
+
+
+
 void DrawStorePage()
 {
     
