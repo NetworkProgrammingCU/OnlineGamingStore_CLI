@@ -128,7 +128,7 @@ int main(int argc, char **argv)
     printf("\n\n");
     
     // Display the user that is presently logged into the system
-    DrawUserLoggedIn();
+    DrawUserLoggedIn(sessionUser->userID);
     
     // Push a few line-feeds to separate the contents
     printf("\n\n\n");
@@ -196,7 +196,11 @@ void CloseProgram()
 // Documentation
 //  This function will simply provide who is presently logged into the store.
 // -----------------------------------
-void DrawUserLoggedIn()
+// Parameters:
+//  screenName [char*]
+//      The User ID that this session is attached to presently.
+// -----------------------------------
+void DrawUserLoggedIn(char *screenName)
 {
-    printf("You are logged in as: {{PLACEHOLDER}}\n");
+    printf("You are logged in as: %s\n", screenName);
 } // DrawUserLoggedIn()
