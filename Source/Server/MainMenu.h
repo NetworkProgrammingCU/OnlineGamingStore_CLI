@@ -20,6 +20,7 @@
 
 // Function Prototypes for Customer Data
 // -----------------------------------
+void DrawInstructionsMainMenu();    // Display the program instructions onto the terminal.
 void DrawMenuMain();                // Display the main menu to the user.
 int MainMenu();                     // Manages with the Main Menu user Requests.
 int MainMenuUserRequest();          // User provides their request within the main menu.

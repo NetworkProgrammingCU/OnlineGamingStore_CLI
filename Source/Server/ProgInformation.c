@@ -18,20 +18,6 @@
 
 
 
-// Draw Instructions
-// -----------------------------------
-// Documentation
-//  This function will provide the instructions to the client,
-//  in regards into how to use the main menu screen.
-// -----------------------------------
-void DrawInstructionsMainMenu()
-{
-    printf("Select the following options from the screen:\n");
-} // DrawInstructions()
-
-
-
-
 // Draw Header
 // -----------------------------------
 // Documentation
