@@ -91,11 +91,7 @@ int main(int argc, char **argv)
     GenerateUserList(&customerList);    // Create the Customer List
     GenerateGameList(&gameList);        // Create the Game List (our catalog)
     // ===================================
-    
-    
-    // Capture the user's input
-    //char userInput[128];
-    //fgets(userInput, 128, stdin);
+
     
     // Determine the user's request
     switch (WelcomeProtocol())
