@@ -50,6 +50,8 @@
 // Function Prototypes
 // ===============================
 void DrawMenuMain();                // Display the main menu to the user.
+int MainMenu();                     // Manages with the Main Menu user Requests.
+int MainMenuUserRequest();          // User provides their request within the main menu.
 void DrawStorePage();               // Display the store page to the user.
 void CloseProgram();                // Perform the termination protocol (if any).
 void DrawUserLoggedIn();            // Display who is viewing the store.
@@ -78,6 +80,7 @@ int main(int argc, char **argv)
         gameList = malloc(sizeof(GameData));            // Game Data Linked-List
     struct CustomerData*
         sessionUser = malloc(sizeof(CustomerData));     // The user for this session
+    bool isContinue = true;                             // User request to terminate the program
     // ----------------------------------
     
     // Immediate Execution
@@ -115,35 +118,132 @@ int main(int argc, char **argv)
             break;
     } // switch()
     
-    // Clear some space for the main menu screen
-    ClearScreen();
+    do
+    {
+        // Clear some space for the main menu screen
+        ClearScreen();
+        
+        // Display the program's header
+        DrawHeader();
+        
+        // Display the program's about section
+        DrawAbout();
+        
+        // Push a few line-feeds to separate the contents
+        printf("\n\n");
+        
+        // Display the user that is presently logged into the system
+        DrawUserLoggedIn(sessionUser->userID);
+        
+        // Push a few line-feeds to separate the contents
+        printf("\n\n\n");
+        
+        // Provide the Main Menu and determine the user's request
+        switch (MainMenu())
+        {
+            case 0: // Store Page
+                printf("Store Page requested\n");
+                break;
+            case 1: // Update User Information
+                printf("Update user information requested\n");
+                break;
+            case 2: // Leave the Store
+                isContinue = false;     // Negate this flag; leave the loop
+                break;
+            default: // Incorrect input or request
+                printf("<!> BAD REQUEST <!>\n");
+                printf("-------------------------------\n");
+                printf("Please select an option from the menu provided\n");
+                break;
+        } // switch()
+    } while(isContinue);
     
-    // Display the program's header
-    DrawHeader();
+    // Prepare to close the program
+    CloseProgram();
     
-    // Display the program's about section
-    DrawAbout();
-    
-    // Push a few line-feeds to separate the contents
-    printf("\n\n");
-    
-    // Display the user that is presently logged into the system
-    DrawUserLoggedIn(sessionUser->userID);
-    
-    // Push a few line-feeds to separate the contents
-    printf("\n\n\n");
-    
-    // Draw the Main Menu
-    DrawInstructionsMainMenu();
-    DrawMenuMain();
-    
+    // Terminate the program
     return 0;
 } // main()
 
 
 
 
+// Main Menu
+// -----------------------------------
+// Documentation:
+//  This function will allow the user to provide
+//  their request - which will allow them to navigate
+//  within the program.
+// -----------------------------------
+// Output:
+//  0 = Store Page
+//  1 = Update User Information
+//  2 = Exit
+//  3 = Bad request
+// -----------------------------------
+int MainMenu()
+{
+    DrawInstructionsMainMenu();     // Draw Instructions
+                                    //  regarding the main menu.
+    DrawMenuMain();                 // Provide the Main Menu
+    return MainMenuUserRequest();   // Fetch user input
+} // MainMenu()
+
+
+
+
+// Main Menu User Request
+// -----------------------------------
+// Documentation:
+//  This will allow the user to provide input in regards to
+//  the main menu, but the input will also be modified to work
+//  within this program.
+// -----------------------------------
+// Output:
+//  0 = Store Page
+//  1 = Update User Information
+//  2 = Exit
+//  3 = Bad request
+// -----------------------------------
+int MainMenuUserRequest()
+{
+    // Declarations and Initializations
+    // ----------------------------------
+    char userInput[_MAX_CHAR_INPUT_];    // This will hold the user input.
+    // ----------------------------------
+    
+    // Display the prompt
+    DisplayPrompt();
+    
+    // Get the user input
+    fgets(userInput, _MAX_CHAR_INPUT_, stdin);
+    
+    // Lower case the user's input
+    LowerCaseUserInput(userInput);
+    
+    // Try to determine the user's request
+    if (userInput[0] == '1')
+        // Store Page
+        return 0;
+    else if (userInput[0] == '2')
+        // Update User Information
+        return 1;
+    else if (userInput[0] == 'x')
+        // Exit from the Store
+        return 2;
+    else
+        // Unknown Request
+        return 3;    
+} // MainMenuUserRequest()
+
+
+
+
 // Draw Main Menu
+// -----------------------------------
+// Documentation:
+//  This will provide the main menu to the user.
+// -----------------------------------
 void DrawMenuMain()
 {
     printf("Main Menu\n");
