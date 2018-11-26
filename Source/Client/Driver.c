@@ -1,11 +1,16 @@
 // ============================================
-// Programmer:      Nicholas Gautier
+// Programmers:     Nicholas Gautier
+//                  Justin Griffith
+//                  Marilyn Li
 // Class:           CS3013; Network Programming
-// Assignment #:    2
-// Due Date:        29.October.2018
+// Assignment #:    3
+// Due Date:        12.December.2018
 // Instructor:      Dr. Zhao
-// Description:     This program allows communication between the client and server.
+// Description:     TO-BE-DETERMINED
 // Credits:
+//      Lewisk3 (from the ZDoom Community) [NG]
+//          Greatly helped me unfuck the Pointeramania issues
+//          Seriously, it was bad - like really bad.
 //  Base Source Code provided by W. Richard Stevens in
 //      Unix Network Programming, The Sockets Networking API
 //      Volume 1, 3rd edition.  All credit goes to him for the framework
