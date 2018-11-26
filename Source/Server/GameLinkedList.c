@@ -11,10 +11,35 @@
 
 // Included Libraries
 // ===============================
+#include <stdio.h>          // Required for input and output
 #include <stddef.h>         // NULLPTR; used for pointers
 #include <stdlib.h>         // Pointer Memory Allocation
+#include "CustomerData.h"   // Customer Data Object
 #include "GameData.h"       // Game Data Object
 // ===============================
+
+
+
+
+// Store Driver
+// -----------------------------------
+// Documentation:
+//  This function manages how the store will operate
+//  and work within the program.  Essentially, this
+//  is our store driver - drive the user to the operate
+//  protocols as specified in this function.
+// -----------------------------------
+// Parameters:
+//  gList [GameData]
+//      Holds the products within the store
+//  userCard [CustomerData]
+//      Holds the user that is currently logged into
+//      the session.
+// -----------------------------------
+void StoreDriver(GameData *gList, CustomerData *userCard)
+{
+    printf("Store was activated!\n");
+} // StoreDriver()
 
 
 

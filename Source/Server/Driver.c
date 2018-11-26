@@ -140,7 +140,7 @@ int main(int argc, char **argv)
         switch (MainMenu())
         {
             case 0: // Store Page
-                printf("Store Page requested\n");
+                StoreDriver(gameList, sessionUser);
                 break;
             case 1: // Update User Information
                 UpdateUserInfoMenu(&sessionUser);

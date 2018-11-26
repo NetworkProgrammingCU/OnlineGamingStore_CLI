@@ -27,6 +27,8 @@ static void CreateNewGame(GameData**,           // Create a new Game entry
                     const char*, const char*);
 static void AppendNewGame(GameData**,           // Add the new game to
                             GameData*);         //  the primary Linked-List.
+void StoreDriver(GameData*, CustomerData*);     // The Store Driver; manages
+                                                //  how the store operates.
 // -----------------------------------
 
 
