@@ -5,7 +5,7 @@
 //  for both the server program and the client program.  With
 //  the use of this file, it is possibly to share common
 //  resources with minimal redundancies as possible and minimal
-//  impact on code maintanance.
+//  impact on code maintenance.
 
 
 
