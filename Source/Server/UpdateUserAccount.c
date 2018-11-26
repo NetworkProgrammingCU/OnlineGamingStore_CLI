@@ -49,7 +49,7 @@ void UpdateUserInfoMenu(CustomerData **userCard)
     do
     {
     DrawUserLoggedIn((*userCard)->userID);  // Show who is currently logged into the session
-    printf("\n\n");                         // Provide extra padding for readability              
+    printf("\n\n");                         // Provide extra padding for readability
     UpdateUserInfoShowMenu(*userCard);      // Display the Menu
     
     userRequest =                           // Get the user's request and cache the value
