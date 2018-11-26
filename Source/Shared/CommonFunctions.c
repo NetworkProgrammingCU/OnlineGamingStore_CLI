@@ -5,7 +5,7 @@
 //  for both the server program and the client program.  With
 //  the use of this file, it is possibly to share common
 //  resources with minimal redundancies as possible and minimal
-//  impact on code maintanance.
+//  impact on code maintenance.
 
 
 
@@ -173,7 +173,7 @@ void DrawUserLoggedIn(char *screenName)
 //      | H | E | L | L | O |  |  |  |  |  |\0|
 //      +---+---+---+---+---+--+--+--+--+--+--+
 //  We will add the '\o' at the next index after
-//  'O', because following 'O' we have atleast two
+//  'O', because following 'O' we have at least two
 //  consecutive spaces (more than that, actually).
 //  HOWEVER, this leads to an issue where the buffer
 //  purposely cut out any text that may exist after the two
@@ -190,7 +190,7 @@ void DrawUserLoggedIn(char *screenName)
 //  Or simply "HELLO".
 //
 //  The methodology is simple by design and because of that
-//  it is subjectable to it's own limitations.
+//  it is subject-able to it's own limitations.
 //  NOTE: This rule now also applies to the '\n' character.
 // -----------------------------------
 // Parameters:
