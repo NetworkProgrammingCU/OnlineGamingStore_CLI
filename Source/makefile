@@ -5,7 +5,7 @@ DIR := ${CURDIR}
 # Compiler and Compiler Args (default)
 # =====================================================
 compiler := cc
-compilerArg := -o
+compilerArg := -std=gnu11 -o
 
 # Shared files
 # =====================================================
