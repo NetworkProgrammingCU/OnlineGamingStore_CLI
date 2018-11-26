@@ -11,9 +11,9 @@
 
 // Included Libraries
 // ===============================
-#include <stddef.h>             // NULLPTR; used for pointers
-#include <stdlib.h>             // Pointer Memory Allocation
-#include "GameData.h"           // Game Data Object
+#include <stddef.h>         // NULLPTR; used for pointers
+#include <stdlib.h>         // Pointer Memory Allocation
+#include "GameData.h"       // Game Data Object
 // ===============================
 
 
@@ -99,7 +99,8 @@ static void CreateNewGame(GameData** gList,
 // Generate Game List
 // -----------------------------------
 // Documentation
-//  This function will merely provide a list of games that is available within the store.
+//  This function will merely provide a list of
+//  games that is available within the store.
 // -----------------------------------
 // Parameters
 //  *glist [GameData]
@@ -108,17 +109,35 @@ static void CreateNewGame(GameData** gList,
 // -----------------------------------
 void GenerateGameList(struct GameData** gList)
 {
-    for (int i = 0; i < 1; ++i)
-    switch(i)
-    {
+    for (int i = 0; i < 3; i++)
+        switch (i)
+        {
         case 0:
-            CreateNewGame(gList,
-                            "The Ultimate Doom",
-                            "Hell has unleashed",
-                            "id Software",
-                            "id Software",
-                            "FPS",
-                            "Nothing");
+            CreateNewGame(gList,                        // Game Linked-List
+                            "Ultimate Doom",            // Title
+                            "UAC Unleashed the hell!",  // Description
+                            "id Software",              // Publisher
+                            "id Software",              // Developers
+                            "First-Person Shooter",     // Genre
+                            "Hell has been released");  // Notes
             break;
-    } // switch
+        case 1:
+            CreateNewGame(gList,                        // Game Linked-List
+                            "Doom 2",                   // Title
+                            "Hell on Earth",            // Description
+                            "id Software",              // Publisher
+                            "id Software",              // Developers
+                            "First-Person Shooter",     // Genre
+                            "RIP Daisy");               // Notes
+            break;
+        case 2:
+            CreateNewGame(gList,                        // Game Linked-List
+                            "Final Doom",               // Title
+                            "The Plutonia Experiement", // Description
+                            "id Software",              // Publisher
+                            "id Software",              // Developers
+                            "First-Person Shooter",     // Genre
+                            "It's never over!");        // Notes
+            break;
+        } // switch
 } // GenerateGameList()
