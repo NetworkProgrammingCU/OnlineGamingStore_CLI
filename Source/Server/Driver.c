@@ -58,7 +58,6 @@ void UpdateUserInfoMenuUpdateChoice_MSG(char*, char**);
 // ~~~~~~~~~~~~~~~~~~~~
 void DrawStorePage();               // Display the store page to the user.
 void CloseProgram();                // Perform the termination protocol (if any).
-void DrawUserLoggedIn();            // Display who is viewing the store.
 // ===============================
 
 
@@ -480,20 +479,3 @@ void CloseProgram()
 {
     printf("Closing program. . .\n\n\n");
 } // CloseProgram()
-
-
-
-
-// Draw User Logged-In Status
-// -----------------------------------
-// Documentation
-//  This function will simply provide who is presently logged into the store.
-// -----------------------------------
-// Parameters:
-//  screenName [char*]
-//      The User ID that this session is attached to presently.
-// -----------------------------------
-void DrawUserLoggedIn(char *screenName)
-{
-    printf("You are logged in as: %s\n", screenName);
-} // DrawUserLoggedIn()
