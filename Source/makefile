@@ -28,7 +28,10 @@ svUpdateUsrInfo := $(svDir)/UpdateUserAccount.c
 
 # Client files
 # =====================================================
-
+clOutput := client.binary
+clDir := $(DIR)/Client
+clDriver := $(clDir)/Driver.c
+clComm := $(clDir)/Comm.c
 
 # Main Make Operation
 # =====================================================
@@ -37,10 +40,11 @@ server:
 	@echo Compiling Server Build. . .
 	@$(compiler) $(compilerArg) $(svOutput) -I $(shDir) -I $(svDir) $(shComFun) $(svProgInfo) $(svGameLL) $(svCustomerLL) $(svWelcome) $(svMainMenu) $(svUpdateUsrInfo) $(svDriver)
 	@echo Successfully Compiled Build!
-client: Driver.c
+client:
 	@echo Compiling Client Build. . .
+	@$(compiler) $(compilerArg) $(clOutput) -I $(shDir) -I $(clDir) $(clComm) $(clDriver)
 	@echo Successfully Compiled Build!
 clean:
 	@echo Thrashing Compiled Builds. . .
-	@rm $(svOutput)
+	@rm $(svOutput) $(clOutput)
 	@echo Successfully Expunged Binary Builds!
