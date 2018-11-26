@@ -1,5 +1,9 @@
-// Client Prospective
-//  Part of TCPCLI01.c
+// Client Communications (listener and responder)
+// ================================
+// ================================
+// This file holds functions that will be necessary
+//  for the client to properly communicate back and
+//  forth with the Online Service server.
 
 
 
