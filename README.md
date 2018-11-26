@@ -14,8 +14,8 @@ The project will provide each student with an opportunity to design and develop 
 |--------|--------------------------|---------------|
 | WIP    | Main menu                | Main Menu of the store |
 | WIP    | Store Catelog            | Display the games available within the store |
-| HOLD   | Search Catelog           | Allow the catelog to be searchable |
-| HOLD   | Filter Catelog           | Display the catelog that is returned by the search; only show the filtered list |
+| DROPPED| Search Catelog           | Allow the catelog to be searchable |
+| DROPPED| Filter Catelog           | Display the catelog that is returned by the search; only show the filtered list |
 | HOLD   | Display full Game Info   | When the user selects the game, display the game contents |
 | HOLD   | Purchase the game        | Allow the user to 'purchase' the game |
 | Done   | User Log-in              | Allow the ability for the user to log into the store to make purchases |
