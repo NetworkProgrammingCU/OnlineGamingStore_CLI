@@ -16,7 +16,9 @@
 #include <stdlib.h>             // Pointer Memory Allocation
 #include <stdbool.h>            // Because I was spoiled with C++ and C#, just give me the Bool data types!
 #include <string.h>             // strcmp() for User Account Authentication Challenge
+#include "GlobalDefs.h"         // Program Macro-Definitions
 #include "CustomerData.h"       // Game Data Object
+#include "CustomerLinkedList.h" // Provides the prototypes
 #include "CommonFunctions.h"    // Prompt
 // ===============================
 
@@ -290,6 +292,18 @@ void ManuallyCreateNewUser(struct CustomerData** cList, struct CustomerData** us
     // Tell the user that we creating the account for them.
     printf("Please wait, creating your account. . .\n");
     
+    // Filter the values before appending them into the system
+    CreateNewUser_ValueFiltering(&firstName,
+                                &lastName,
+                                &userID,
+                                &userKey,
+                                &email,
+                                &phoneNumber,
+                                &addressCity,
+                                &addressState,
+                                &addressCountry,
+                                &addressStreet,
+                                &addressPostalCode);
     
     // With the data provided from the user, throw the information to the
     //  customer Linked-List for further use.
@@ -328,6 +342,88 @@ void ManuallyCreateNewUser(struct CustomerData** cList, struct CustomerData** us
 
 
 
+// Value Filtering for the Create New User
+// -----------------------------------
+// Documentation:
+//  This function will clean up the values provided in the
+//  parameters; clean up resulting on removing the '\n'
+//  charactor that will be recorded in the variable --
+//  when the 'enter key' value is kept, we need it expunged.
+// -----------------------------------
+// -----------------------------------
+// Parameters
+//  firstName [char*]
+//      The customer's first name
+//  lastName [char*]
+//      The customer's last name
+//  userID [char*]
+//      The customer's User ID to log into the store
+//  userKey [char*]
+//      The customer's Password to log into the store
+//  email [char*]
+//      The customer's email address
+//  phoneNumber [char*]
+//      The customer's phone number
+//  addressCity [char*]
+//      The customer's Address information: City
+//  addressState [char*]
+//      The customer's Address information: State
+//  addressCountry [char*]
+//      The customer's Address information: Country
+//  addressStreet [char*]
+//      The customer's Address information: Street
+//  addressPostalCode [char*]
+//      The customer's Address information: Zip Code (without +4)
+// -----------------------------------
+void CreateNewUser_ValueFiltering(char **firstName,
+                                    char **lastName,
+                                    char **userID,
+                                    char **userKey,
+                                    char **email,
+                                    char **phoneNumber,
+                                    char **addressCity,
+                                    char **addressState,
+                                    char **addressCountry,
+                                    char **addressStreet,
+                                    char **addressPostalCode)
+{
+    // First Name
+    FilterUserInputArray(*firstName, _MAX_CHAR_INPUT_);
+    
+    // Last Name
+    FilterUserInputArray(*lastName, _MAX_CHAR_INPUT_);
+    
+    // User ID
+    FilterUserInputArray(*userID, _MAX_CHAR_INPUT_);
+    
+    // User Key
+    FilterUserInputArray(*userKey, _MAX_CHAR_INPUT_);
+    
+    // E-Mail
+    FilterUserInputArray(*email, _MAX_CHAR_INPUT_);
+    
+    // Phone Number
+    FilterUserInputArray(*phoneNumber, _MAX_CHAR_INPUT_);
+    
+    // Address City
+    FilterUserInputArray(*addressCity, _MAX_CHAR_INPUT_);
+    
+    // Address State
+    FilterUserInputArray(*addressState, _MAX_CHAR_INPUT_);
+    
+    // Address Country
+    FilterUserInputArray(*addressCountry, _MAX_CHAR_INPUT_);
+    
+    // Address Street
+    FilterUserInputArray(*addressStreet, _MAX_CHAR_INPUT_);
+    
+    // Address ZIP Code
+    FilterUserInputArray(*addressPostalCode, _MAX_CHAR_INPUT_);
+} // CreateNewUser_ValueFiltering()
+
+
+
+ 
 // Find User _AND_ Return User Information
 // -----------------------------------
 // Documentation:

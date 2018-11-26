@@ -40,6 +40,12 @@ void UserLogin(CustomerData*,                       // This will provide the pro
                     CustomerData**);                //  for the login system.
 void AskUserLogin(char**, char**);                  // Ask the user for login information
                                                     //  Required for the login system.
+void CreateNewUser_ValueFiltering(char**,           // Filter the newly provided values
+                            char**, char**,         //  to the user's account by removing
+                            char**, char**,         //  the '\n' char from the values.
+                            char**, char**,
+                            char**, char**,
+                            char**, char**);
 // -----------------------------------
 
 
