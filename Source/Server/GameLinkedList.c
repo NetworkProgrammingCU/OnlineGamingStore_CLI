@@ -109,7 +109,7 @@ static void CreateNewGame(GameData** gList,
 // -----------------------------------
 void GenerateGameList(struct GameData** gList)
 {
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 3; ++i)
         switch (i)
         {
         case 0:
