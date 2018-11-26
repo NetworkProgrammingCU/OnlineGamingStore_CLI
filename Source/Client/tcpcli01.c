@@ -1,12 +1,10 @@
 // ============================================
-// Programmers:     Nicholas Gautier
-//                  Justin Griffith
-//                  Marilyn Li
+// Programmer:      Nicholas Gautier
 // Class:           CS3013; Network Programming
-// Assignment #:    3
-// Due Date:        12.December.2018
+// Assignment #:    2
+// Due Date:        29.October.2018
 // Instructor:      Dr. Zhao
-// Description:     TO-BE-DETERMINED
+// Description:     This program allows communication between the client and server.
 // Credits:
 //  Base Source Code provided by W. Richard Stevens in
 //      Unix Network Programming, The Sockets Networking API
@@ -56,7 +54,7 @@ int main(int argc, char **argv)
         printf("             client 127.0.0.1\n");
         exit(2);
     } // Incorrect arguments
-
+    
     // Create the Socket
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
