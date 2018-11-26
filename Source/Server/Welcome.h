@@ -20,7 +20,7 @@
 
 
 
-// Function Prototypes for Game Data
+// Function Prototypes for Welcome Functions
 // -----------------------------------
 void WelcomeMessage();      // Displays the welcome message to the end-user.
 int WelcomeProtocol();      // Provides the Welcome Protocols
