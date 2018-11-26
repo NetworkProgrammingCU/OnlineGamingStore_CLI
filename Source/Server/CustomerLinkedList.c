@@ -17,7 +17,7 @@
 #include <stdbool.h>            // Because I was spoiled with C++ and C#, just give me the Bool data types!
 #include <string.h>             // strcmp() for User Account Authentication Challenge
 #include "GlobalDefs.h"         // Program Macro-Definitions
-#include "CustomerData.h"       // Game Data Object
+#include "CustomerData.h"       // Customer Data Object
 #include "CustomerLinkedList.h" // Provides the prototypes
 #include "CommonFunctions.h"    // Prompt
 // ===============================
