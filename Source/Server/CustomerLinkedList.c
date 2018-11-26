@@ -347,7 +347,7 @@ void ManuallyCreateNewUser(struct CustomerData** cList, struct CustomerData** us
 // Documentation:
 //  This function will clean up the values provided in the
 //  parameters; clean up resulting on removing the '\n'
-//  charactor that will be recorded in the variable --
+//  character that will be recorded in the variable --
 //  when the 'enter key' value is kept, we need it expunged.
 // -----------------------------------
 // -----------------------------------
@@ -467,7 +467,7 @@ bool FindUser_ReturnUserInfo(CustomerData *cList,
     //  or if we reached NULL within the Linked-List.
     if (cList == NULL)
     {   // Reached end of the Linked List, user's account was not found.
-        userCard = NULL;    // If incase it was not done so previously, NULL the card now.
+        userCard = NULL;    // If in-case it was not done so previously, NULL the card now.
         return false;       // Return a failure signal.
     } // if :: NULL
     else if (0 == strcmp(cList->userID, userID))
@@ -480,7 +480,7 @@ bool FindUser_ReturnUserInfo(CustomerData *cList,
         } // if :: Successful!
         
         // Else, the password was incorrect.
-        userCard = NULL;        // If incase it was not done so previously, NULL the card now.
+        userCard = NULL;        // If in-case it was not done so previously, NULL the card now.
         return false;           // Return a failure signal.
     } // if :: Found User Account!
     else
