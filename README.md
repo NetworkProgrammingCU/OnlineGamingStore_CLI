@@ -13,7 +13,7 @@ The project will provide each student with an opportunity to design and develop 
 | Status | Function Name            | functionality |
 |--------|--------------------------|---------------|
 | WIP    | Main menu                | Main Menu of the store |
-| HOLD   | Store Catelog            | Display the games available within the store |
+| WIP    | Store Catelog            | Display the games available within the store |
 | HOLD   | Search Catelog           | Allow the catelog to be searchable |
 | HOLD   | Filter Catelog           | Display the catelog that is returned by the search; only show the filtered list |
 | HOLD   | Display full Game Info   | When the user selects the game, display the game contents |
