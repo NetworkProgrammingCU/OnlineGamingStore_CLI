@@ -18,7 +18,7 @@
 
 
 
-// Function Prototypes for Customer Data
+// Function Prototypes for Main Menu
 // -----------------------------------
 void DrawInstructionsMainMenu();    // Display the program instructions onto the terminal.
 void DrawMenuMain();                // Display the main menu to the user.
