@@ -48,5 +48,14 @@
 
 
 
+// Macro-Functions
+// -----------------------------------
+#define min(a, b) ((a) < (b) ? (a) : (b))   // Get the min value [Ternary]
+#define max(a, b) ((a) > (b) ? (a) : (b))   // Get the max value [Ternary]
+// -----------------------------------
+
+
+
+
 // Concluding Inclusion Guard
 #endif
