@@ -54,6 +54,7 @@ void UpdateUserInfoMenu(CustomerData**);
 int UpdateUserInfoMenuGetInput();
 void UpdateUserInfoMenuUpdateChoice(CustomerData**, int);
 void UpdateUserInfoShowMenu(CustomerData*);
+void UpdateUserInfoMenuUpdateChoice_MSG(char*, char**);
 // ~~~~~~~~~~~~~~~~~~~~
 void DrawStorePage();               // Display the store page to the user.
 void CloseProgram();                // Perform the termination protocol (if any).
@@ -307,10 +308,105 @@ int UpdateUserInfoMenuGetInput()
 //  This function will allow the user to actually
 //  update their information based on their request.
 // -----------------------------------
+// Parameters:
+//  userCard [CustomerData]
+//      The user's personal information that will be modified.
+//  request [int]
+//      What is to be modified on the user's User Card.
+// -----------------------------------
 void UpdateUserInfoMenuUpdateChoice(CustomerData **userCard, int request)
 {
-    return;
+    // Declarations and Initializations
+    // ----------------------------------
+    char *userInput = (char*)malloc(sizeof(char)*_MAX_CHAR_INPUT_);
+    // ----------------------------------
+    
+    
+    // Execute the user's request
+    switch(request)
+    {
+        case 0: // First Name
+            UpdateUserInfoMenuUpdateChoice_MSG((*userCard)->firstName, &userInput);
+            (*userCard)->firstName = userInput;
+            break;
+        case 1: // Last Name
+            UpdateUserInfoMenuUpdateChoice_MSG((*userCard)->lastName, &userInput);
+            (*userCard)->lastName = userInput;
+            break;
+        case 2: // Account Password
+            UpdateUserInfoMenuUpdateChoice_MSG((*userCard)->userKey, &userInput);
+            (*userCard)->userKey = userInput;
+            break;
+        case 3: // E-Mail Address
+            UpdateUserInfoMenuUpdateChoice_MSG((*userCard)->email, &userInput);
+            (*userCard)->email = userInput;
+            break;
+        case 4: // Phone Number
+            UpdateUserInfoMenuUpdateChoice_MSG((*userCard)->phoneNumber, &userInput);
+            (*userCard)->phoneNumber = userInput;
+            break;
+        case 5: // Address [City]
+            UpdateUserInfoMenuUpdateChoice_MSG((*userCard)->addressCity, &userInput);
+            (*userCard)->addressCity = userInput;
+            break;
+        case 6: // Address [State]
+            UpdateUserInfoMenuUpdateChoice_MSG((*userCard)->addressState, &userInput);
+            (*userCard)->addressState = userInput;
+            break;
+        case 7: // Address [Country]
+            UpdateUserInfoMenuUpdateChoice_MSG((*userCard)->addressCountry, &userInput);
+            (*userCard)->addressCountry = userInput;
+            break;
+        case 8: // Address [Street]
+            UpdateUserInfoMenuUpdateChoice_MSG((*userCard)->addressStreet, &userInput);
+            (*userCard)->addressStreet = userInput;
+            break;
+        case 9: // Address [Zip]
+            UpdateUserInfoMenuUpdateChoice_MSG((*userCard)->addressPostalCode, &userInput);
+            (*userCard)->addressPostalCode = userInput;
+            break;
+        default:// Bad key; don't fatally error out - no reason too.
+            printf("<!> ERROR <!>\n");
+            printf("--------------------------------\n");
+            printf("Unknown User Card Request!\nRequest was cancelled!\n");
+            break;
+    } // switch()
 } // UpdateUserInfoMenuUpdateChoice()
+
+
+
+
+// Update User Information Menu Update Choice - Message [Because long function names are cool!]
+// -----------------------------------
+// Documentation:
+//  This function, merely reducing repetitiveness, allows
+//  the user to provide an update on their personal information.
+//  After which, the user's input will be cleaned-up and sent
+//  back for further instructions.
+// -----------------------------------
+// Parameters:
+//  msg [char]
+//      The present value that currently exists.
+//  response [char]
+//      The new value that will replace the older-value
+//      [relating to the 'msg' variable above]
+// -----------------------------------
+void UpdateUserInfoMenuUpdateChoice_MSG(char* msg, char **response)
+{
+    // Display the current value
+    printf("Currently: %s\n", msg);
+    
+    // Tell the user to provide a new value
+    printf("Provide a new value\n");
+    DisplayPrompt();
+    
+    // Fetch the new value
+    fgets(*response, _MAX_CHAR_INPUT_, stdin);
+    
+    // Clean it up; otherwise the '\n' char
+    //  will still remain in the new value.
+    FilterUserInputArray(*response, _MAX_CHAR_INPUT_);
+} // UpdateUserInfoMenuUpdateChoice_MSG()
 
 
 
