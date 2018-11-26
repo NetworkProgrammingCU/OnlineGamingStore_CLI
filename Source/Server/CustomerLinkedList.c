@@ -423,7 +423,7 @@ void CreateNewUser_ValueFiltering(char **firstName,
 
 
 
- 
+
 // Find User _AND_ Return User Information
 // -----------------------------------
 // Documentation:
