@@ -207,7 +207,7 @@ void FilterUserInputArray(char buffer[], int bufferSize)
         if((buffer[i] == ' ' && buffer[1+i] == ' ')     // Two consecutive white spaces?
             || buffer[i] == '\n')                       // Or did we find the '\n' char?
         {
-            buffer[i] = '\0';                           // Replace that instance with a null-terminator.                           
+            buffer[i] = '\0';                           // Replace that instance with a null-terminator.
             return;                                     // Leave the function, we are done here!
         } // if :: Two White Spaces
     } // for()
