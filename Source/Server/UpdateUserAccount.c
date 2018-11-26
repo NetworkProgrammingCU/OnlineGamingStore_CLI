@@ -220,7 +220,7 @@ void UpdateUserInfoMenuUpdateChoice(CustomerData **userCard, int request)
         default:// Bad key; don't fatally error out - no reason too.
             printf("<!> ERROR <!>\n");
             printf("--------------------------------\n");
-            printf("Unknown User Card Request!\nRequest was cancelled!\n");
+            printf("Unknown User Card Request!\nRequest was canceled!\n");
             break;
     } // switch()
 } // UpdateUserInfoMenuUpdateChoice()
