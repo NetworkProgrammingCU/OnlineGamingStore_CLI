@@ -29,6 +29,8 @@ static void AppendNewGame(GameData**,           // Add the new game to
                             GameData*);         //  the primary Linked-List.
 void StoreDriver(GameData*, CustomerData*);     // The Store Driver; manages
                                                 //  how the store operates.
+void DisplayGameList(GameData*);                // Displays the products on
+                                                //  the terminal.
 // -----------------------------------
 
 

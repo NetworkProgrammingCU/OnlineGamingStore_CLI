@@ -21,6 +21,55 @@
 
 
 
+// Macro-Definitions
+// ===============================
+#define naturalStart 1      // Because humans start at '1' naturally,
+                            //  when we start an iterator
+                            //  (commonly 'i' in a loop), start at
+                            //  that position instead '0'.
+                            //  This exists for my sanity ;) [NG]
+// ===============================
+
+
+
+
+// Display Game List
+// -----------------------------------
+// Documentation:
+//  This function will display all of the
+//  products available within the store.
+// -----------------------------------
+// Parameters:
+//  gList [GameData]
+//      Holds the products within the store
+// -----------------------------------
+void DisplayGameList(GameData* gList)
+{
+    // Because the user will select a game from the list,
+    //  we will a for() to also update our 'i'.  This 'i'
+    //  is necessary so the user can 'select' a game from
+    //  the list provided from here.
+    for (int i = naturalStart; gList != NULL; ++i)
+    {
+        // Display the Game Title
+        printf("[%d] - %s\n", i, gList->title);
+        
+        // Display the Publisher
+        printf("       %s\n", gList->publisher);
+        
+        // Provide an extra space to assure
+        //  that the products are 'connected'
+        //  visually to the user.
+        printf("\n");
+        
+        // Go to the next product
+        gList = gList->next;
+    } // while
+} // DisplayGameList()
+
+
+
+
 // Store Driver
 // -----------------------------------
 // Documentation:
@@ -39,6 +88,7 @@
 void StoreDriver(GameData *gList, CustomerData *userCard)
 {
     printf("Store was activated!\n");
+    DisplayGameList(gList);
 } // StoreDriver()
 
 
