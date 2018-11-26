@@ -137,6 +137,23 @@ void ClearScreen()
 
 
 
+// Draw User Logged-In Status
+// -----------------------------------
+// Documentation
+//  This function will simply provide who is presently logged into the store.
+// -----------------------------------
+// Parameters:
+//  screenName [char*]
+//      The User ID that this session is attached to presently.
+// -----------------------------------
+void DrawUserLoggedIn(char *screenName)
+{
+    printf("You are logged in as: %s\n", screenName);
+} // DrawUserLoggedIn()
+
+
+
+
 // Filter User's Input [Buffer]
 // -----------------------------------
 // Documentation:

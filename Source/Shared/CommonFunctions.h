@@ -28,6 +28,7 @@ void ClearBuffer(char [], int);         // Clear the buffer
 void FilterUserInputArray(char[], int); // Clean the user's input by removing extra spacing.
 void ClearScreen();                     // This function will try to 'clear' the terminal buffer.
                                         //  Really, it's just new lines.
+void DrawUserLoggedIn();                // Display who is viewing the store.
 // -----------------------------------
 
 
