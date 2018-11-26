@@ -20,10 +20,10 @@
 // Included Libraries
 // ============================
 #include "myunp.h"              // Our custom UNP Header file
-#include "CommonFunctions.c"    // This contains our common functions
+#include "CommonFunctions.h"    // This contains our common functions
                                 //  will be available through out the
                                 //  entire program.
-#include "str_cli.c"            // Client Communication
+#include "Comm.h"            // Client Communication
 // ============================
 
 
