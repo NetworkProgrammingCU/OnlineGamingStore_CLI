@@ -70,12 +70,6 @@ void str_cli(FILE *fp, int sockfd)
             } // Server Terminated
             else
             {
-                // To help separate content
-                printf("\n");
-                
-                // Add a tag to the user
-                MessageTag("Server\0");
-                
                 // Display the message
                 fputs(receiveBuffer, stdout);
             } // Server responded - Message
