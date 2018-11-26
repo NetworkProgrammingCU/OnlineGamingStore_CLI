@@ -42,7 +42,7 @@ server:
 	@echo Successfully Compiled Build!
 client:
 	@echo Compiling Client Build. . .
-	@$(compiler) $(compilerArg) $(clOutput) -I $(shDir) -I $(clDir) $(clComm) $(clDriver)
+	@$(compiler) $(compilerArg) $(clOutput) -I $(shDir) -I $(clDir) $(shComFun) $(clComm) $(clDriver)
 	@echo Successfully Compiled Build!
 clean:
 	@echo Thrashing Compiled Builds. . .
