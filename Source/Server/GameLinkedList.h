@@ -31,6 +31,7 @@ void StoreDriver(GameData*, CustomerData*);     // The Store Driver; manages
                                                 //  how the store operates.
 void DisplayGameList(GameData*);                // Displays the products on
                                                 //  the terminal.
+void StoreBorder();                             // Displays the border
 // -----------------------------------
 
 

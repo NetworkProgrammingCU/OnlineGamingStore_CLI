@@ -14,8 +14,12 @@
 #include <stdio.h>          // Required for input and output
 #include <stddef.h>         // NULLPTR; used for pointers
 #include <stdlib.h>         // Pointer Memory Allocation
+#include <stdbool.h>        // Because I was spoiled with C++ and C#, just give me the Bool data types!
 #include "CustomerData.h"   // Customer Data Object
 #include "GameData.h"       // Game Data Object
+#include "ProgInformation.h"// Instructions and Informational Output
+#include "CommonFunctions.h"// Shared functions; to help minimize development cost between sub-projects.
+#include "GameLinkedList.h" // Prototype functions for this implementation source
 // ===============================
 
 
@@ -87,9 +91,65 @@ void DisplayGameList(GameData* gList)
 // -----------------------------------
 void StoreDriver(GameData *gList, CustomerData *userCard)
 {
-    printf("Store was activated!\n");
-    DisplayGameList(gList);
+    // Declarations and Initializations
+    // ----------------------------------
+    bool isContinue = true;     // User request to leave the store (return to main menu)
+    // ----------------------------------
+
+    // Run the store loop
+    do
+    {
+        // Clear some space for the main menu screen
+        ClearScreen();
+        
+        // Display the program's header
+        DrawHeader();
+        
+        // Display the user that is presently logged into the system
+        DrawUserLoggedIn(userCard->userID);
+        
+        // Push a few line-feeds to separate the contents
+        printf("\n\n");
+        
+        // Provide a header for the product list
+        printf("Store Page\n");
+        
+        // Provide a header border
+        StoreBorder();
+        
+        // Display the products
+        DisplayGameList(gList);
+        
+        // Provide a footer border
+        StoreBorder();
+        
+    } while (0);
 } // StoreDriver()
+
+
+
+
+// Store Menu
+// -----------------------------------
+// -----------------------------------
+// -----------------------------------
+int StoreMenu()
+{
+} // StoreMenu()
+
+
+
+
+// Store Border
+// -----------------------------------
+// Documentation:
+//  This function will merely provides a border.
+//  Ideally to help separate the content and to showcase focus
+// -----------------------------------
+void StoreBorder()
+{
+    printf("------------------------------------\n");
+} // StoreBorder
 
 
 
