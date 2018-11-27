@@ -17,6 +17,7 @@
 #include "Welcome.h"            // Welcome Function Prototype
 #include "GlobalDefs.h"         // Program Macro-Definitions
 #include "CommonFunctions.h"    // Prompt and Filtering user Input
+#include "ProgInformation.h"    // Used for the DrawHeader function
 #include <string.h>             // strcmp() for User Account Authentication Challenge
 // ===============================
 
@@ -45,6 +46,8 @@ int WelcomeProtocol()
     // Protocol to get the user's input
     do
     {
+        DrawHeader();           // Display the program's header
+        
         WelcomeMessage();       // Display the welcome message
         WelcomeMenu();          // Display the Welcome Menu
         
