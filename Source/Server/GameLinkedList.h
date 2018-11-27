@@ -32,6 +32,10 @@ void StoreDriver(GameData*, CustomerData*);     // The Store Driver; manages
 void DisplayGameList(GameData*);                // Displays the products on
                                                 //  the terminal.
 void StoreBorder();                             // Displays the border
+int CountProducts(GameData*);                   // Returns how many products exists
+                                                //  within the store
+int StoreMenu(int);                             // Allows user to provide a request,
+                                                //  select game or return to main menu.
 // -----------------------------------
 
 
