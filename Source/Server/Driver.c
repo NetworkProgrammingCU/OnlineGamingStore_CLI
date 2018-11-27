@@ -56,7 +56,6 @@
 
 // Function Prototypes
 // ===============================
-void DrawStorePage();               // Display the store page to the user.
 void CloseProgram();                // Perform the termination protocol (if any).
 // ===============================
 
