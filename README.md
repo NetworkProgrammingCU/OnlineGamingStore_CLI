@@ -16,7 +16,7 @@ The project will provide each student with an opportunity to design and develop 
 | Done   | Store Catelog            | Display the games available within the store |
 | DROPPED| Search Catelog           | Allow the catelog to be searchable |
 | DROPPED| Filter Catelog           | Display the catelog that is returned by the search; only show the filtered list |
-| HOLD   | Display full Game Info   | When the user selects the game, display the game contents |
+| WIP    | Display full Game Info   | When the user selects the game, display the game contents |
 | HOLD   | Purchase the game        | Allow the user to 'purchase' the game |
 | Done   | User Log-in              | Allow the ability for the user to log into the store to make purchases |
 | Done   | Create a new user acc.   | Allow new users to create a new account |
