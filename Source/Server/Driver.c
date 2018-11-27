@@ -11,6 +11,11 @@
 //      Lewisk3 (from the ZDoom Community) [NG]
 //          Greatly helped me unfuck the Pointeramania issues
 //          Seriously, it was bad - like really bad.
+//      Gutawer (from the ZDoom Community) [NG]
+//          Provided further explanation of pointers to me.
+//          I was a bit shaky with pointers, but - he greatly
+//          helped me further understand them with simple
+//          explanations.
 //  Base Source Code provided by W. Richard Stevens in
 //      Unix Network Programming, The Sockets Networking API
 //      Volume 1, 3rd edition.  All credit goes to him for the framework
