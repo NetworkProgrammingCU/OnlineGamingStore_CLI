@@ -36,6 +36,12 @@ int CountProducts(GameData*);                   // Returns how many products exi
                                                 //  within the store
 int StoreMenu(int);                             // Allows user to provide a request,
                                                 //  select game or return to main menu.
+void SelectedProduct(GameData*, CustomerData*,  // This function provides a protocol of
+                     int);                      //  displaying the product and giving
+                                                //  user the ability to purchase it or
+                                                //  return back to the store page.
+void SelectedProduct_Display(GameData*, int);   // Display the full game information
+int SelectedProduct_FeedBack();                 // Fetch user response about the product.
 // -----------------------------------
 
 

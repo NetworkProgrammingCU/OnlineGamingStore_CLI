@@ -16,6 +16,7 @@
 #include <stdlib.h>         // Pointer Memory Allocation
 #include <stdbool.h>        // Because I was spoiled with C++ and C#, just give me the Bool data types!
 #include <string.h>         // strcmp() for User Account Authentication Challenge
+#include <ctype.h>          // for toupper(); Full Game Info - Game Title
 #include "GlobalDefs.h"     // Program Macro-Definitions
 #include "CustomerData.h"   // Customer Data Object
 #include "GameData.h"       // Game Data Object
@@ -121,6 +122,9 @@ void StoreDriver(GameData *gList, CustomerData *userCard)
         // Provide a header border
         StoreBorder();
         
+        // Provide an extra line-feed
+        printf("\n");
+        
         // Display the products
         DisplayGameList(gList);
         
@@ -145,11 +149,210 @@ void StoreDriver(GameData *gList, CustomerData *userCard)
                 printf("Please select an option from the menu provided\n");
                 break;
             default:    // Selected something from the store
-                printf("Not yet ready...\n");
+                SelectedProduct(gList, userCard, userRequest);
                 break;
         } // switch()
     } while (isContinue);
 } // StoreDriver()
+
+
+
+
+// Selected Product
+// -----------------------------------
+// Documentation:
+//  This function will provide a small protocol
+//  procedure for how the information should be
+//  presented and to provide the user with the
+//  choice to 'purchase' the game and\or return
+//  back to the main menu.
+// -----------------------------------
+// Parameters:
+//  gList [GameData]
+//      Holds the products within the store
+//  userCard [CustomerData]
+//      Holds the current user within this session
+//  numRequested [int]
+//      Holds the number (product ID; counter)
+//      that the user requested to view.
+// -----------------------------------
+void SelectedProduct(GameData *gList, CustomerData *userCard, int numRequested)
+{
+    // Declarations and Initializations
+    // ----------------------------------
+    bool isContinue = true;         // Required for the loop; is the
+                                    //  user finished viewing the product?
+    int userRequest;                // User's request
+    // ----------------------------------
+    
+    // Loop; assure proper feedback from the user
+    //  hence why we need this loop.
+    do
+    {
+        // Clear some space for the main menu screen
+        ClearScreen();
+        
+        // Display the program's header
+        DrawHeader();
+        
+        // Display the user that is presently logged into the system
+        DrawUserLoggedIn(userCard->userID);
+        
+        // Push a few line-feeds to separate the contents
+        printf("\n\n");
+        
+        // Provide a header for the product list
+        printf("Game Details\n");
+        
+        // Provide a header border
+        StoreBorder();
+        
+        // Provide an extra line-feed
+        printf("\n");
+        
+        // Display the product to the user
+        SelectedProduct_Display(gList, numRequested);
+        
+        // Provide a header border
+        StoreBorder();
+        
+        // Retrieve user request
+        userRequest = SelectedProduct_FeedBack();
+        
+        // Evaluate the user's request
+        switch(userRequest)
+        {
+            case 0:     // Game back to the store page
+                isContinue = false;
+                break;
+            case 1:     // Purchase the product
+                isContinue = false;
+                break;
+            default:    // Incorrect request
+                printf("<!> BAD REQUEST <!>\n");
+                printf("-------------------------------\n");
+                printf("Please select an option from the menu provided\n");
+                break;
+        } // switch()
+    } while (isContinue);
+} // SelectedProduct()
+
+
+
+
+// Selected Product - Feedback
+// -----------------------------------
+// Documentation:
+//  This function will ask the user two questions:
+//  - Purchase the game
+//  - Return to Store Page
+//  Nothing is really done within this function
+//  other than retrieving feedback from the user
+//  and checking the response.
+// -----------------------------------
+// Output:
+//  0 = Go back to Store Page
+//  1 = Purchase Item
+//  2 = Incorrect or unknown response
+// -----------------------------------
+int SelectedProduct_FeedBack()
+{
+    // Declarations and Initializations
+    // ----------------------------------
+    char userInput[_MAX_CHAR_INPUT_];    // This will hold the user input.
+    // ----------------------------------
+    
+    // Show the user what options are available
+    printf("What would you like to do?\n");
+    printf("\n");
+    printf("Options:\n");
+    printf("------------------\n");
+    printf("[Buy] - Purchase the game\n");
+    printf("[X] - Return to the Store\n");    
+    
+    // Display the prompt
+    DisplayPrompt();
+    
+    // Get the user input
+    fgets(userInput, _MAX_CHAR_INPUT_, stdin);
+    
+    // Lower case the user's input
+    LowerCaseUserInput(userInput);
+    
+    // Try to determine the user's request
+    // User requested to buy the game
+    if (!strncmp(userInput, "buy", 3))
+        return 1;
+        
+    // User request to go back to previous menu?
+    else if (!CheckForUserQuit(userInput, _MAX_CHAR_INPUT_))
+        return 0;  // Return to Store Page
+    else if ((!strncmp(userInput, "x\n", 2)) ||
+            (!strncmp(userInput, "X\n", 2)))
+        return 0;  // Return to Store Page
+    
+    // Incorrect request?
+    else
+        return 2;
+} // SelectedProduct_FeedBack()
+
+
+
+
+// Selected Product - Display Game
+// -----------------------------------
+// Documentation:
+//  This function will provide the game
+//  information to the user.
+// -----------------------------------
+// Parameters:
+//  gList [GameData]
+//      Holds the products within the store
+//  numRequested [int]
+//      Holds the number (product ID; counter)
+//      that the user requested to view.
+// -----------------------------------
+void SelectedProduct_Display(GameData *gList, int numRequested)
+{
+    // Scan the Linked-List until we find the exact product we are looking for
+    //  Remember, we can not DYNAMICALLY go specifically to that node, we must
+    //  scan until we hit that exact node.
+    for(int i = 1; i < numRequested; ++i)
+        gList = gList->next;
+    
+    
+    // Provide the Game Information
+    // -----------------------------
+    
+    // TITLE
+    printf("%s\n", gList->title);
+    printf("\n");
+    
+    // DESCRIPTION
+    printf("Description:\n");
+    printf("%s\n", gList->description);
+    printf("\n");
+    
+    // PUBLISHER
+    printf("Publisher:\n");
+    printf("%s\n", gList->publisher);
+    printf("\n");
+    
+    // DEVELOPERS
+    printf("Developers:\n");
+    printf("%s\n", gList->developers);
+    printf("\n");
+    
+    // GENRE
+    printf("Genre:\n");
+    printf("%s\n", gList->genre);
+    printf("\n");
+    
+    // NOTES
+    printf("Notes:\n");
+    printf("%s\n", gList->notes);
+    printf("\n");
+} // SelectedProduct_Display()
 
 
 
