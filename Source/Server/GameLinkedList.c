@@ -226,6 +226,7 @@ void SelectedProduct(GameData *gList, CustomerData *userCard, int numRequested)
                 isContinue = false;
                 break;
             case 1:     // Purchase the product
+                SelectedProduct_Purchased(userCard);
                 isContinue = false;
                 break;
             default:    // Incorrect request
@@ -236,6 +237,18 @@ void SelectedProduct(GameData *gList, CustomerData *userCard, int numRequested)
         } // switch()
     } while (isContinue);
 } // SelectedProduct()
+
+
+
+
+// Selected Product - Purchased
+void SelectedProduct_Purchased(CustomerData *userCard)
+{
+    printf("Game purchased!\n");
+    printf("====================\n");
+    printf("Game will be shipped to the following address:\n");
+    printf("%s, %s, %s, %s, %s\n", userCard->addressStreet, userCard->addressCity, userCard->addressState, userCard->addressPostalCode, userCard->addressCountry);
+} // SelectedProduct_Purchased()
 
 
 

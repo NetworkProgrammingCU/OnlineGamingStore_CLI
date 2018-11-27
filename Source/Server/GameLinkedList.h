@@ -42,6 +42,9 @@ void SelectedProduct(GameData*, CustomerData*,  // This function provides a prot
                                                 //  return back to the store page.
 void SelectedProduct_Display(GameData*, int);   // Display the full game information
 int SelectedProduct_FeedBack();                 // Fetch user response about the product.
+void SelectedProduct_Purchased(CustomerData*);  // Shows a message that the game has been
+                                                //  purchased and will be shipped at a
+                                                //  specific address.
 // -----------------------------------
 
 
