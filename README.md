@@ -12,7 +12,7 @@ The project will provide each student with an opportunity to design and develop 
 # Progress
 | Status | Function Name            | functionality |
 |--------|--------------------------|---------------|
-| WIP    | Main menu                | Main Menu of the store |
+| Done   | Main menu                | Main Menu of the store |
 | Done   | Store Catelog            | Display the games available within the store |
 | DROPPED| Search Catelog           | Allow the catelog to be searchable |
 | DROPPED| Filter Catelog           | Display the catelog that is returned by the search; only show the filtered list |
