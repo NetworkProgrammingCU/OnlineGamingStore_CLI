@@ -141,7 +141,7 @@ int UpdateUserInfoMenuGetInput()
     else if (!CheckForUserQuit(userInput, _MAX_CHAR_INPUT_))
         return 10;  // Return to Main Menu
     else if ((!strncmp(userInput, "x\n", 2)) ||
-            (strncmp(userInput, "X\n", 2)))
+            (!strncmp(userInput, "X\n", 2)))
         return 10;  // Return to Main Menu
     
     // -------------------
