@@ -166,14 +166,6 @@ int main(int argc, char **argv)
 
 
 
-void DrawStorePage()
-{
-    
-}
-
-
-
-
 // Closing Program
 // -----------------------------------
 // Documentation
