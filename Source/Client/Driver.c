@@ -6,7 +6,18 @@
 // Assignment #:    4
 // Due Date:        12.December.2018
 // Instructor:      Dr. Zhao
-// Description:     TO-BE-DETERMINED
+// Description:     The client requires a stable connection
+//                      to the server, which the server performs
+//                      all transactions and services.  The client
+//                      program is needed in order to interact
+//                      with the server's services.  The client,
+//                      by itself, depends heavily on the select()
+//                      functionality.  This is required as the
+//                      server will push multiple messages through
+//                      the TCP socket; the client is only required
+//                      to send the end-user's request to the server.
+//                      The client program is incappable of operating
+//                      without the server being active.
 // Credits:
 //      Lewisk3 (from the ZDoom Community) [NG]
 //          Greatly helped me unfuck the Pointeramania issues
