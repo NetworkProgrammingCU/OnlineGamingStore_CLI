@@ -6,7 +6,32 @@
 // Assignment #:    4
 // Due Date:        12.December.2018
 // Instructor:      Dr. Zhao
-// Description:     TO-BE-DETERMINED
+// Description:     This server holds user personal account data,
+//                      and also the store itself.  The server merely
+//                      is a service, in which allows the users to
+//                      purchase products from the store.  The products,
+//                      in this case, are video games.  The products and
+//                      users that are available within this program are
+//                      only accessible via Linked-List, no Databases are
+//                      required for this program to work correctly.
+//                  Functionality Notes:
+//                      Because of the design of the server implementation,
+//                          all clients are shifted to a child-server fork.
+//                      TCP Sockets will be required; all data is to be
+//                          accounted for.
+//                      Communication is mainly from the server, client
+//                          is only for user-input - nothing more.
+//                      Server may waste more bandwidth than what is absolutely
+//                          necessary.
+//                  Design Flaws (Known Issues):
+//                      All changes regarding a user's account - nothing is
+//                          permanently saved within the user's account after the
+//                          session has been terminated.  This requires the use
+//                          of pipes from the child server to the parent server.
+//                          This can not be implemented due to time constraints.
+//                      Newly created user accounts are not saved after the
+//                          session is terminated.  In order to keep user data,
+//                          we will need to use both pipes and a reliable database.
 // Credits:
 //      Lewisk3 (from the ZDoom Community) [NG]
 //          Greatly helped me unfuck the Pointeramania issues
