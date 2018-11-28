@@ -245,19 +245,33 @@ void UpdateUserInfoMenuUpdateChoice(CustomerData **userCard, int request)
 // -----------------------------------
 void UpdateUserInfoMenuUpdateChoice_MSG(char* msg, char **response)
 {
-    // Display the current value
-    printf("Currently: %s\n", msg);
+    // Declarations and Initializations
+    // ----------------------------------
+    bool isContinue = true;     // Handle's the loop; if input is valid
+    // ----------------------------------
     
-    // Tell the user to provide a new value
-    printf("Provide a new value\n");
-    DisplayPrompt();
-    
-    // Fetch the new value
-    fgets(*response, _MAX_CHAR_INPUT_, stdin);
-    
-    // Clean it up; otherwise the '\n' char
-    //  will still remain in the new value.
-    FilterUserInputArray(*response, _MAX_CHAR_INPUT_);
+    // Capture a valid response from the user
+    do
+    {
+        // Display the current value
+        printf("Currently: %s\n", msg);
+        
+        // Tell the user to provide a new value
+        printf("Provide a new value\n");
+        DisplayPrompt();
+        
+        // Fetch the new value
+        fgets(*response, _MAX_CHAR_INPUT_, stdin);
+        
+        // Clean it up; otherwise the '\n' char
+        //  will still remain in the new value.
+        FilterUserInputArray(*response, _MAX_CHAR_INPUT_);
+        
+        if (!strncmp(*response, '\0', 1))
+            printf("!ERR!: Please provide a valid value!\n\n");   // Bootless Star's old error messages :) [NG]
+        else
+            isContinue = false;
+    } while(isContinue);
 } // UpdateUserInfoMenuUpdateChoice_MSG()
 
 
