@@ -224,6 +224,7 @@ void ManuallyCreateNewUser(struct CustomerData** cList, struct CustomerData** us
     char *addressCountry    = malloc(charSize*sizeof(char));   // Address (country)
     char *addressStreet     = malloc(charSize*sizeof(char));   // Address (street)
     char *addressPostalCode = malloc(charSize*sizeof(char));   // Address (Zip Code)
+    int cmpResponse;         // Used to assure that the user's response is meaningful
     // ----------------------------------
     
     // Tell the user that we're gathering information from them
@@ -234,59 +235,178 @@ void ManuallyCreateNewUser(struct CustomerData** cList, struct CustomerData** us
     // Capture input from the user
     // -------------------------------
     // User Login ID
-    printf("Provide User Login Screen Name:\n");
-    DisplayPrompt();
-    fgets(userID, charSize, stdin);
+    do
+    {
+        printf("Provide User Login Screen Name:\n");
+        DisplayPrompt();
+        fgets(userID, charSize, stdin);
+        
+        // Is the response valid and meaningful?
+        cmpResponse = strncmp(userID, "\n", 1);
+        if (!cmpResponse)
+            printf("!ERR!: Please provide a valid value!\n");   // Bootless Star's old error messages :) [NG]
+        printf("\n");   // Provide an extra line-feed.
+    } while(!cmpResponse);
+    
+    
     
     // User Login Password
-    printf("Provide User Login Password:\n");
-    DisplayPrompt();
-    fgets(userKey, charSize, stdin);
+    do
+    {
+        printf("Provide User Login Password:\n");
+        DisplayPrompt();
+        fgets(userKey, charSize, stdin);
+        
+        // Is the response valid and meaningful?
+        cmpResponse = strncmp(userKey, "\n", 1);
+        if (!cmpResponse)
+            printf("!ERR!: Please provide a valid value!\n");
+        printf("\n");   // Provide an extra line-feed.
+    } while(!cmpResponse);
+    
+    
     
     // User E-Mail Account
-    printf("Provide an E-Mail Account:\n");
-    DisplayPrompt();
-    fgets(email, charSize, stdin);
+    do
+    {
+        printf("Provide an E-Mail Account:\n");
+        DisplayPrompt();
+        fgets(email, charSize, stdin);
+        
+        // Is the response valid and meaningful?
+        cmpResponse = strncmp(email, "\n", 1);
+        if (!cmpResponse)
+            printf("!ERR!: Please provide a valid value!\n");
+        printf("\n");   // Provide an extra line-feed.
+    } while(!cmpResponse);
+    
+    
     
     // User First Name
-    printf("Provide your First Name:\n");
-    DisplayPrompt();
-    fgets(firstName, charSize, stdin);
+    do
+    {
+        printf("Provide your First Name:\n");
+        DisplayPrompt();
+        fgets(firstName, charSize, stdin);
+    
+        // Is the response valid and meaningful?
+        cmpResponse = strncmp(firstName, "\n", 1);
+        if (!cmpResponse)
+            printf("!ERR!: Please provide a valid value!\n");
+        printf("\n");   // Provide an extra line-feed.
+    } while(!cmpResponse);
+    
+    
     
     // User Last Name
-    printf("Provide your Last Name:\n");
-    DisplayPrompt();
-    fgets(lastName, charSize, stdin);
+    do
+    {
+        printf("Provide your Last Name:\n");
+        DisplayPrompt();
+        fgets(lastName, charSize, stdin);
+    
+        // Is the response valid and meaningful?
+        cmpResponse = strncmp(lastName, "\n", 1);
+        if (!cmpResponse)
+            printf("!ERR!: Please provide a valid value!\n");
+        printf("\n");   // Provide an extra line-feed.
+    } while(!cmpResponse);
+    
+    
     
     // User Phone Number
-    printf("Provide your Phone Number:\n");
-    DisplayPrompt();
-    fgets(phoneNumber, charSize, stdin);
+    do
+    {
+        printf("Provide your Phone Number:\n");
+        DisplayPrompt();
+        fgets(phoneNumber, charSize, stdin);
+    
+        // Is the response valid and meaningful?
+        cmpResponse = strncmp(phoneNumber, "\n", 1);
+        if (!cmpResponse)
+            printf("!ERR!: Please provide a valid value!\n");
+        printf("\n");   // Provide an extra line-feed.
+    } while(!cmpResponse);
+    
+    
     
     // User Address [city]
-    printf("Provide your Address (City):\n");
-    DisplayPrompt();
-    fgets(addressCity, charSize, stdin);
+    do
+    {
+        printf("Provide your Address (City):\n");
+        DisplayPrompt();
+        fgets(addressCity, charSize, stdin);
+    
+        // Is the response valid and meaningful?
+        cmpResponse = strncmp(addressCity, "\n", 1);
+        if (!cmpResponse)
+            printf("!ERR!: Please provide a valid value!\n");
+        printf("\n");   // Provide an extra line-feed.
+    } while(!cmpResponse);
+    
+    
     
     // User Address [state]
-    printf("Provide your Address (State):\n");
-    DisplayPrompt();
-    fgets(addressState, charSize, stdin);
+    do
+    {
+        printf("Provide your Address (State):\n");
+        DisplayPrompt();
+        fgets(addressState, charSize, stdin);
+    
+        // Is the response valid and meaningful?
+        cmpResponse = strncmp(addressState, "\n", 1);
+        if (!cmpResponse)
+            printf("!ERR!: Please provide a valid value!\n");
+        printf("\n");   // Provide an extra line-feed.
+    } while(!cmpResponse);
+    
+    
     
     // User Address [country]
-    printf("Provide your Address (Country):\n");
-    DisplayPrompt();
-    fgets(addressCountry, charSize, stdin);
+    do
+    {
+        printf("Provide your Address (Country):\n");
+        DisplayPrompt();
+        fgets(addressCountry, charSize, stdin);
+    
+        // Is the response valid and meaningful?
+        cmpResponse = strncmp(addressCountry, "\n", 1);
+        if (!cmpResponse)
+            printf("!ERR!: Please provide a valid value!\n");
+        printf("\n");   // Provide an extra line-feed.
+    } while(!cmpResponse);
+    
+    
     
     // User Address [street]
-    printf("Provide your Address (Street):\n");
-    DisplayPrompt();
-    fgets(addressStreet, charSize, stdin);
+    do
+    {
+        printf("Provide your Address (Street):\n");
+        DisplayPrompt();
+        fgets(addressStreet, charSize, stdin);
+    
+        // Is the response valid and meaningful?
+        cmpResponse = strncmp(addressStreet, "\n", 1);
+        if (!cmpResponse)
+            printf("!ERR!: Please provide a valid value!\n");
+        printf("\n");   // Provide an extra line-feed.
+    } while(!cmpResponse);
+    
+    
     
     // User Address [zip]
-    printf("Provide your Address (ZIP-Code):\n");
-    DisplayPrompt();
-    fgets(addressPostalCode, charSize, stdin);
+    do
+    {
+        printf("Provide your Address (ZIP-Code):\n");
+        DisplayPrompt();
+        fgets(addressPostalCode, charSize, stdin);
+    
+        // Is the response valid and meaningful?
+        cmpResponse = strncmp(addressPostalCode, "\n", 1);
+        if (!cmpResponse)
+            printf("!ERR!: Please provide a valid value!\n");
+        printf("\n");   // Provide an extra line-feed.
+    } while(!cmpResponse);
     
     
     // Tell the user that we creating the account for them.
