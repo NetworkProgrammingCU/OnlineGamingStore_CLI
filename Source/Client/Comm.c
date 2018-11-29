@@ -35,6 +35,7 @@ void str_cli(FILE *fp, int sockfd)
     int maxfdp1;                    // Number of sockets within the array
     fd_set rset;                    // Master file descriptor array
     bool stdinEOF;                  // Shutdown; EOF from keyboard
+    int signalCache;                // Cache the signal from the read\write functions
     // ----------------------------------
 
     // Immediately clear out the entire buffer; avoid garbage
@@ -70,7 +71,7 @@ void str_cli(FILE *fp, int sockfd)
             if (stdinEOF)
                 return;         // Server responded but EOF was already reached.
             // Server Terminated
-            if (read(sockfd, receiveBuffer, MAXLINE) == 0)
+            if ((signalCache = read(sockfd, receiveBuffer, MAXLINE)) == 0)
             {
                 printf("<!> SERVER DISCONNECTED <!>\n");
                 printf("The server is no longer available.\n");
@@ -87,7 +88,7 @@ void str_cli(FILE *fp, int sockfd)
         if (FD_ISSET(fileno(fp), &rset))
         {
             // Check if the user wanted to quit
-            if ((read(fileno(fp), sendBuffer, MAXLINE) == 0) ||     // HotKey to cancel
+            if ((signalCache = read(fileno(fp), sendBuffer, MAXLINE) == 0) ||     // HotKey to cancel
                 !CheckForUserQuit(sendBuffer, strlen(sendBuffer)))  // User typed quit or exit
             {
                 printf("Closing Connection. . .\n");
