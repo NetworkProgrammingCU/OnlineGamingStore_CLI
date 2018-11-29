@@ -267,7 +267,7 @@ void UpdateUserInfoMenuUpdateChoice_MSG(char* msg, char **response)
         //  will still remain in the new value.
         FilterUserInputArray(*response, _MAX_CHAR_INPUT_);
         
-        if (!strncmp(*response, '\0', 1))
+        if (!strncmp(*response, "\0", 1))
             printf("!ERR!: Please provide a valid value!\n\n");   // Bootless Star's old error messages :) [NG]
         else
             isContinue = false;
