@@ -59,8 +59,6 @@ void str_cli(FILE *fp, int sockfd)
         FD_SET(sockfd, &rset);                  // Turn on the bit setting for FD in FDSET - Server Connectivity
         maxfdp1 = max(fileno(fp), sockfd) + 1;  // How many to sockets are in the array
         
-        // Display the prompt
-        DisplayPrompt();
         
         // BLOCK - STOP_WAIT() for any available updates
         select(maxfdp1, &rset, NULL, NULL, NULL);
