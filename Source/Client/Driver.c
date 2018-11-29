@@ -16,7 +16,7 @@
 //                      server will push multiple messages through
 //                      the TCP socket; the client is only required
 //                      to send the end-user's request to the server.
-//                      The client program is incappable of operating
+//                      The client program is incapable of operating
 //                      without the server being active.
 // Credits:
 //      Lewisk3 (from the ZDoom Community) [NG]
