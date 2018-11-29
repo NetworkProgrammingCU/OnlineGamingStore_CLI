@@ -107,45 +107,4 @@ void str_cli(FILE *fp, int sockfd)
         ClearBuffer(sendBuffer, strlen(sendBuffer));
         ClearBuffer(receiveBuffer, strlen(receiveBuffer));
     } // for()
-    
-    
-    
-    /*
-    while (fgets(sendBuffer, MAXLINE, fp) != NULL)
-    {
-        // Check if the user wanted to quit
-        if (!CheckForUserQuit(sendBuffer, strlen(sendBuffer)))
-        {
-            printf("Closing program. . .\n");
-            exit(0);
-        } // User Requested: Termination
-
-        // Push the string to the server
-        write(sockfd, sendBuffer, strlen(sendBuffer));
-        
-        // Provide an line for clarity sakes
-        printf("\n");
-        
-        // Server fault
-        if (read(sockfd, receiveBuffer, MAXLINE) == 0)
-        {
-            printf("<!> SERVER DISCONNECTED <!>\n");
-            printf("The server is no longer available.\n");
-            exit(1);    // System call to stop the program
-        } // if Server Fault
-        
-        // Add a tag to the user
-        MessageTag("Server\0");
-        
-        // Output the message to the screen
-        fputs(receiveBuffer, stdout);
-        
-        // Clear the buffers
-        ClearBuffer(sendBuffer, strlen(sendBuffer));
-        ClearBuffer(receiveBuffer, strlen(receiveBuffer));
-        
-        // Display the prompt
-        DisplayPrompt();
-    } // While()
-    */
 } // str_cli()
