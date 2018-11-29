@@ -10,7 +10,8 @@
 
 // Included Libraries
 // ============================
-#include "myunp.h"      // Our custom UNP Header file
+#include <stdbool.h>            // Because I was spoiled with C++ and C#, just give me the Bool data types!
+#include "myunp.h"              // Our custom UNP Header file
 #include "CommonFunctions.h"    // Shared functions; to help minimize development cost between sub-projects.
 // ============================
 
@@ -33,7 +34,7 @@ void str_cli(FILE *fp, int sockfd)
     char receiveBuffer[MAXLINE];    // Receiving message buffer
     int maxfdp1;                    // Number of sockets within the array
     fd_set rset;                    // Master file descriptor array
-    int stdinEOF;                   // Shutdown; EOF from keyboard
+    bool stdinEOF;                  // Shutdown; EOF from keyboard
     // ----------------------------------
 
     // Immediately clear out the entire buffer; avoid garbage
@@ -42,7 +43,7 @@ void str_cli(FILE *fp, int sockfd)
     // ----
     
     // mark the Shutdown as false
-    stdinEOF = 0;
+    stdinEOF = false;
     
     // Prepare our File Descriptor
     FD_ZERO(&rset); // Reset all of the descriptor bit-fields
