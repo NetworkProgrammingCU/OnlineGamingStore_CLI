@@ -25,6 +25,7 @@ svCustomerLL := $(svDir)/CustomerLinkedList.c
 svWelcome := $(svDir)/Welcome.c
 svMainMenu := $(svDir)/MainMenu.c
 svUpdateUsrInfo := $(svDir)/UpdateUserAccount.c
+svSigChldPID := $(svDir)/sigchldwaitpid.c
 
 # Client files
 # =====================================================
@@ -38,7 +39,7 @@ clComm := $(clDir)/Comm.c
 ALL: server client
 server:
 	@echo Compiling Server Build. . .
-	@$(compiler) $(compilerArg) $(svOutput) -I $(shDir) -I $(svDir) $(shComFun) $(svProgInfo) $(svGameLL) $(svCustomerLL) $(svWelcome) $(svMainMenu) $(svUpdateUsrInfo) $(svDriver)
+	@$(compiler) $(compilerArg) $(svOutput) -I $(shDir) -I $(svDir) $(shComFun) $(svProgInfo) $(svGameLL) $(svCustomerLL) $(svWelcome) $(svMainMenu) $(svUpdateUsrInfo) $(svSigChldPID) $(svDriver)
 	@echo Successfully Compiled Build!
 client:
 	@echo Compiling Client Build. . .
