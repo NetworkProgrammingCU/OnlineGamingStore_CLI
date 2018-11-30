@@ -110,9 +110,6 @@ int main(int argc, char **argv)
     
     // Immediate Execution
     // ===================================
-    // Randomize the seed
-    srand((unsigned)time(NULL));      // This will come in handy when we do the randomization of information.
-    
     // All Linked-List heads point to NULL
     customerList = NULL;    // Customer List
     gameList = NULL;        // Game List
