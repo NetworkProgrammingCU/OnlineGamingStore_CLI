@@ -99,8 +99,6 @@ int main(int argc, char **argv)
 {
     // Declarations and Initializations
     // ----------------------------------
-    //int sockfd;                     // Socket File Descriptor
-    //struct sockaddr_in servaddr;    // Server Info Struct.
     struct CustomerData*
         customerList = malloc(sizeof(CustomerData));    // Customer Data Linked-List
     struct GameData*
