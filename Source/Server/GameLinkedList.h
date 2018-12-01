@@ -27,22 +27,22 @@ static void CreateNewGame(GameData**,           // Create a new Game entry
                     const char*, const char*);
 static void AppendNewGame(GameData**,           // Add the new game to
                             GameData*);         //  the primary Linked-List.
-void StoreDriver(GameData*, CustomerData*);     // The Store Driver; manages
+void StoreDriver(GameData*, CustomerData*, int);     // The Store Driver; manages
                                                 //  how the store operates.
-void DisplayGameList(GameData*);                // Displays the products on
+void DisplayGameList(GameData*, int);                // Displays the products on
                                                 //  the terminal.
-void StoreBorder();                             // Displays the border
+void StoreBorder(int);                             // Displays the border
 int CountProducts(GameData*);                   // Returns how many products exists
                                                 //  within the store
-int StoreMenu(int);                             // Allows user to provide a request,
+int StoreMenu(int, int);                             // Allows user to provide a request,
                                                 //  select game or return to main menu.
 void SelectedProduct(GameData*, CustomerData*,  // This function provides a protocol of
-                     int);                      //  displaying the product and giving
+                     int, int);                      //  displaying the product and giving
                                                 //  user the ability to purchase it or
                                                 //  return back to the store page.
-void SelectedProduct_Display(GameData*, int);   // Display the full game information
-int SelectedProduct_FeedBack();                 // Fetch user response about the product.
-void SelectedProduct_Purchased(CustomerData*);  // Shows a message that the game has been
+void SelectedProduct_Display(GameData*, int, int);   // Display the full game information
+int SelectedProduct_FeedBack(int);                 // Fetch user response about the product.
+void SelectedProduct_Purchased(CustomerData*, int);  // Shows a message that the game has been
                                                 //  purchased and will be shipped at a
                                                 //  specific address.
 // -----------------------------------

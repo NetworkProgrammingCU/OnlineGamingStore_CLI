@@ -31,14 +31,14 @@ static void CreateNewCustomer(CustomerData**,       // Create a new Customer ent
 static void AppendNewCustomer(CustomerData**,       // Add the new customer to
                                 CustomerData *);    //   the primary Linked-List.
 void ManuallyCreateNewUser(struct CustomerData**,   // Manually create a new user
-                            struct CustomerData**);
+                            struct CustomerData**, int);
                                                     //  account for our store.
 bool FindUser_ReturnUserInfo(CustomerData*,         // Provides the ability to scan
                             CustomerData**,         //  for a user and checks if the
-                            char*, char*);          //  credentials match.
+                            char*, char*, int);          //  credentials match.
 void UserLogin(CustomerData*,                       // This will provide the procedures
-                    CustomerData**);                //  for the login system.
-void AskUserLogin(char**, char**);                  // Ask the user for login information
+                    CustomerData**, int);                //  for the login system.
+void AskUserLogin(char**, char**, int);                  // Ask the user for login information
                                                     //  Required for the login system.
 void CreateNewUser_ValueFiltering(char**,           // Filter the newly provided values
                             char**, char**,         //  to the user's account by removing

@@ -20,8 +20,8 @@
 
 // Function Prototypes for Program Information
 // -----------------------------------
-void DrawHeader();                  // Display the program header onto the terminal buffer.
-void DrawAbout();                   // Display the purpose of the program to the user.
+void DrawHeader(int);                  // Display the program header onto the terminal buffer.
+void DrawAbout(int);                   // Display the purpose of the program to the user.
 // -----------------------------------
 
 

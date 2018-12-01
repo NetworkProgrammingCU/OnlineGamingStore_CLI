@@ -22,10 +22,10 @@
 
 // Function Prototypes for Welcome Functions
 // -----------------------------------
-void WelcomeMessage();      // Displays the welcome message to the end-user.
-int WelcomeProtocol();      // Provides the Welcome Protocols
-void WelcomeMenu();         // Display the welcome menu
-int WelcomeFetchInput();    // Fetch input regarding the welcome menu
+void WelcomeMessage(int);      // Displays the welcome message to the end-user.
+int WelcomeProtocol(int);      // Provides the Welcome Protocols
+void WelcomeMenu(int);         // Display the welcome menu
+int WelcomeFetchInput(int);    // Fetch input regarding the welcome menu
 // -----------------------------------
 
 

@@ -19,6 +19,7 @@
 #include "CommonFunctions.h"    // Prompt and Filtering user Input
 #include "ProgInformation.h"    // Used for the DrawHeader function
 #include <string.h>             // strcmp() for User Account Authentication Challenge
+#include "myunp.h"				// For read()/write() and MAXLINE
 // ===============================
 
 
@@ -36,7 +37,7 @@
 //      1 = Register Request
 //      2 = Exit Request
 // -----------------------------------
-int WelcomeProtocol()
+int WelcomeProtocol(int sockfd)
 {
     // Declarations and Initializations
     // ----------------------------------
@@ -46,18 +47,18 @@ int WelcomeProtocol()
     // Protocol to get the user's input
     do
     {
-        DrawHeader();           // Display the program's header
+        DrawHeader(sockfd);           // Display the program's header
         
-        WelcomeMessage();       // Display the welcome message
-        WelcomeMenu();          // Display the Welcome Menu
+        WelcomeMessage(sockfd);       // Display the welcome message
+        WelcomeMenu(sockfd);          // Display the Welcome Menu
         
-        userRequest = WelcomeFetchInput();  // Record the user's request
+        userRequest = WelcomeFetchInput(sockfd);  // Record the user's request
         
         if (userRequest != 255) // If the user's request is valid, return it.
             return userRequest;
         
         
-        ClearScreen();          // User's request was not valid; retry again.
+        ClearScreen(sockfd);          // User's request was not valid; retry again.
     } while(1);
 } // WelcomeProtocol()
 
@@ -77,15 +78,17 @@ int WelcomeProtocol()
 //      1 = Register Request
 //      2 = Exit Request
 //      255 = Fatal Error; unknown request
-int WelcomeFetchInput()
+int WelcomeFetchInput(int sockfd)
 {
     // Declarations and Initializations
     // ----------------------------------
     char userInput[_MAX_CHAR_INPUT_];   // This will be used to capture the user's input.
+	ClearBuffer(userInput, _MAX_CHAR_INPUT_);
+	
     // ----------------------------------
     
-    DisplayPrompt();    // Show the prompt to the user.
-    fgets(userInput, _MAX_CHAR_INPUT_, stdin);
+    DisplayPrompt(sockfd);    // Show the prompt to the user.
+    read(sockfd, userInput, _MAX_CHAR_INPUT_);
     
     FilterUserInputArray(userInput, _MAX_CHAR_INPUT_);
     LowerCaseUserInput(userInput);
@@ -102,10 +105,17 @@ int WelcomeFetchInput()
         return 2;
     else
     {
-        printf("<!> BAD REQUEST <!>\n");
-        printf("-------------------------------\n");
-        printf("Please select an option from the menu provided\n");
-        printf(" User Requested [%s]\n", userInput);
+		char sendbuffer[MAXLINE];				// Buffer to send the possible error message to the user
+		ClearBuffer(sendbuffer, MAXLINE);		// Clears the buffer just to be super ultra safe
+		
+        strcpy(sendbuffer, "<!> BAD REQUEST <!>\n");
+        strcat(sendbuffer, "-------------------------------\n");
+        strcat(sendbuffer, "Please select an option from the menu provided\n");
+        strcat(sendbuffer, " User Requested ");
+		strcat(sendbuffer, userInput);
+		strcat(sendbuffer, "\n");
+		write(sockfd, sendbuffer, MAXLINE);
+		
         return 255;
     } // Fatal Error \ Unknown Request
 } // WelcomeFetchInput()
@@ -120,19 +130,24 @@ int WelcomeFetchInput()
 //  and the options available when first accessing
 //  the store.
 // -----------------------------------
-void WelcomeMessage()
+void WelcomeMessage(int sockfd)
 {
+	char sendbuffer[MAXLINE];
+	ClearBuffer(sendbuffer, MAXLINE);
     // Welcome Page
     // -------------------------
-    printf("Welcome to the %s Store!\n", _NAME_);
-    printf("------------------------------------\n");
-    printf("------------------------------------\n");
-    printf("\n");
-    printf("In order to access the store, you must have an account with this service.\n");
-    printf("If you don't have an account, you can easily create a new account!\n");
-    printf("Because of a tight budget and thinking of maximizing our profits, we require that you use your keyboard in order to navigate in this store.  If you would like a nice graphical interface, feel free to donate us unlimited supply of financial currency (NOT MONOPOLY MONEY!)\n");
-    printf("\n");
-    printf("\n");
+    strcpy(sendbuffer, "Welcome to the ");
+	strcat(sendbuffer, _NAME_);
+	strcat(sendbuffer, "Store!\n");
+    strcat(sendbuffer, "------------------------------------\n");
+    strcat(sendbuffer, "------------------------------------\n");
+    strcat(sendbuffer, "\n");
+    strcat(sendbuffer, "In order to access the store, you must have an account with this service.\n");
+    strcat(sendbuffer, "If you don't have an account, you can easily create a new account!\n");
+    strcat(sendbuffer, "Because of a tight budget and thinking of maximizing our profits, we require that you use your keyboard in order to navigate in this store.  If you would like a nice graphical interface, feel free to donate us unlimited supply of financial currency (NOT MONOPOLY MONEY!)\n");
+    strcat(sendbuffer, "\n\n");
+	
+	write(sockfd, sendbuffer, MAXLINE);
 } // WelcomeMessage()
 
 
@@ -143,16 +158,21 @@ void WelcomeMessage()
 // Documentation:
 //  This function will display the welcome on the user's terminal.
 // -----------------------------------
-void WelcomeMenu()
+void WelcomeMenu(int sockfd)
 {
-    printf("Please use your keyboard to interact with the store.\n");
-    printf("\n");
-    printf("\n");
-    printf("Other Options\n");
-    printf("--------------\n");
-    printf("[Log]  - Login\n");
-    printf("[Reg]  - Register a new account\n");
-    printf("[Exit] - Leave the store\n");
-    printf("--------------\n");
-    printf("\n");
+	char sendbuffer[MAXLINE];
+	ClearBuffer(sendbuffer, MAXLINE);
+	
+    strcpy(sendbuffer, "Please use your keyboard to interact with the store.\n");
+    strcat(sendbuffer, "\n");
+    strcat(sendbuffer, "\n");
+    strcat(sendbuffer, "Other Options\n");
+    strcat(sendbuffer, "--------------\n");
+    strcat(sendbuffer, "[Log]  - Login\n");
+    strcat(sendbuffer, "[Reg]  - Register a new account\n");
+    strcat(sendbuffer, "[Exit] - Leave the store\n");
+    strcat(sendbuffer, "--------------\n");
+    strcat(sendbuffer, "\n");
+	
+	write(sockfd, sendbuffer, MAXLINE);
 } // WelcomeMenu()

@@ -19,11 +19,11 @@
 
 // Function Prototypes for Update Account Information
 // -----------------------------------
-void UpdateUserInfoMenu(CustomerData**);                    // Provides the driver for the Update Account functionality.
-int UpdateUserInfoMenuGetInput();                           // Retrieves the user's input and tries to provide the signal regarding the user's request.
-void UpdateUserInfoMenuUpdateChoice(CustomerData**, int);   // Provide the ability to edit a specific value; organized mess!
-void UpdateUserInfoShowMenu(CustomerData*);                 // Provide the menu to the user.
-void UpdateUserInfoMenuUpdateChoice_MSG(char*, char**);     // Retrieves the input from the user and filters it.
+void UpdateUserInfoMenu(CustomerData**, int);                    // Provides the driver for the Update Account functionality.
+int UpdateUserInfoMenuGetInput(int);                             // Retrieves the user's input and tries to provide the signal regarding the user's request.
+void UpdateUserInfoMenuUpdateChoice(CustomerData**, int, int);   // Provide the ability to edit a specific value; organized mess!
+void UpdateUserInfoShowMenu(CustomerData*, int);                 // Provide the menu to the user.
+void UpdateUserInfoMenuUpdateChoice_MSG(char*, char**, int);     // Retrieves the input from the user and filters it.
 // -----------------------------------
 
 

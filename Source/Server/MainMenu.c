@@ -15,6 +15,7 @@
 #include "GlobalDefs.h"         // Program Macro-Definitions
 #include "CommonFunctions.h"    // Shared functions; to help minimize development cost between sub-projects.
 #include "MainMenu.h"           // Main Menu
+#include "myunp.h"				// For read()/write() and MAXLINE
 // ===============================
 
 
@@ -33,12 +34,12 @@
 //  2 = Exit
 //  3 = Bad request
 // -----------------------------------
-int MainMenu()
+int MainMenu(int sockfd)
 {
-    DrawInstructionsMainMenu();     // Draw Instructions
+    DrawInstructionsMainMenu(sockfd);     // Draw Instructions
                                     //  regarding the main menu.
-    DrawMenuMain();                 // Provide the Main Menu
-    return MainMenuUserRequest();   // Fetch user input
+    DrawMenuMain(sockfd);                 // Provide the Main Menu
+    return MainMenuUserRequest(sockfd);   // Fetch user input
 } // MainMenu()
 
 
@@ -57,7 +58,7 @@ int MainMenu()
 //  2 = Exit
 //  3 = Bad request
 // -----------------------------------
-int MainMenuUserRequest()
+int MainMenuUserRequest(int sockfd)
 {
     // Declarations and Initializations
     // ----------------------------------
@@ -65,10 +66,10 @@ int MainMenuUserRequest()
     // ----------------------------------
     
     // Display the prompt
-    DisplayPrompt();
+    DisplayPrompt(sockfd);
     
     // Get the user input
-    fgets(userInput, _MAX_CHAR_INPUT_, stdin);
+    read(sockfd, userInput, _MAX_CHAR_INPUT_);
     
     // Lower case the user's input
     LowerCaseUserInput(userInput);
@@ -99,19 +100,23 @@ int MainMenuUserRequest()
 // Documentation:
 //  This will provide the main menu to the user.
 // -----------------------------------
-void DrawMenuMain()
+void DrawMenuMain(int sockfd)
 {
-    printf("Main Menu\n");
-    printf("------------------------------------------------\n\n");
+	char sendbuffer[MAXLINE];
+	ClearBuffer(sendbuffer, MAXLINE);
+	
+    strcpy(sendbuffer, "Main Menu\n------------------------------------------------\n\n");
     // View Store Catalog
-    printf("[1] - View Game Store\n");
-    printf("       View what games are available within our store!\n");
+    strcat(sendbuffer, "[1] - View Game Store\n");
+    strcat(sendbuffer, "       View what games are available within our store!\n");
     // Update Personal Information
-    printf("[2] - Update Personal Information\n");
-    printf("       View and change your personal account settings, such as email, address, etc.\n");
+    strcat(sendbuffer, "[2] - Update Personal Information\n");
+    strcat(sendbuffer, "       View and change your personal account settings, such as email, address, etc.\n");
     // Leave terminate session
-    printf("[X] - Leave Store\n");
-    printf("       Exit from the store\n");
+    strcat(sendbuffer, "[X] - Leave Store\n");
+    strcat(sendbuffer, "       Exit from the store\n");
+	
+	write(sockfd, sendbuffer, MAXLINE);
 } // DrawMenuMain()
 
 
@@ -123,7 +128,12 @@ void DrawMenuMain()
 //  This function will provide the instructions to the client,
 //  in regards into how to use the main menu screen.
 // -----------------------------------
-void DrawInstructionsMainMenu()
+void DrawInstructionsMainMenu(int sockfd)
 {
-    printf("Select the following options from the screen:\n");
+	char sendbuffer[MAXLINE];
+	ClearBuffer(sendbuffer, MAXLINE);
+	
+    strcpy(sendbuffer, "Select the following options from the screen:\n");
+	write(sockfd, sendbuffer, MAXLINE);
+	
 } // DrawInstructions()

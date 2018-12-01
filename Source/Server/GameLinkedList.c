@@ -23,6 +23,7 @@
 #include "ProgInformation.h"// Instructions and Informational Output
 #include "CommonFunctions.h"// Shared functions; to help minimize development cost between sub-projects.
 #include "GameLinkedList.h" // Prototype functions for this implementation source
+#include "myunp.h"
 // ===============================
 
 
@@ -50,24 +51,26 @@
 //  gList [GameData]
 //      Holds the products within the store
 // -----------------------------------
-void DisplayGameList(GameData* gList)
+void DisplayGameList(GameData* gList,int sockfd)
 {
     // Because the user will select a game from the list,
     //  we will a for() to also update our 'i'.  This 'i'
     //  is necessary so the user can 'select' a game from
     //  the list provided from here.
+	
+	char sendbuffer[MAXLINE];
+	
     for (int i = naturalStart; gList != NULL; ++i)
     {
+		ClearBuffer(sendbuffer, MAXLINE);
         // Display the Game Title
-        printf("[%d] - %s\n", i, gList->title);
+        sprintf(sendbuffer, "[%d] - %s\n", i, gList->title);
         
         // Display the Publisher
-        printf("       %s\n", gList->publisher);
-        
-        // Provide an extra space to assure
-        //  that the products are 'connected'
-        //  visually to the user.
-        printf("\n");
+        strcat(sendbuffer, "       ");
+	strcat(sendbuffer, gList->publisher);
+	strcat(sendbuffer, "\n\n");
+	write(sockfd, sendbuffer, MAXLINE);
         
         // Go to the next product
         gList = gList->next;
@@ -92,50 +95,58 @@ void DisplayGameList(GameData* gList)
 //      Holds the user that is currently logged into
 //      the session.
 // -----------------------------------
-void StoreDriver(GameData *gList, CustomerData *userCard)
+void StoreDriver(GameData *gList, CustomerData *userCard, int sockfd)
 {
     // Declarations and Initializations
     // ----------------------------------
     int numProducts = 0;        // How many products exists within the store
     int userRequest;            // User's request within the store page.
     bool isContinue = true;     // User request to leave the store (return to main menu)
+	char sendbuffer[MAXLINE];
     // ----------------------------------
 
     // Run the store loop
     do
     {
+		ClearBuffer(sendbuffer, MAXLINE);
         // Clear some space for the main menu screen
-        ClearScreen();
+        ClearScreen(sockfd);
         
         // Display the program's header
-        DrawHeader();
+        DrawHeader(sockfd);
         
         // Display the user that is presently logged into the system
-        DrawUserLoggedIn(userCard->userID);
+        DrawUserLoggedIn(userCard->userID, sockfd);
         
         // Push a few line-feeds to separate the contents
-        printf("\n\n");
+        strcpy(sendbuffer, "\n\n");
         
         // Provide a header for the product list
-        printf("Store Page\n");
+        strcat(sendbuffer, "Store Page\n");
+		write(sockfd, sendbuffer, MAXLINE);
+		ClearBuffer(sendbuffer, MAXLINE);
         
         // Provide a header border
-        StoreBorder();
+        StoreBorder(sockfd);
+		
+        
         
         // Provide an extra line-feed
-        printf("\n");
+        strcpy(sendbuffer, "\n");
+		write(sockfd, sendbuffer, MAXLINE);
+		ClearBuffer(sendbuffer, MAXLINE);
         
         // Display the products
-        DisplayGameList(gList);
+        DisplayGameList(gList, sockfd);
         
         // Retrieve how many are available.
         numProducts = CountProducts(gList);
 
         // Provide a footer border
-        StoreBorder();
+        StoreBorder(sockfd);
         
         // Ask the user what they want todo and capture the response
-        userRequest = StoreMenu(numProducts);
+        userRequest = StoreMenu(numProducts, sockfd);
         
         
         switch (userRequest)
@@ -144,12 +155,14 @@ void StoreDriver(GameData *gList, CustomerData *userCard)
                 isContinue = false;
                 break;
             case -1:    // Invalid request or bad input
-                printf("<!> BAD REQUEST <!>\n");
-                printf("-------------------------------\n");
-                printf("Please select an option from the menu provided\n");
+                strcpy(sendbuffer, "<!> BAD REQUEST <!>\n");
+                strcat(sendbuffer, "-------------------------------\n");
+                strcat(sendbuffer, "Please select an option from the menu provided\n");
+				write(sockfd, sendbuffer, MAXLINE);
+				ClearBuffer(sendbuffer, MAXLINE);
                 break;
             default:    // Selected something from the store
-                SelectedProduct(gList, userCard, userRequest);
+                SelectedProduct(gList, userCard, userRequest, sockfd);
                 break;
         } // switch()
     } while (isContinue);
@@ -176,48 +189,54 @@ void StoreDriver(GameData *gList, CustomerData *userCard)
 //      Holds the number (product ID; counter)
 //      that the user requested to view.
 // -----------------------------------
-void SelectedProduct(GameData *gList, CustomerData *userCard, int numRequested)
+void SelectedProduct(GameData *gList, CustomerData *userCard, int numRequested, int sockfd)
 {
     // Declarations and Initializations
     // ----------------------------------
     bool isContinue = true;         // Required for the loop; is the
                                     //  user finished viewing the product?
     int userRequest;                // User's request
+	char sendbuffer[MAXLINE];
     // ----------------------------------
     
     // Loop; assure proper feedback from the user
     //  hence why we need this loop.
     do
     {
+		ClearBuffer(sendbuffer, MAXLINE);
         // Clear some space for the main menu screen
-        ClearScreen();
+        ClearScreen(sockfd);
         
         // Display the program's header
-        DrawHeader();
+        DrawHeader(sockfd);
         
         // Display the user that is presently logged into the system
-        DrawUserLoggedIn(userCard->userID);
+        DrawUserLoggedIn(userCard->userID, sockfd);
         
         // Push a few line-feeds to separate the contents
-        printf("\n\n");
+        strcpy(sendbuffer, "\n\n");
         
         // Provide a header for the product list
-        printf("Game Details\n");
+        strcat(sendbuffer, "Game Details\n");
+		write(sockfd, sendbuffer, MAXLINE);
+		ClearBuffer(sendbuffer, MAXLINE);
         
         // Provide a header border
-        StoreBorder();
+        StoreBorder(sockfd);
         
         // Provide an extra line-feed
-        printf("\n");
+        strcpy(sendbuffer, "\n");
+		write(sockfd, sendbuffer, MAXLINE);
+		ClearBuffer(sendbuffer, MAXLINE);
         
         // Display the product to the user
-        SelectedProduct_Display(gList, numRequested);
+        SelectedProduct_Display(gList, numRequested, sockfd);
         
         // Provide a header border
-        StoreBorder();
+        StoreBorder(sockfd);
         
         // Retrieve user request
-        userRequest = SelectedProduct_FeedBack();
+        userRequest = SelectedProduct_FeedBack(sockfd);
         
         // Evaluate the user's request
         switch(userRequest)
@@ -226,14 +245,15 @@ void SelectedProduct(GameData *gList, CustomerData *userCard, int numRequested)
                 isContinue = false;
                 break;
             case 1:     // Purchase the product
-                SelectedProduct_Purchased(userCard);
+                SelectedProduct_Purchased(userCard, sockfd);
                 isContinue = false;
                 break;
             default:    // Incorrect request
-                printf("<!> BAD REQUEST <!>\n");
-                printf("-------------------------------\n");
-                printf("Please select an option from the menu provided\n");
-                break;
+                strcpy(sendbuffer, "<!> BAD REQUEST <!>\n");
+                strcat(sendbuffer, "-------------------------------\n");
+                strcat(sendbuffer, "Please select an option from the menu provided\n");
+				write(sockfd, sendbuffer, MAXLINE);
+				ClearBuffer(sendbuffer, MAXLINE);
         } // switch()
     } while (isContinue);
 } // SelectedProduct()
@@ -242,16 +262,23 @@ void SelectedProduct(GameData *gList, CustomerData *userCard, int numRequested)
 
 
 // Selected Product - Purchased
-void SelectedProduct_Purchased(CustomerData *userCard)
+void SelectedProduct_Purchased(CustomerData *userCard, int sockfd)
 {
-    printf("Game purchased!\n");
-    printf("====================\n");
-    printf("Game will be shipped to the following address:\n");
-    printf("%s, %s, %s, %s, %s\n", userCard->addressStreet, userCard->addressCity, userCard->addressState, userCard->addressPostalCode, userCard->addressCountry);
+	char sendbuffer[MAXLINE];
+	ClearBuffer(sendbuffer, MAXLINE);
+	
+    strcpy(sendbuffer, "Game purchased!\n====================\n");
+    strcat(sendbuffer, "Game will be shipped to the following address:\n");
+	
+	strcat(sendbuffer, userCard->addressStreet);
+	strcat(sendbuffer,  userCard->addressCity);
+	strcat(sendbuffer,  userCard->addressState);
+	strcat(sendbuffer,  userCard->addressPostalCode);
+	strcat(sendbuffer,  userCard->addressCountry);
+	strcat(sendbuffer, "\n");
+	
+	write(sockfd, sendbuffer, MAXLINE);
 } // SelectedProduct_Purchased()
-
-
-
 
 // Selected Product - Feedback
 // -----------------------------------
@@ -268,26 +295,31 @@ void SelectedProduct_Purchased(CustomerData *userCard)
 //  1 = Purchase Item
 //  2 = Incorrect or unknown response
 // -----------------------------------
-int SelectedProduct_FeedBack()
+int SelectedProduct_FeedBack(int sockfd)
 {
     // Declarations and Initializations
     // ----------------------------------
     char userInput[_MAX_CHAR_INPUT_];    // This will hold the user input.
+	ClearBuffer(userInput, _MAX_CHAR_INPUT_);
+	char sendbuffer[MAXLINE];
+	ClearBuffer(sendbuffer, MAXLINE);
     // ----------------------------------
     
     // Show the user what options are available
-    printf("What would you like to do?\n");
-    printf("\n");
-    printf("Options:\n");
-    printf("------------------\n");
-    printf("[Buy] - Purchase the game\n");
-    printf("[X] - Return to the Store\n");    
+    strcpy(sendbuffer, "What would you like to do?\n");
+    strcat(sendbuffer, "\nOptions:\n");
+    strcat(sendbuffer, "------------------\n");
+    strcat(sendbuffer, "[Buy] - Purchase the game\n");
+    strcat(sendbuffer, "[X] - Return to the Store\n");
+	
+	write(sockfd, sendbuffer, MAXLINE);
+	ClearBuffer(sendbuffer, MAXLINE);
     
     // Display the prompt
-    DisplayPrompt();
+    DisplayPrompt(sockfd);
     
     // Get the user input
-    fgets(userInput, _MAX_CHAR_INPUT_, stdin);
+    read(sockfd, userInput, _MAX_CHAR_INPUT_);
     
     // Lower case the user's input
     LowerCaseUserInput(userInput);
@@ -325,8 +357,11 @@ int SelectedProduct_FeedBack()
 //      Holds the number (product ID; counter)
 //      that the user requested to view.
 // -----------------------------------
-void SelectedProduct_Display(GameData *gList, int numRequested)
+void SelectedProduct_Display(GameData *gList, int numRequested, int sockfd)
 {
+	char sendbuffer[MAXLINE];
+	ClearBuffer(sendbuffer, MAXLINE);
+	
     // Scan the Linked-List until we find the exact product we are looking for
     //  Remember, we can not DYNAMICALLY go specifically to that node, we must
     //  scan until we hit that exact node.
@@ -338,33 +373,36 @@ void SelectedProduct_Display(GameData *gList, int numRequested)
     // -----------------------------
     
     // TITLE
-    printf("%s\n", gList->title);
-    printf("\n");
+    strcpy(sendbuffer, gList->title);
+	strcat(sendbuffer, "\n\n");
     
     // DESCRIPTION
-    printf("Description:\n");
-    printf("%s\n", gList->description);
-    printf("\n");
+    strcat(sendbuffer, "Description:\n");
+    strcat(sendbuffer, gList->description);
+	strcat(sendbuffer, "\n\n");
     
     // PUBLISHER
-    printf("Publisher:\n");
-    printf("%s\n", gList->publisher);
-    printf("\n");
+    strcat(sendbuffer, "Publisher:\n");
+    strcat(sendbuffer, gList->publisher);
+	strcat(sendbuffer, "\n\n");
     
     // DEVELOPERS
-    printf("Developers:\n");
-    printf("%s\n", gList->developers);
-    printf("\n");
+    strcat(sendbuffer, "Developers:\n");
+    strcat(sendbuffer, gList->developers);
+    strcat(sendbuffer, "\n\n");
     
     // GENRE
-    printf("Genre:\n");
-    printf("%s\n", gList->genre);
-    printf("\n");
+    strcat(sendbuffer, "Genre:\n");
+    strcat(sendbuffer, gList->genre);
+    strcat(sendbuffer, "\n\n");
     
     // NOTES
-    printf("Notes:\n");
-    printf("%s\n", gList->notes);
-    printf("\n");
+    strcat(sendbuffer, "Notes:\n");
+    strcat(sendbuffer, gList->notes);
+    strcat(sendbuffer, "\n\n");
+	
+	write(sockfd, sendbuffer, MAXLINE);
+	
 } // SelectedProduct_Display()
 
 
@@ -387,28 +425,32 @@ void SelectedProduct_Display(GameData *gList, int numRequested)
 //    0 = Return to Main Menu
 //  0 < = Product within 
 // -----------------------------------
-int StoreMenu(int numProducts)
+int StoreMenu(int numProducts, int sockfd)
 {
     // Declarations and Initializations
     // ----------------------------------
     char userInput[_MAX_CHAR_INPUT_];   // This will hold the user input.
     int numInput;                       // Holds numeric value of what
                                         //  the user typed.
+	char sendbuffer[MAXLINE];
+	ClearBuffer(sendbuffer, MAXLINE);
     // ----------------------------------
     
     // Show 'Other Options' and instructions
-    printf("Select the game by using the number keys\n");
-    printf("\n");
-    printf("Other Options:\n");
-    printf("------------------\n");
-    printf("[X] - Exit\n");
+    strcpy(sendbuffer, "Select the game by using the number keys\n\n");
+    strcat(sendbuffer, "Other Options:\n");
+    strcat(sendbuffer, "------------------\n");
+    strcat(sendbuffer, "[X] - Exit\n");
+	
+	write(sockfd, sendbuffer, MAXLINE);
+	ClearBuffer(sendbuffer, MAXLINE);
     
     
     // Display the prompt
-    DisplayPrompt();
+    DisplayPrompt(sockfd);
     
     // Get the user input
-    fgets(userInput, _MAX_CHAR_INPUT_, stdin);
+    read(sockfd, userInput, _MAX_CHAR_INPUT_);
     
     // Lower case the user's input
     LowerCaseUserInput(userInput);
@@ -492,9 +534,14 @@ int CountProducts(GameData* gList)
 //  This function will merely provides a border.
 //  Ideally to help separate the content and to showcase focus
 // -----------------------------------
-void StoreBorder()
+void StoreBorder(int sockfd)
 {
-    printf("------------------------------------\n");
+	char sendbuffer[MAXLINE];
+	ClearBuffer(sendbuffer, MAXLINE);
+	
+    strcpy(sendbuffer, "------------------------------------\n");
+	
+	write(sockfd, sendbuffer, MAXLINE);
 } // StoreBorder
 
 

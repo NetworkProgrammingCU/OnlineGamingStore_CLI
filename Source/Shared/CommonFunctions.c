@@ -1,3 +1,9 @@
+// Included Libraries
+// ===============================
+#include "myunp.h" 		// included for write()
+#include "../Server/GlobalDefs.h" // included for _MAX_CHAR_INPUT_
+// ===============================
+
 // Common Functions
 // ================================
 // ================================
@@ -6,8 +12,6 @@
 //  the use of this file, it is possibly to share common
 //  resources with minimal redundancies as possible and minimal
 //  impact on code maintenance.
-
-
 
 
 // Lowercase User Input
@@ -94,9 +98,10 @@ int CheckForUserQuit(char string[], int stringSize)
 //  Used for 'strcmp()'
 #include <stdio.h>
 // ------------------------
-void DisplayPrompt()
+void DisplayPrompt(int sockfd)
 {
-    printf(">>>>> ");
+	char indicator[_MAX_CHAR_INPUT_] = ">>>>> ";
+	write(sockfd, indicator, _MAX_CHAR_INPUT_);
 } // DisplayPrompt()
 
 
@@ -129,9 +134,13 @@ void ClearBuffer(char stringBuffer[], int bufferSize)
 //  wall of text.  Thus, providing a cleaner look when accessing a new
 //  option or field.
 // -----------------------------------
-void ClearScreen()
+void ClearScreen(int sockfd)
 {
-    printf("\n\n\n\n\n\n\n");
+    char sendbuffer[MAXLINE];
+	ClearBuffer(sendbuffer,MAXLINE);
+
+	strcpy(sendbuffer, "\n\n\n\n\n\n\n");
+	write(sockfd, sendbuffer, _MAX_CHAR_INPUT_);
 } // ClearScreen()
 
 
@@ -146,9 +155,15 @@ void ClearScreen()
 //  screenName [char*]
 //      The User ID that this session is attached to presently.
 // -----------------------------------
-void DrawUserLoggedIn(char *screenName)
+void DrawUserLoggedIn(char *screenName, int sockfd)
 {
-    printf("You are logged in as: %s\n", screenName);
+    char sendbuffer[_MAX_CHAR_INPUT_];
+	ClearBuffer(sendbuffer,_MAX_CHAR_INPUT_);
+	
+	strcpy(sendbuffer, "You are logged in as: ");
+	strcat(sendbuffer, screenName);
+	strcat(sendbuffer, "\n");
+	write(sockfd, sendbuffer, _MAX_CHAR_INPUT_);
 } // DrawUserLoggedIn()
 
 

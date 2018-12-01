@@ -20,10 +20,10 @@
 
 // Function Prototypes for Main Menu
 // -----------------------------------
-void DrawInstructionsMainMenu();    // Display the program instructions onto the terminal.
-void DrawMenuMain();                // Display the main menu to the user.
-int MainMenu();                     // Manages with the Main Menu user Requests.
-int MainMenuUserRequest();          // User provides their request within the main menu.
+void DrawInstructionsMainMenu(int);    // Display the program instructions onto the terminal.
+void DrawMenuMain(int);                // Display the main menu to the user.
+int MainMenu(int);                     // Manages with the Main Menu user Requests.
+int MainMenuUserRequest(int);          // User provides their request within the main menu.
 // -----------------------------------
 
 

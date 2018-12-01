@@ -23,12 +23,12 @@
 // -----------------------------------
 void LowerCaseUserInput(char []);       // Lower cases the entire string provided from the user.
 int CheckForUserQuit(char [], int);     // Inspect user's input for a quit\exit request.
-void DisplayPrompt();                   // Display the Python'ish prompt to the end-user
+void DisplayPrompt(int);                   // Display the Python'ish prompt to the end-user
 void ClearBuffer(char [], int);         // Clear the buffer
 void FilterUserInputArray(char[], int); // Clean the user's input by removing extra spacing.
-void ClearScreen();                     // This function will try to 'clear' the terminal buffer.
+void ClearScreen(int);                     // This function will try to 'clear' the terminal buffer.
                                         //  Really, it's just new lines.
-void DrawUserLoggedIn();                // Display who is viewing the store.
+void DrawUserLoggedIn(char*, int);                // Display who is viewing the store.
 // -----------------------------------
 
 

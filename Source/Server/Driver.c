@@ -54,34 +54,11 @@
 
 
 
-
 // Included Libraries
 // ===============================
-#include <stdio.h>              // Input\Output Stream
-#include <stdbool.h>            // Because I was spoiled with C++ and C#, just give me the Bool data types!
-#include <ctype.h>              // tolower() functions for user input
-#include <stddef.h>             // NULLPTR; used for pointers
-#include <stdlib.h>             // Pointer Memory Allocation
-#include <time.h>               // time() function for randomized seeds
-#include "GlobalDefs.h"         // Program Macro-Definitions
-#include "myunp.h"              // Our custom UNP Header file
-#include "CommonFunctions.h"    // Shared functions; to help minimize development cost between sub-projects.
-#include "CustomerData.h"       // Customer Data Object
-#include "GameData.h"           // Game Data Object
-#include "ProgInformation.h"    // Instructions and Informational Output
-#include "GameLinkedList.h"     // Linked-List Support for Games
-#include "CustomerLinkedList.h" // Linked-List Support for Customers
-#include "Welcome.h"            // Welcome Menu
-#include "MainMenu.h"           // Main Menu
-#include "UpdateUserAccount.h"  // Update User Account Information (user card)
-// ===============================
-
-
-
-
-// Function Prototypes
-// ===============================
-void CloseProgram();                // Perform the termination protocol (if any).
+#include	"myunp.h"
+#include	"sigchldwaitpid.h"
+#include	"ChildServer.h"
 // ===============================
 
 
@@ -89,113 +66,48 @@ void CloseProgram();                // Perform the termination protocol (if any)
 
 // Main
 // -----------------------------------
-// Arguments:
-//  argc [int]
-//      How many arguments has been passed
-//  argv [multi-string]
-//      Arguments passed
-// -----------------------------------
-int main(int argc, char **argv)
+int main()
 {
-    // Declarations and Initializations
-    // ----------------------------------
-    struct CustomerData*
-        customerList = malloc(sizeof(CustomerData));    // Customer Data Linked-List
-    struct GameData*
-        gameList = malloc(sizeof(GameData));            // Game Data Linked-List
-    struct CustomerData*
-        sessionUser = malloc(sizeof(CustomerData));     // The user for this session
-    bool isContinue = true;                             // User request to terminate the program
-    // ----------------------------------
-    
-    // Immediate Execution
-    // ===================================
-    // All Linked-List heads point to NULL
-    customerList = NULL;    // Customer List
-    gameList = NULL;        // Game List
-    
-    // Prepare the linked-lists
-    GenerateUserList(&customerList);    // Create the Customer List
-    GenerateGameList(&gameList);        // Create the Game List (our catalog)
-    // ===================================
+	int					listenfd, connfd;
+	pid_t				childpid;
+	socklen_t			clilen;
+	struct sockaddr_in	cliaddr, servaddr;
+	void				sig_chld(int);
 
-    
-    // Determine the user's request
-    switch (WelcomeProtocol())
-    {
-        case 0:
-            printf("User requested to login\n");
-            UserLogin(customerList, &sessionUser);
-            break;
-        case 1:
-            printf("User requested to register\n");
-            ManuallyCreateNewUser(&customerList, &sessionUser);
-            break;
-        case 2:
-            printf("User requested to leave\n");
-            exit(1);
-            break;
-        default:
-            exit(255);
-            break;
-    } // switch()
-    
-    do
-    {
-        // Clear some space for the main menu screen
-        ClearScreen();
-        
-        // Display the program's header
-        DrawHeader();
-        
-        // Display the program's about section
-        DrawAbout();
-        
-        // Push a few line-feeds to separate the contents
-        printf("\n\n");
-        
-        // Display the user that is presently logged into the system
-        DrawUserLoggedIn(sessionUser->userID);
-        
-        // Push a few line-feeds to separate the contents
-        printf("\n\n\n");
-        
-        // Provide the Main Menu and determine the user's request
-        switch (MainMenu())
-        {
-            case 0: // Store Page
-                StoreDriver(gameList, sessionUser);
-                break;
-            case 1: // Update User Information
-                UpdateUserInfoMenu(&sessionUser);
-                break;
-            case 2: // Leave the Store
-                isContinue = false;     // Negate this flag; leave the loop
-                break;
-            default: // Incorrect input or request
-                printf("<!> BAD REQUEST <!>\n");
-                printf("-------------------------------\n");
-                printf("Please select an option from the menu provided\n");
-                break;
-        } // switch()
-    } while(isContinue);
-    
-    // Prepare to close the program
-    CloseProgram();
-    
-    // Terminate the program
-    return 0;
-} // main()
+	//creates listening socket
+	listenfd = socket(AF_INET, SOCK_STREAM, 0);
 
+	bzero(&servaddr, sizeof(servaddr)); //clears the server address bits before creating a new socket
+	
+	//IPv4 family for socket
+	servaddr.sin_family      = AF_INET;
 
+	//sets the server address to the IP address assigned to INADDR_ANY
+	servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+	
+	//sets the server in port to the value assigned to the SERV_PORT value
+	servaddr.sin_port        = htons(SERV_PORT);
 
+	//Binds the listening socket to the listenfd
+	bind(listenfd, (SA *) &servaddr, sizeof(servaddr));	
 
-// Closing Program
-// -----------------------------------
-// Documentation
-//  This function will perform any protocols necessary before the program's instance is destroyed or terminated.
-// -----------------------------------
-void CloseProgram()
-{
-    printf("Closing program. . .\n\n\n");
-} // CloseProgram()
+	listen(listenfd, LISTENQ);			//listens for client request
+
+	signal(SIGCHLD, sig_chld);			//creates a signal handler for child processes
+
+	for ( ; ; ) {
+		clilen = sizeof(cliaddr);		//used to detail the length of the client's address
+		connfd = accept(listenfd, (SA *) &cliaddr, &clilen); //stores value returned from "accept()" in "connfd"
+		childpid = fork();
+		
+		if (childpid == 0) {	//creates child server
+			close(listenfd);	// closes listening server socket
+			
+			//calls the main driver for the child server function and passes the socket used to connect to the client
+			ChildServer(connfd);	
+			close(connfd);			// close the connection socket
+			exit(0);				//exits the child process
+		}
+		
+	}
+}

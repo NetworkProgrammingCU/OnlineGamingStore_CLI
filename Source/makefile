@@ -19,6 +19,7 @@ shMyUNP := $(shDir)/myunp.h
 svOutput := server.binary
 svDir := $(DIR)/Server
 svDriver := $(svDir)/Driver.c
+svChildServer := $(svDir)/ChildServer.c
 svProgInfo := $(svDir)/ProgInformation.c
 svGameLL := $(svDir)/GameLinkedList.c
 svCustomerLL := $(svDir)/CustomerLinkedList.c
@@ -39,7 +40,7 @@ clComm := $(clDir)/Comm.c
 ALL: server client
 server:
 	@echo Compiling Server Build. . .
-	@$(compiler) $(compilerArg) $(svOutput) -I $(shDir) -I $(svDir) $(shComFun) $(svProgInfo) $(svGameLL) $(svCustomerLL) $(svWelcome) $(svMainMenu) $(svUpdateUsrInfo) $(svSigChldPID) $(svDriver)
+	$(compiler) $(compilerArg) $(svOutput) -I $(shDir) -I $(svDir) $(shComFun) $(svProgInfo) $(svGameLL) $(svCustomerLL) $(svWelcome) $(svMainMenu) $(svUpdateUsrInfo) $(svSigChldPID) $(svChildServer) $(svDriver)
 	@echo Successfully Compiled Build!
 client:
 	@echo Compiling Client Build. . .
