@@ -79,6 +79,7 @@ void str_cli(FILE *fp, int sockfd)
             {
                 // Display the message
                 fputs(receiveBuffer, stdout);
+                fflush(stdout);              // Required for stdout to display input prompt to user.
             } // Server responded - Message
         } // Server Responded
         
