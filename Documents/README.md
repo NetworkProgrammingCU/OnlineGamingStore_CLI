@@ -6,8 +6,8 @@
  * Project assignments of team numbers (wtf?)
  * Images
  * ReadMe
- * Technical ReadMe
+ * ~~Technical ReadMe~~
  * Log-Key
  * Log
  * Project Design
- * System Requirements
+ * ~~System Requirements~~
