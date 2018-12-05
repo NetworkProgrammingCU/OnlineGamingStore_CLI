@@ -5,7 +5,7 @@
  * ~~Program synopsis.~~
  * Project assignments of team numbers (wtf?)
  * Images
- * ReadMe
+ * ~~ReadMe~~
  * ~~Technical ReadMe~~
  * Log-Key
  * Log
