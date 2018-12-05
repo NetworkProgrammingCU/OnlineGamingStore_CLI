@@ -40,7 +40,7 @@ clComm := $(clDir)/Comm.c
 ALL: server client
 server:
 	@echo Compiling Server Build. . .
-	$(compiler) $(compilerArg) $(svOutput) -I $(shDir) -I $(svDir) $(shComFun) $(svProgInfo) $(svGameLL) $(svCustomerLL) $(svWelcome) $(svMainMenu) $(svUpdateUsrInfo) $(svSigChldPID) $(svChildServer) $(svDriver)
+	@$(compiler) $(compilerArg) $(svOutput) -I $(shDir) -I $(svDir) $(shComFun) $(svProgInfo) $(svGameLL) $(svCustomerLL) $(svWelcome) $(svMainMenu) $(svUpdateUsrInfo) $(svSigChldPID) $(svChildServer) $(svDriver)
 	@echo Successfully Compiled Build!
 client:
 	@echo Compiling Client Build. . .
