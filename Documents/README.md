@@ -4,10 +4,10 @@
  * ~~Software and hardware descriptions (Operating systems, computer architecture information, and so on).~~
  * ~~Program synopsis.~~
  * Project assignments of team numbers (wtf?)
- * Images
+ * ~~Images~~
  * ~~ReadMe~~
  * ~~Technical ReadMe~~
- * Log-Key
- * Log
+ * ~~Log-Key~~
+ * ~~Log~~
  * Project Design
  * ~~System Requirements~~
