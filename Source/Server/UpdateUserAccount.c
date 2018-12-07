@@ -26,6 +26,9 @@
 #include "MainMenu.h"           // Main Menu
 #include "UpdateUserAccount.h"  // Update User Account Information (user card)
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 3a4afe4... Fixed issue with the user's input not updating fields
+=======
 >>>>>>> parent of 3a4afe4... Fixed issue with the user's input not updating fields
 =======
 >>>>>>> parent of 3a4afe4... Fixed issue with the user's input not updating fields
@@ -218,7 +221,11 @@ void GenerateUserList(struct CustomerData** cList)
 // -----------------------------------
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ManuallyCreateNewUser(struct CustomerData** cList, struct CustomerData** userCard, int sockfd)
+=======
+void UpdateUserInfoMenu(CustomerData **userCard)
+>>>>>>> parent of 3a4afe4... Fixed issue with the user's input not updating fields
 =======
 void UpdateUserInfoMenu(CustomerData **userCard)
 >>>>>>> parent of 3a4afe4... Fixed issue with the user's input not updating fields
@@ -250,6 +257,9 @@ void UpdateUserInfoMenu(CustomerData **userCard)
 =======
     bool isContinue = true;     // User request to leave this menu
     int userRequest;            // User's request
+<<<<<<< HEAD
+>>>>>>> parent of 3a4afe4... Fixed issue with the user's input not updating fields
+=======
 >>>>>>> parent of 3a4afe4... Fixed issue with the user's input not updating fields
     // ----------------------------------
     
@@ -293,6 +303,7 @@ void UpdateUserInfoMenu(CustomerData **userCard)
     // User Login Password
     do
     {
+<<<<<<< HEAD
         sprintf(sendbuffer, "Provide User Login Password:\n");
 		write(sockfd, sendbuffer, MAXLINE);
 		ClearBuffer(sendbuffer, MAXLINE);
@@ -940,6 +951,8 @@ void UserLogin(CustomerData* cList, CustomerData **userCard, int sockfd)
     // Run the User Update Menu Loop
     do
     {
+=======
+>>>>>>> parent of 3a4afe4... Fixed issue with the user's input not updating fields
 =======
 >>>>>>> parent of 3a4afe4... Fixed issue with the user's input not updating fields
     DrawUserLoggedIn((*userCard)->userID);  // Show who is currently logged into the session
