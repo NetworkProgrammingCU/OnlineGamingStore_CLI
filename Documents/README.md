@@ -3,7 +3,7 @@
  * Instructions on how to use your program interface, such as how to use a menu.
  * ~~Software and hardware descriptions (Operating systems, computer architecture information, and so on).~~
  * ~~Program synopsis.~~
- * Project assignments of team numbers (wtf?)
+ * ~~Project assignments of team numbers (wtf?)~~
  * ~~Images~~
  * ~~ReadMe~~
  * ~~Technical ReadMe~~
