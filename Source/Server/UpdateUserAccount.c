@@ -25,6 +25,9 @@
 =======
 #include "MainMenu.h"           // Main Menu
 #include "UpdateUserAccount.h"  // Update User Account Information (user card)
+<<<<<<< HEAD
+>>>>>>> parent of 3a4afe4... Fixed issue with the user's input not updating fields
+=======
 >>>>>>> parent of 3a4afe4... Fixed issue with the user's input not updating fields
 // ===============================
 
@@ -214,7 +217,11 @@ void GenerateUserList(struct CustomerData** cList)
 //      user that is currently active within the session.
 // -----------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ManuallyCreateNewUser(struct CustomerData** cList, struct CustomerData** userCard, int sockfd)
+=======
+void UpdateUserInfoMenu(CustomerData **userCard)
+>>>>>>> parent of 3a4afe4... Fixed issue with the user's input not updating fields
 =======
 void UpdateUserInfoMenu(CustomerData **userCard)
 >>>>>>> parent of 3a4afe4... Fixed issue with the user's input not updating fields
@@ -224,6 +231,7 @@ void UpdateUserInfoMenu(CustomerData **userCard)
 	
     // Declarations and Initializations
     // ----------------------------------
+<<<<<<< HEAD
 <<<<<<< HEAD
     const int charSize = 128;   // Character pointer array size.
     int adminRights = 0;        // By default, the new user can not be an administrator.
@@ -239,6 +247,10 @@ void UpdateUserInfoMenu(CustomerData **userCard)
     char *addressStreet     = malloc(charSize*sizeof(char));   // Address (street)
     char *addressPostalCode = malloc(charSize*sizeof(char));   // Address (Zip Code)
     int cmpResponse;         // Used to assure that the user's response is meaningful
+=======
+    bool isContinue = true;     // User request to leave this menu
+    int userRequest;            // User's request
+>>>>>>> parent of 3a4afe4... Fixed issue with the user's input not updating fields
     // ----------------------------------
     
     // Tell the user that we're gathering information from them
@@ -251,6 +263,7 @@ void UpdateUserInfoMenu(CustomerData **userCard)
     // User Login ID
     do
     {
+<<<<<<< HEAD
         sprintf(sendbuffer, "Provide User Login Screen Name:\n");
 		write(sockfd, sendbuffer, MAXLINE);
 		ClearBuffer(sendbuffer, MAXLINE);
@@ -927,6 +940,8 @@ void UserLogin(CustomerData* cList, CustomerData **userCard, int sockfd)
     // Run the User Update Menu Loop
     do
     {
+=======
+>>>>>>> parent of 3a4afe4... Fixed issue with the user's input not updating fields
     DrawUserLoggedIn((*userCard)->userID);  // Show who is currently logged into the session
     printf("\n\n");                         // Provide extra padding for readability
     UpdateUserInfoShowMenu(*userCard);      // Display the Menu
