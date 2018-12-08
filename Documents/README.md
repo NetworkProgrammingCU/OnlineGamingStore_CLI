@@ -11,4 +11,4 @@
  * ~~Log~~
  * Project Design
  * ~~System Requirements~~
- * PowerPoint Presentation
+ * ~~PowerPoint Presentation~~
