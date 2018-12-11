@@ -32,7 +32,7 @@
 #include <ctype.h>          // pid_t
 #include <unistd.h>         // read(), write()
 #include <arpa/inet.h>      // inet_addr()
-#include <signal.h>	    	// for SIGCHLD and signal functions
+#include <signal.h>         // for SIGCHLD and signal functions
 // -----------------------------------
 
 

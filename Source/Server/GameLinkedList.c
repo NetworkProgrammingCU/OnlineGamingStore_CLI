@@ -57,20 +57,20 @@ void DisplayGameList(GameData* gList,int sockfd)
     //  we will a for() to also update our 'i'.  This 'i'
     //  is necessary so the user can 'select' a game from
     //  the list provided from here.
-	
-	char sendbuffer[MAXLINE];
-	
+
+    char sendbuffer[MAXLINE];
+
     for (int i = naturalStart; gList != NULL; ++i)
     {
-		ClearBuffer(sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
         // Display the Game Title
         sprintf(sendbuffer, "[%d] - %s\n", i, gList->title);
         
         // Display the Publisher
         strcat(sendbuffer, "       ");
-	strcat(sendbuffer, gList->publisher);
-	strcat(sendbuffer, "\n\n");
-	write(sockfd, sendbuffer, MAXLINE);
+        strcat(sendbuffer, gList->publisher);
+        strcat(sendbuffer, "\n\n");
+        write(sockfd, sendbuffer, MAXLINE);
         
         // Go to the next product
         gList = gList->next;
@@ -102,13 +102,13 @@ void StoreDriver(GameData *gList, CustomerData *userCard, int sockfd)
     int numProducts = 0;        // How many products exists within the store
     int userRequest;            // User's request within the store page.
     bool isContinue = true;     // User request to leave the store (return to main menu)
-	char sendbuffer[MAXLINE];
+    char sendbuffer[MAXLINE];
     // ----------------------------------
 
     // Run the store loop
     do
     {
-		ClearBuffer(sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
         // Clear some space for the main menu screen
         ClearScreen(sockfd);
         
@@ -123,18 +123,18 @@ void StoreDriver(GameData *gList, CustomerData *userCard, int sockfd)
         
         // Provide a header for the product list
         strcat(sendbuffer, "Store Page\n");
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
-        
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
+
         // Provide a header border
         StoreBorder(sockfd);
-		
-        
-        
+
+
+
         // Provide an extra line-feed
         strcpy(sendbuffer, "\n");
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
         
         // Display the products
         DisplayGameList(gList, sockfd);
@@ -158,8 +158,8 @@ void StoreDriver(GameData *gList, CustomerData *userCard, int sockfd)
                 strcpy(sendbuffer, "<!> BAD REQUEST <!>\n");
                 strcat(sendbuffer, "-------------------------------\n");
                 strcat(sendbuffer, "Please select an option from the menu provided\n");
-				write(sockfd, sendbuffer, MAXLINE);
-				ClearBuffer(sendbuffer, MAXLINE);
+                write(sockfd, sendbuffer, MAXLINE);
+                ClearBuffer(sendbuffer, MAXLINE);
                 break;
             default:    // Selected something from the store
                 SelectedProduct(gList, userCard, userRequest, sockfd);
@@ -196,14 +196,14 @@ void SelectedProduct(GameData *gList, CustomerData *userCard, int numRequested, 
     bool isContinue = true;         // Required for the loop; is the
                                     //  user finished viewing the product?
     int userRequest;                // User's request
-	char sendbuffer[MAXLINE];
+    char sendbuffer[MAXLINE];
     // ----------------------------------
     
     // Loop; assure proper feedback from the user
     //  hence why we need this loop.
     do
     {
-		ClearBuffer(sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
         // Clear some space for the main menu screen
         ClearScreen(sockfd);
         
@@ -218,16 +218,16 @@ void SelectedProduct(GameData *gList, CustomerData *userCard, int numRequested, 
         
         // Provide a header for the product list
         strcat(sendbuffer, "Game Details\n");
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
         
         // Provide a header border
         StoreBorder(sockfd);
         
         // Provide an extra line-feed
         strcpy(sendbuffer, "\n");
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
         
         // Display the product to the user
         SelectedProduct_Display(gList, numRequested, sockfd);
@@ -252,8 +252,8 @@ void SelectedProduct(GameData *gList, CustomerData *userCard, int numRequested, 
                 strcpy(sendbuffer, "<!> BAD REQUEST <!>\n");
                 strcat(sendbuffer, "-------------------------------\n");
                 strcat(sendbuffer, "Please select an option from the menu provided\n");
-				write(sockfd, sendbuffer, MAXLINE);
-				ClearBuffer(sendbuffer, MAXLINE);
+                write(sockfd, sendbuffer, MAXLINE);
+                ClearBuffer(sendbuffer, MAXLINE);
         } // switch()
     } while (isContinue);
 } // SelectedProduct()
@@ -264,24 +264,24 @@ void SelectedProduct(GameData *gList, CustomerData *userCard, int numRequested, 
 // Selected Product - Purchased
 void SelectedProduct_Purchased(CustomerData *userCard, int sockfd)
 {
-	char sendbuffer[MAXLINE];
-	ClearBuffer(sendbuffer, MAXLINE);
-	
+    char sendbuffer[MAXLINE];
+    ClearBuffer(sendbuffer, MAXLINE);
+
     strcpy(sendbuffer, "Game purchased!\n====================\n");
     strcat(sendbuffer, "Game will be shipped to the following address:\n");
-	
-	strcat(sendbuffer, userCard->addressStreet);
-	strcat(sendbuffer, " ");
-	strcat(sendbuffer,  userCard->addressCity);
-	strcat(sendbuffer, " ");
-	strcat(sendbuffer,  userCard->addressState);
-	strcat(sendbuffer, " ");
-	strcat(sendbuffer,  userCard->addressPostalCode);
-	strcat(sendbuffer, " ");
-	strcat(sendbuffer,  userCard->addressCountry);
-	strcat(sendbuffer, "\n");
-	
-	write(sockfd, sendbuffer, MAXLINE);
+
+    strcat(sendbuffer, userCard->addressStreet);
+    strcat(sendbuffer, " ");
+    strcat(sendbuffer,  userCard->addressCity);
+    strcat(sendbuffer, " ");
+    strcat(sendbuffer,  userCard->addressState);
+    strcat(sendbuffer, " ");
+    strcat(sendbuffer,  userCard->addressPostalCode);
+    strcat(sendbuffer, " ");
+    strcat(sendbuffer,  userCard->addressCountry);
+    strcat(sendbuffer, "\n");
+
+    write(sockfd, sendbuffer, MAXLINE);
 } // SelectedProduct_Purchased()
 
 // Selected Product - Feedback
@@ -304,9 +304,9 @@ int SelectedProduct_FeedBack(int sockfd)
     // Declarations and Initializations
     // ----------------------------------
     char userInput[_MAX_CHAR_INPUT_];    // This will hold the user input.
-	ClearBuffer(userInput, _MAX_CHAR_INPUT_);
-	char sendbuffer[MAXLINE];
-	ClearBuffer(sendbuffer, MAXLINE);
+    ClearBuffer(userInput, _MAX_CHAR_INPUT_);
+    char sendbuffer[MAXLINE];
+    ClearBuffer(sendbuffer, MAXLINE);
     // ----------------------------------
     
     // Show the user what options are available
@@ -315,9 +315,9 @@ int SelectedProduct_FeedBack(int sockfd)
     strcat(sendbuffer, "------------------\n");
     strcat(sendbuffer, "[Buy] - Purchase the game\n");
     strcat(sendbuffer, "[X] - Return to the Store\n");
-	
-	write(sockfd, sendbuffer, MAXLINE);
-	ClearBuffer(sendbuffer, MAXLINE);
+    
+    write(sockfd, sendbuffer, MAXLINE);
+    ClearBuffer(sendbuffer, MAXLINE);
     
     // Display the prompt
     DisplayPrompt(sockfd);
@@ -363,9 +363,9 @@ int SelectedProduct_FeedBack(int sockfd)
 // -----------------------------------
 void SelectedProduct_Display(GameData *gList, int numRequested, int sockfd)
 {
-	char sendbuffer[MAXLINE];
-	ClearBuffer(sendbuffer, MAXLINE);
-	
+    char sendbuffer[MAXLINE];
+    ClearBuffer(sendbuffer, MAXLINE);
+    
     // Scan the Linked-List until we find the exact product we are looking for
     //  Remember, we can not DYNAMICALLY go specifically to that node, we must
     //  scan until we hit that exact node.
@@ -378,17 +378,17 @@ void SelectedProduct_Display(GameData *gList, int numRequested, int sockfd)
     
     // TITLE
     strcpy(sendbuffer, gList->title);
-	strcat(sendbuffer, "\n\n");
+    strcat(sendbuffer, "\n\n");
     
     // DESCRIPTION
     strcat(sendbuffer, "Description:\n");
     strcat(sendbuffer, gList->description);
-	strcat(sendbuffer, "\n\n");
+    strcat(sendbuffer, "\n\n");
     
     // PUBLISHER
     strcat(sendbuffer, "Publisher:\n");
     strcat(sendbuffer, gList->publisher);
-	strcat(sendbuffer, "\n\n");
+    strcat(sendbuffer, "\n\n");
     
     // DEVELOPERS
     strcat(sendbuffer, "Developers:\n");
@@ -404,9 +404,9 @@ void SelectedProduct_Display(GameData *gList, int numRequested, int sockfd)
     strcat(sendbuffer, "Notes:\n");
     strcat(sendbuffer, gList->notes);
     strcat(sendbuffer, "\n\n");
-	
-	write(sockfd, sendbuffer, MAXLINE);
-	
+    
+    write(sockfd, sendbuffer, MAXLINE);
+    
 } // SelectedProduct_Display()
 
 
@@ -436,8 +436,8 @@ int StoreMenu(int numProducts, int sockfd)
     char userInput[_MAX_CHAR_INPUT_];   // This will hold the user input.
     int numInput;                       // Holds numeric value of what
                                         //  the user typed.
-	char sendbuffer[MAXLINE];
-	ClearBuffer(sendbuffer, MAXLINE);
+    char sendbuffer[MAXLINE];
+    ClearBuffer(sendbuffer, MAXLINE);
     // ----------------------------------
     
     // Show 'Other Options' and instructions
@@ -445,9 +445,9 @@ int StoreMenu(int numProducts, int sockfd)
     strcat(sendbuffer, "Other Options:\n");
     strcat(sendbuffer, "------------------\n");
     strcat(sendbuffer, "[X] - Exit\n");
-	
-	write(sockfd, sendbuffer, MAXLINE);
-	ClearBuffer(sendbuffer, MAXLINE);
+    
+    write(sockfd, sendbuffer, MAXLINE);
+    ClearBuffer(sendbuffer, MAXLINE);
     
     
     // Display the prompt
@@ -540,12 +540,12 @@ int CountProducts(GameData* gList)
 // -----------------------------------
 void StoreBorder(int sockfd)
 {
-	char sendbuffer[MAXLINE];
-	ClearBuffer(sendbuffer, MAXLINE);
-	
+    char sendbuffer[MAXLINE];
+    ClearBuffer(sendbuffer, MAXLINE);
+
     strcpy(sendbuffer, "------------------------------------\n");
-	
-	write(sockfd, sendbuffer, MAXLINE);
+
+    write(sockfd, sendbuffer, MAXLINE);
 } // StoreBorder
 
 

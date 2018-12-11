@@ -19,7 +19,7 @@
 #include "GlobalDefs.h"         // Program Macro-Definitions
 #include "MainMenu.h"           // Main Menu
 #include "UpdateUserAccount.h"  // Update User Account Information (user card)
-#include "myunp.h"				// For MAXLINE
+#include "myunp.h"              // For MAXLINE
 // ===============================
 
 
@@ -44,35 +44,35 @@ void UpdateUserInfoMenu(CustomerData **userCard, int sockfd)
     // ----------------------------------
     bool isContinue = true;     // User request to leave this menu
     int userRequest;            // User's request
-	char sendbuffer[MAXLINE];
+    char sendbuffer[MAXLINE];
     // ----------------------------------
     
     // Run the User Update Menu Loop
     do
     {
-		ClearBuffer(sendbuffer, MAXLINE);
-		DrawUserLoggedIn((*userCard)->userID, sockfd);  // Show who is currently logged into the session
-		strcpy(sendbuffer, "\n\n");   	// Provide extra padding for readability
-		write(sockfd, sendbuffer, MAXLINE);
-		UpdateUserInfoShowMenu(*userCard, sockfd);      // Display the Menu
+        ClearBuffer(sendbuffer, MAXLINE);
+        DrawUserLoggedIn((*userCard)->userID, sockfd);  // Show who is currently logged into the session
+        strcpy(sendbuffer, "\n\n");                     // Provide extra padding for readability
+        write(sockfd, sendbuffer, MAXLINE);
+        UpdateUserInfoShowMenu(*userCard, sockfd);      // Display the Menu
     
-		userRequest =                           // Get the user's request and cache the value
-			UpdateUserInfoMenuGetInput(sockfd);       //  to process it.
+        userRequest =                                   // Get the user's request and cache the value
+            UpdateUserInfoMenuGetInput(sockfd);         //  to process it.
     
-		// Inspect the user's input
-		if (userRequest < 10)       // Execute the user's request
-			UpdateUserInfoMenuUpdateChoice(userCard, userRequest, sockfd);
-		else if (userRequest == 10) // Return to main menu
-			isContinue = false;
-		else
-		{
-			ClearBuffer(sendbuffer, MAXLINE);
-			strcpy(sendbuffer, "<!> BAD REQUEST <!>\n");
-			strcat(sendbuffer, "-------------------------------\n");
-			strcat(sendbuffer, "Please select an option from the menu provided\n");
-			write(sockfd, sendbuffer, MAXLINE);
-		}
-	} while(isContinue);
+        // Inspect the user's input
+        if (userRequest < 10)       // Execute the user's request
+            UpdateUserInfoMenuUpdateChoice(userCard, userRequest, sockfd);
+        else if (userRequest == 10) // Return to main menu
+            isContinue = false;
+        else
+        {
+            ClearBuffer(sendbuffer, MAXLINE);
+            strcpy(sendbuffer, "<!> BAD REQUEST <!>\n");
+            strcat(sendbuffer, "-------------------------------\n");
+            strcat(sendbuffer, "Please select an option from the menu provided\n");
+            write(sockfd, sendbuffer, MAXLINE);
+        }
+    } while(isContinue);
 } // UpdateUserInfoMenu()
 
 
@@ -105,8 +105,8 @@ int UpdateUserInfoMenuGetInput(int sockfd)
 {
     // Declarations and Initializations
     // ----------------------------------
-    char userInput[MAXLINE];    // This will hold the user input.
-	ClearBuffer(userInput, MAXLINE);
+    char userInput[MAXLINE];        // This will hold the user input.
+    ClearBuffer(userInput, MAXLINE);
     // ----------------------------------
     
     // Display the prompt
@@ -180,8 +180,8 @@ void UpdateUserInfoMenuUpdateChoice(CustomerData **userCard, int request, int so
     // Declarations and Initializations
     // ----------------------------------
     char *userInput = (char*)malloc(sizeof(char)*_MAX_CHAR_INPUT_);
-	char sendbuffer[MAXLINE];
-	ClearBuffer(sendbuffer, MAXLINE);
+    char sendbuffer[MAXLINE];
+    ClearBuffer(sendbuffer, MAXLINE);
     // ----------------------------------
     
     
@@ -229,11 +229,11 @@ void UpdateUserInfoMenuUpdateChoice(CustomerData **userCard, int request, int so
             (*userCard)->addressPostalCode = userInput;
             break;
         default:// Bad key; don't fatally error out - no reason too.
-			ClearBuffer(sendbuffer, MAXLINE);
+            ClearBuffer(sendbuffer, MAXLINE);
             strcpy(sendbuffer, "<!> ERROR <!>\n");
             strcat(sendbuffer, "--------------------------------\n");
             strcat(sendbuffer, "Unknown User Card Request!\nRequest was canceled!\n");
-			write(sockfd, sendbuffer, MAXLINE);
+            write(sockfd, sendbuffer, MAXLINE);
             break;
     } // switch()
 } // UpdateUserInfoMenuUpdateChoice()
@@ -261,27 +261,27 @@ void UpdateUserInfoMenuUpdateChoice_MSG(char* msg, char **response, int sockfd)
     // Declarations and Initializations
     // ----------------------------------
     bool isContinue = true;     // Handle's the loop; if input is valid
-	char sendbuffer[MAXLINE];
+    char sendbuffer[MAXLINE];
     // ----------------------------------
     
     // Capture a valid response from the user
     do
     {
-		ClearBuffer(sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
         // Display the current value
         strcpy(sendbuffer, "Currently: ");
-		strcat(sendbuffer, msg);
-		strcat(sendbuffer, "\n");
+        strcat(sendbuffer, msg);
+        strcat(sendbuffer, "\n");
         
         // Tell the user to provide a new value
         strcat(sendbuffer, "Provide a new value\n");
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
-		
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
+        
         DisplayPrompt(sockfd);
         
         // Fetch the new value
-		ClearBuffer(*response, MAXLINE);
+        ClearBuffer(*response, MAXLINE);
         read(sockfd, *response, MAXLINE);
         
         // Clean it up; otherwise the '\n' char
@@ -289,17 +289,17 @@ void UpdateUserInfoMenuUpdateChoice_MSG(char* msg, char **response, int sockfd)
         FilterUserInputArray(*response, MAXLINE);
         
         if (!strncmp(*response, "\0", 1))
-		{
-			ClearBuffer(sendbuffer, MAXLINE);
+        {
+            ClearBuffer(sendbuffer, MAXLINE);
             strcpy(sendbuffer, "!ERR!: Please provide a valid value!\n\n");   // Bootless Star's old error messages :) [NG]
-			write(sockfd, sendbuffer, MAXLINE);
-			ClearBuffer(sendbuffer, MAXLINE);
-		}
-		
-		else
-		{
+            write(sockfd, sendbuffer, MAXLINE);
+            ClearBuffer(sendbuffer, MAXLINE);
+        }
+        
+        else
+        {
             isContinue = false;
-		}
+        }
     } while(isContinue);
 } // UpdateUserInfoMenuUpdateChoice_MSG()
 
@@ -319,64 +319,64 @@ void UpdateUserInfoMenuUpdateChoice_MSG(char* msg, char **response, int sockfd)
 // -----------------------------------
 void UpdateUserInfoShowMenu(CustomerData *userCard, int sockfd)
 {    
-	char sendbuffer[MAXLINE];
-	ClearBuffer(sendbuffer, MAXLINE);
-	
+    char sendbuffer[MAXLINE];
+    ClearBuffer(sendbuffer, MAXLINE);
+
     strcpy(sendbuffer, "Update User Information Menu\n");
     strcat(sendbuffer, "------------------------------------------------\n\n");
     // User's First Name
     strcat(sendbuffer, "[1] - First Name\n");
     strcat(sendbuffer, "       Current Value: ");
-	strcat(sendbuffer, userCard->firstName);
-	strcat(sendbuffer, "\n");
+    strcat(sendbuffer, userCard->firstName);
+    strcat(sendbuffer, "\n");
     // User's Last Name
     strcat(sendbuffer, "[2] - Last Name\n");
     strcat(sendbuffer, "       Current Value: ");
-	strcat(sendbuffer, userCard->lastName);
-	strcat(sendbuffer, "\n");
+    strcat(sendbuffer, userCard->lastName);
+    strcat(sendbuffer, "\n");
     // User's Account Password
     strcat(sendbuffer, "[3] - Account Password\n");
     strcat(sendbuffer, "       Current Value: ");
-	strcat(sendbuffer, userCard->userKey);
-	strcat(sendbuffer, "\n");
+    strcat(sendbuffer, userCard->userKey);
+    strcat(sendbuffer, "\n");
     // User's E-Mail Address
     strcat(sendbuffer, "[4] - E-Mail Address\n");
     strcat(sendbuffer, "       Current Value: ");
-	strcat(sendbuffer, userCard->email);
-	strcat(sendbuffer, "\n");
+    strcat(sendbuffer, userCard->email);
+    strcat(sendbuffer, "\n");
     // User's Phone Number
     strcat(sendbuffer, "[5] - Phone Number\n");
     strcat(sendbuffer, "       Current Value: ");
-	strcat(sendbuffer, userCard->phoneNumber);
-	strcat(sendbuffer, "\n");
+    strcat(sendbuffer, userCard->phoneNumber);
+    strcat(sendbuffer, "\n");
     // User's Address [City]
     strcat(sendbuffer, "[6] - Address [City]\n");
     strcat(sendbuffer, "       Current Value: ");
-	strcat(sendbuffer, userCard->addressCity);
-	strcat(sendbuffer, "\n");
+    strcat(sendbuffer, userCard->addressCity);
+    strcat(sendbuffer, "\n");
     // User's Address [State]
     strcat(sendbuffer, "[7] - Address [State]\n");
     strcat(sendbuffer, "       Current Value: ");
-	strcat(sendbuffer, userCard->addressState);
-	strcat(sendbuffer, "\n");
+    strcat(sendbuffer, userCard->addressState);
+    strcat(sendbuffer, "\n");
     // User's Address [Country]
     strcat(sendbuffer, "[8] - Address [Country]\n");
     strcat(sendbuffer, "       Current Value: ");
-	strcat(sendbuffer, userCard->addressCountry);
-	strcat(sendbuffer, "\n");
+    strcat(sendbuffer, userCard->addressCountry);
+    strcat(sendbuffer, "\n");
     // User's Address [Street]
     strcat(sendbuffer, "[9] - Address [Street]\n");
     strcat(sendbuffer, "       Current Value: ");
-	strcat(sendbuffer, userCard->addressStreet);
-	strcat(sendbuffer, "\n");
+    strcat(sendbuffer, userCard->addressStreet);
+    strcat(sendbuffer, "\n");
     // User's Address [Zip]
     strcat(sendbuffer, "[10] - Address [Zip Code]\n");
     strcat(sendbuffer, "       Current Value: ");
-	strcat(sendbuffer, userCard->addressPostalCode);
-	strcat(sendbuffer, "\n");
+    strcat(sendbuffer, userCard->addressPostalCode);
+    strcat(sendbuffer, "\n");
     // Leave the menu
     strcat(sendbuffer, "[X] - Return to Main Menu\n");
-	
-	write(sockfd, sendbuffer, MAXLINE);
-	ClearBuffer(sendbuffer, MAXLINE);
+
+    write(sockfd, sendbuffer, MAXLINE);
+    ClearBuffer(sendbuffer, MAXLINE);
 } // UpdateUserInfoShowMenu()

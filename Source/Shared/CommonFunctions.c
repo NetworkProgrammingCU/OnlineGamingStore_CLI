@@ -1,10 +1,3 @@
-// Included Libraries
-// ===============================
-#include "myunp.h" 		// included for write()
-#include "CommonFunctions.h"
-#include "../Server/GlobalDefs.h" // included for _MAX_CHAR_INPUT_
-// ===============================
-
 // Common Functions
 // ================================
 // ================================
@@ -13,6 +6,18 @@
 //  the use of this file, it is possibly to share common
 //  resources with minimal redundancies as possible and minimal
 //  impact on code maintenance.
+
+
+
+
+// Included Libraries
+// ===============================
+#include "myunp.h"                  // included for write()
+#include "CommonFunctions.h"
+#include "../Server/GlobalDefs.h"   // included for _MAX_CHAR_INPUT_
+// ===============================
+
+
 
 
 // Lowercase User Input
@@ -101,9 +106,10 @@ int CheckForUserQuit(char string[], int stringSize)
 // ------------------------
 void DisplayPrompt(int sockfd)
 {
-	char indicator[] = ">>>>> \0";
-	write(sockfd, indicator, MAXLINE);
+    char indicator[] = ">>>>> \0";
+    write(sockfd, indicator, MAXLINE);
 } // DisplayPrompt()
+
 
 
 
@@ -137,10 +143,10 @@ void ClearBuffer(char stringBuffer[], int bufferSize)
 void ClearScreen(int sockfd)
 {
     char sendbuffer[MAXLINE];
-	ClearBuffer(sendbuffer,MAXLINE);
+    ClearBuffer(sendbuffer,MAXLINE);
 
-	strcpy(sendbuffer, "\n\n\n\n\n\n\n");
-	write(sockfd, sendbuffer, MAXLINE);
+    strcpy(sendbuffer, "\n\n\n\n\n\n\n");
+    write(sockfd, sendbuffer, MAXLINE);
 } // ClearScreen()
 
 
@@ -158,13 +164,13 @@ void ClearScreen(int sockfd)
 void DrawUserLoggedIn(char *screenName, int sockfd)
 {
     char sendbuffer[MAXLINE];
-	ClearBuffer(sendbuffer,MAXLINE);
-	
-	strcpy(sendbuffer, "You are logged in as: ");
-	strcat(sendbuffer, screenName);
-	strcat(sendbuffer, "\n");
-	
-	write(sockfd, sendbuffer, MAXLINE);
+    ClearBuffer(sendbuffer,MAXLINE);
+    
+    strcpy(sendbuffer, "You are logged in as: ");
+    strcat(sendbuffer, screenName);
+    strcat(sendbuffer, "\n");
+    
+    write(sockfd, sendbuffer, MAXLINE);
 } // DrawUserLoggedIn()
 
 

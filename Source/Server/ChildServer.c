@@ -74,7 +74,7 @@
 #include "Welcome.h"            // Welcome Menu
 #include "MainMenu.h"           // Main Menu
 #include "UpdateUserAccount.h"  // Update User Account Information (user card)
-#include "ChildServer.h"		// Child Server header that includes function prototypes
+#include "ChildServer.h"        // Child Server header that includes function prototypes
 // ===============================
 
 
@@ -96,8 +96,8 @@ void ChildServer(int sockfd)
     struct CustomerData*
         sessionUser = malloc(sizeof(CustomerData));     // The user for this session
     bool isContinue = true;                             // User request to terminate the program
-	char sendbuffer[MAXLINE];
-	ClearBuffer(sendbuffer, MAXLINE);
+    char sendbuffer[MAXLINE];
+    ClearBuffer(sendbuffer, MAXLINE);
     // ----------------------------------
     
     // Immediate Execution
@@ -117,17 +117,14 @@ void ChildServer(int sockfd)
     {
         case 0:
             printf("User requested to login\n");
-			//write(sockfd, sendbuffer, MAXLINE);
             UserLogin(customerList, &sessionUser, sockfd);
             break;
         case 1:
             printf("User requested to register\n");
-			//write(sockfd, sendbuffer, MAXLINE);
             ManuallyCreateNewUser(&customerList, &sessionUser, sockfd);
             break;
         case 2:
             printf("User requested to leave\n");
-			//write(sockfd, sendbuffer, MAXLINE);
             exit(1);
             break;
         default:
@@ -148,15 +145,15 @@ void ChildServer(int sockfd)
         
         // Push a few line-feeds to separate the contents
         strcpy(sendbuffer, "\n\n");
-		write(sockfd, sendbuffer, MAXLINE);
+        write(sockfd, sendbuffer, MAXLINE);
         ClearBuffer(sendbuffer, MAXLINE);
-		
+        
         // Display the user that is presently logged into the system
         DrawUserLoggedIn(sessionUser->userID, sockfd);
         
         // Push a few line-feeds to separate the contents
         strcpy(sendbuffer, "\n\n\n");
-		write(sockfd, sendbuffer, MAXLINE);
+        write(sockfd, sendbuffer, MAXLINE);
         ClearBuffer(sendbuffer, MAXLINE);
         
         // Provide the Main Menu and determine the user's request
@@ -175,8 +172,8 @@ void ChildServer(int sockfd)
                 strcpy(sendbuffer, "<!> BAD REQUEST <!>\n");
                 strcat(sendbuffer, "-------------------------------\n");
                 strcat(sendbuffer, "Please select an option from the menu provided\n");
-				write(sockfd, sendbuffer, MAXLINE);
-				ClearBuffer(sendbuffer, MAXLINE);
+                write(sockfd, sendbuffer, MAXLINE);
+                ClearBuffer(sendbuffer, MAXLINE);
                 break;
         } // switch()
     } while(isContinue);
@@ -198,8 +195,8 @@ void ChildServer(int sockfd)
 // -----------------------------------
 void CloseProgram(int sockfd)
 {
-	char sendbuffer[MAXLINE];
-	ClearBuffer(sendbuffer, MAXLINE);
-	
+    char sendbuffer[MAXLINE];
+    ClearBuffer(sendbuffer, MAXLINE);
+    
     strcpy(sendbuffer, "Closing program. . .\n\n\n");
 } // CloseProgram()

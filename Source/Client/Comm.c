@@ -79,14 +79,13 @@ void str_cli(FILE *fp, int sockfd)
             {
                 // Display the message
                 printf("%s", receiveBuffer);
-				fflush(stdout);					// Stdout will not print a line until it sees a '\n'. This command will force stdout to display what is in the buffer.
+                fflush(stdout);             // Stdout will not print a line until it sees a '\n'. This command will force stdout to display what is in the buffer.
             } // Server responded - Message
         } // Server Responded
-		
+        
         // End-User Responded (STDIN)
         if (FD_ISSET(fileno(fp), &rset))
         {
-			
             // Check if the user wanted to quit
             if ((signalCache = read(fileno(fp), sendBuffer, MAXLINE) == 0) ||     // HotKey to cancel
                 !CheckForUserQuit(sendBuffer, strlen(sendBuffer)))  // User typed quit or exit

@@ -15,7 +15,7 @@
 #include "GlobalDefs.h"         // Program Macro-Definitions
 #include "CommonFunctions.h"    // Shared functions; to help minimize development cost between sub-projects.
 #include "MainMenu.h"           // Main Menu
-#include "myunp.h"				// For read()/write() and MAXLINE
+#include "myunp.h"              // For read()/write() and MAXLINE
 // ===============================
 
 
@@ -36,10 +36,10 @@
 // -----------------------------------
 int MainMenu(int sockfd)
 {
-    DrawInstructionsMainMenu(sockfd);     // Draw Instructions
-                                    //  regarding the main menu.
-    DrawMenuMain(sockfd);                 // Provide the Main Menu
-    return MainMenuUserRequest(sockfd);   // Fetch user input
+    DrawInstructionsMainMenu(sockfd);   // Draw Instructions
+                                        // regarding the main menu.
+    DrawMenuMain(sockfd);               // Provide the Main Menu
+    return MainMenuUserRequest(sockfd); // Fetch user input
 } // MainMenu()
 
 
@@ -102,9 +102,9 @@ int MainMenuUserRequest(int sockfd)
 // -----------------------------------
 void DrawMenuMain(int sockfd)
 {
-	char sendbuffer[MAXLINE];
-	ClearBuffer(sendbuffer, MAXLINE);
-	
+    char sendbuffer[MAXLINE];
+    ClearBuffer(sendbuffer, MAXLINE);
+
     strcpy(sendbuffer, "Main Menu\n------------------------------------------------\n\n");
     // View Store Catalog
     strcat(sendbuffer, "[1] - View Game Store\n");
@@ -115,8 +115,8 @@ void DrawMenuMain(int sockfd)
     // Leave terminate session
     strcat(sendbuffer, "[Exit] - Leave Store\n");
     strcat(sendbuffer, "       Exit from the store\n");
-	
-	write(sockfd, sendbuffer, MAXLINE);
+    
+    write(sockfd, sendbuffer, MAXLINE);
 } // DrawMenuMain()
 
 
@@ -130,10 +130,9 @@ void DrawMenuMain(int sockfd)
 // -----------------------------------
 void DrawInstructionsMainMenu(int sockfd)
 {
-	char sendbuffer[MAXLINE];
-	ClearBuffer(sendbuffer, MAXLINE);
-	
+    char sendbuffer[MAXLINE];
+    ClearBuffer(sendbuffer, MAXLINE);
+
     sprintf(sendbuffer, "Select the following options from the screen:\n");
-	write(sockfd, sendbuffer, MAXLINE);
-	
+    write(sockfd, sendbuffer, MAXLINE);
 } // DrawInstructions()

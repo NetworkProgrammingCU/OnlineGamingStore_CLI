@@ -20,7 +20,7 @@
 #include "CustomerData.h"       // Customer Data Object
 #include "CustomerLinkedList.h" // Provides the prototypes
 #include "CommonFunctions.h"    // Prompt
-#include "myunp.h"				// For MAXLINE
+#include "myunp.h"              // For MAXLINE
 // ===============================
 
 
@@ -155,7 +155,7 @@ void GenerateUserList(struct CustomerData** cList)
                             "United States",            // Address (Country)
                             "20 Sagamore Hill Rd",      // Address (Street)
                             "11771",                    // Address (Zip Code)
-                            1);							// Administrator?  
+                            1);                         // Administrator?  
             break;
         case 1:
             CreateNewCustomer(cList,                    // Customer Linked-List
@@ -170,7 +170,7 @@ void GenerateUserList(struct CustomerData** cList)
                             "United States",            // Address (Country)
                             "9764 Jeopardy Lane",       // Address (Street)
                             "60015",                    // Address (Zip Code)
-                            0);							// Administrator?
+                            0);                         // Administrator?
             break;
         case 2:
             CreateNewCustomer(cList,                    // Customer Linked-List
@@ -185,7 +185,7 @@ void GenerateUserList(struct CustomerData** cList)
                             "United States",            // Address (Country)
                             "4389 Brosius Cir.",        // Address (Street)
                             "79904",                    // Address (Zip Code)
-                            0);							// Administrator?
+                            0);                         // Administrator?
             break;
         } // switch
 } // GenerateUserList()
@@ -210,9 +210,9 @@ void GenerateUserList(struct CustomerData** cList)
 // -----------------------------------
 void ManuallyCreateNewUser(struct CustomerData** cList, struct CustomerData** userCard, int sockfd)
 {
-	char sendbuffer[MAXLINE];
-	ClearBuffer(sendbuffer, MAXLINE);
-	
+    char sendbuffer[MAXLINE];
+    ClearBuffer(sendbuffer, MAXLINE);
+    
     // Declarations and Initializations
     // ----------------------------------
     const int charSize = 128;   // Character pointer array size.
@@ -233,7 +233,7 @@ void ManuallyCreateNewUser(struct CustomerData** cList, struct CustomerData** us
     
     // Tell the user that we're gathering information from them
     sprintf(sendbuffer, "In order to register an account in this store, we're going to need a bit of information from you.\nPlease provide the following information:\n\n");
-	write(sockfd, sendbuffer, MAXLINE);
+    write(sockfd, sendbuffer, MAXLINE);
     ClearBuffer(sendbuffer, MAXLINE);
     
     // Capture input from the user
@@ -242,27 +242,27 @@ void ManuallyCreateNewUser(struct CustomerData** cList, struct CustomerData** us
     do
     {
         sprintf(sendbuffer, "Provide User Login Screen Name:\n");
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
-		
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
+        
         DisplayPrompt(sockfd);
-		ClearBuffer(userID, charSize);
+        ClearBuffer(userID, charSize);
         read(sockfd, userID, charSize);
         
         // Is the response valid and meaningful?
         cmpResponse = strncmp(userID, "\n", 1);
-		
+        
         if (!cmpResponse)
         {
-			sprintf(sendbuffer, "!ERR!: Please provide a valid value!\n");   // Bootless Star's old error messages :) [NG]
-			write(sockfd, sendbuffer, MAXLINE);
-			ClearBuffer(sendbuffer, MAXLINE);
-		}
-		
+            sprintf(sendbuffer, "!ERR!: Please provide a valid value!\n");   // Bootless Star's old error messages :) [NG]
+            write(sockfd, sendbuffer, MAXLINE);
+            ClearBuffer(sendbuffer, MAXLINE);
+        }
+        
         sprintf(sendbuffer, "\n");   // Provide an extra line-feed.
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
-		
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
+        
     } while(!cmpResponse);
     
     
@@ -271,26 +271,26 @@ void ManuallyCreateNewUser(struct CustomerData** cList, struct CustomerData** us
     do
     {
         sprintf(sendbuffer, "Provide User Login Password:\n");
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
-		
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
+        
         DisplayPrompt(sockfd);
-		ClearBuffer(userKey, charSize);
+        ClearBuffer(userKey, charSize);
         read(sockfd, userKey, charSize);
         
         // Is the response valid and meaningful?
         cmpResponse = strncmp(userKey, "\n", 1);
-		
+        
         if (!cmpResponse)
         {
-			sprintf(sendbuffer, "!ERR!: Please provide a valid value!\n");   // Bootless Star's old error messages :) [NG]
-			write(sockfd, sendbuffer, MAXLINE);
-			ClearBuffer(sendbuffer, MAXLINE);
-		}
-		
+            sprintf(sendbuffer, "!ERR!: Please provide a valid value!\n");   // Bootless Star's old error messages :) [NG]
+            write(sockfd, sendbuffer, MAXLINE);
+            ClearBuffer(sendbuffer, MAXLINE);
+        }
+        
         sprintf(sendbuffer, "\n");   // Provide an extra line-feed.
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
     } while(!cmpResponse);
     
     
@@ -299,27 +299,27 @@ void ManuallyCreateNewUser(struct CustomerData** cList, struct CustomerData** us
     do
     {
         sprintf(sendbuffer, "Provide an E-Mail Account:\n");
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
-		
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
+        
         DisplayPrompt(sockfd);
-		ClearBuffer(email, charSize);
+        ClearBuffer(email, charSize);
         read(sockfd, email, charSize);
         
         // Is the response valid and meaningful?
         cmpResponse = strncmp(email, "\n", 1);
-		
+        
         if (!cmpResponse)
         {
-			sprintf(sendbuffer, "!ERR!: Please provide a valid value!\n");   // Bootless Star's old error messages :) [NG]
-			write(sockfd, sendbuffer, MAXLINE);
-			ClearBuffer(sendbuffer, MAXLINE);
-		}
-		
+            sprintf(sendbuffer, "!ERR!: Please provide a valid value!\n");   // Bootless Star's old error messages :) [NG]
+            write(sockfd, sendbuffer, MAXLINE);
+            ClearBuffer(sendbuffer, MAXLINE);
+        }
+        
         sprintf(sendbuffer, "\n");   // Provide an extra line-feed.
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
-		
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
+        
     } while(!cmpResponse);
     
     
@@ -328,27 +328,27 @@ void ManuallyCreateNewUser(struct CustomerData** cList, struct CustomerData** us
     do
     {
         sprintf(sendbuffer, "Provide your First Name:\n");
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
-		
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
+        
         DisplayPrompt(sockfd);
-		ClearBuffer(firstName, charSize);
+        ClearBuffer(firstName, charSize);
         read(sockfd, firstName, charSize);
-    
+
         // Is the response valid and meaningful?
         cmpResponse = strncmp(firstName, "\n", 1);
-		
+        
         if (!cmpResponse)
         {
-			sprintf(sendbuffer, "!ERR!: Please provide a valid value!\n");   // Bootless Star's old error messages :) [NG]
-			write(sockfd, sendbuffer, MAXLINE);
-			ClearBuffer(sendbuffer, MAXLINE);
-		}
-		
+            sprintf(sendbuffer, "!ERR!: Please provide a valid value!\n");   // Bootless Star's old error messages :) [NG]
+            write(sockfd, sendbuffer, MAXLINE);
+            ClearBuffer(sendbuffer, MAXLINE);
+        }
+        
         sprintf(sendbuffer, "\n");   // Provide an extra line-feed.
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
-		
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
+        
     } while(!cmpResponse);
     
     
@@ -357,27 +357,27 @@ void ManuallyCreateNewUser(struct CustomerData** cList, struct CustomerData** us
     do
     {
         sprintf(sendbuffer, "Provide your Last Name:\n");
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
-		
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
+        
         DisplayPrompt(sockfd);
-		ClearBuffer(lastName, charSize);
+        ClearBuffer(lastName, charSize);
         read(sockfd, lastName, charSize);
-    
+
         // Is the response valid and meaningful?
         cmpResponse = strncmp(lastName, "\n", 1);
-		
+        
         if (!cmpResponse)
         {
-			sprintf(sendbuffer, "!ERR!: Please provide a valid value!\n");   // Bootless Star's old error messages :) [NG]
-			write(sockfd, sendbuffer, MAXLINE);
-			ClearBuffer(sendbuffer, MAXLINE);
-		}
-		
+            sprintf(sendbuffer, "!ERR!: Please provide a valid value!\n");   // Bootless Star's old error messages :) [NG]
+            write(sockfd, sendbuffer, MAXLINE);
+            ClearBuffer(sendbuffer, MAXLINE);
+        }
+        
         sprintf(sendbuffer, "\n");   // Provide an extra line-feed.
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
-		
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
+        
     } while(!cmpResponse);
     
     
@@ -386,27 +386,27 @@ void ManuallyCreateNewUser(struct CustomerData** cList, struct CustomerData** us
     do
     {
         sprintf(sendbuffer, "Provide your Phone Number:\n");
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
-		
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
+        
         DisplayPrompt(sockfd);
-		ClearBuffer(phoneNumber, charSize);
+        ClearBuffer(phoneNumber, charSize);
         read(sockfd, phoneNumber, charSize);
-    
+
         // Is the response valid and meaningful?
         cmpResponse = strncmp(phoneNumber, "\n", 1);
-		
+        
         if (!cmpResponse)
         {
-			sprintf(sendbuffer, "!ERR!: Please provide a valid value!\n");   // Bootless Star's old error messages :) [NG]
-			write(sockfd, sendbuffer, MAXLINE);
-			ClearBuffer(sendbuffer, MAXLINE);
-		}
-		
+            sprintf(sendbuffer, "!ERR!: Please provide a valid value!\n");   // Bootless Star's old error messages :) [NG]
+            write(sockfd, sendbuffer, MAXLINE);
+            ClearBuffer(sendbuffer, MAXLINE);
+        }
+        
         sprintf(sendbuffer, "\n");   // Provide an extra line-feed.
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
-		
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
+        
     } while(!cmpResponse);
     
     
@@ -415,27 +415,27 @@ void ManuallyCreateNewUser(struct CustomerData** cList, struct CustomerData** us
     do
     {
         sprintf(sendbuffer, "Provide your Address (City):\n");
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
-		
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
+        
         DisplayPrompt(sockfd);
-		ClearBuffer(addressCity, charSize);
+        ClearBuffer(addressCity, charSize);
         read(sockfd, addressCity, charSize);
-    
+
         // Is the response valid and meaningful?
         cmpResponse = strncmp(addressCity, "\n", 1);
         
         if (!cmpResponse)
         {
-			sprintf(sendbuffer, "!ERR!: Please provide a valid value!\n");   // Bootless Star's old error messages :) [NG]
-			write(sockfd, sendbuffer, MAXLINE);
-			ClearBuffer(sendbuffer, MAXLINE);
-		}
-		
+            sprintf(sendbuffer, "!ERR!: Please provide a valid value!\n");   // Bootless Star's old error messages :) [NG]
+            write(sockfd, sendbuffer, MAXLINE);
+            ClearBuffer(sendbuffer, MAXLINE);
+        }
+        
         sprintf(sendbuffer, "\n");   // Provide an extra line-feed.
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
-		
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
+        
     } while(!cmpResponse);
     
     
@@ -444,27 +444,27 @@ void ManuallyCreateNewUser(struct CustomerData** cList, struct CustomerData** us
     do
     {
         sprintf(sendbuffer, "Provide your Address (State):\n");
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
-		
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
+        
         DisplayPrompt(sockfd);
-		ClearBuffer(addressState, charSize);
+        ClearBuffer(addressState, charSize);
         read(sockfd, addressState, charSize);
-    
+
         // Is the response valid and meaningful?
         cmpResponse = strncmp(addressState, "\n", 1);
         
         if (!cmpResponse)
         {
-			sprintf(sendbuffer, "!ERR!: Please provide a valid value!\n");   // Bootless Star's old error messages :) [NG]
-			write(sockfd, sendbuffer, MAXLINE);
-			ClearBuffer(sendbuffer, MAXLINE);
-		}
-		
+            sprintf(sendbuffer, "!ERR!: Please provide a valid value!\n");   // Bootless Star's old error messages :) [NG]
+            write(sockfd, sendbuffer, MAXLINE);
+            ClearBuffer(sendbuffer, MAXLINE);
+        }
+        
         sprintf(sendbuffer, "\n");   // Provide an extra line-feed.
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
-		
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
+        
     } while(!cmpResponse);
     
     
@@ -473,27 +473,27 @@ void ManuallyCreateNewUser(struct CustomerData** cList, struct CustomerData** us
     do
     {
         sprintf(sendbuffer, "Provide your Address (Country):\n");
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
-		
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
+        
         DisplayPrompt(sockfd);
-		ClearBuffer(addressCountry, charSize);
+        ClearBuffer(addressCountry, charSize);
         read(sockfd, addressCountry, charSize);
-    
+
         // Is the response valid and meaningful?
         cmpResponse = strncmp(addressCountry, "\n", 1);
         
         if (!cmpResponse)
         {
-			sprintf(sendbuffer, "!ERR!: Please provide a valid value!\n");   // Bootless Star's old error messages :) [NG]
-			write(sockfd, sendbuffer, MAXLINE);
-			ClearBuffer(sendbuffer, MAXLINE);
-		}
-		
+            sprintf(sendbuffer, "!ERR!: Please provide a valid value!\n");   // Bootless Star's old error messages :) [NG]
+            write(sockfd, sendbuffer, MAXLINE);
+            ClearBuffer(sendbuffer, MAXLINE);
+        }
+        
         sprintf(sendbuffer, "\n");   // Provide an extra line-feed.
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
-		
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
+        
     } while(!cmpResponse);
     
     
@@ -502,27 +502,27 @@ void ManuallyCreateNewUser(struct CustomerData** cList, struct CustomerData** us
     do
     {
         sprintf(sendbuffer, "Provide your Address (Street):\n");
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
-		
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
+        
         DisplayPrompt(sockfd);
-		ClearBuffer(addressStreet, charSize);
+        ClearBuffer(addressStreet, charSize);
         read(sockfd, addressStreet, charSize);
-    
+
         // Is the response valid and meaningful?
         cmpResponse = strncmp(addressStreet, "\n", 1);
         
         if (!cmpResponse)
         {
-			sprintf(sendbuffer, "!ERR!: Please provide a valid value!\n");   // Bootless Star's old error messages :) [NG]
-			write(sockfd, sendbuffer, MAXLINE);
-			ClearBuffer(sendbuffer, MAXLINE);
-		}
-		
+            sprintf(sendbuffer, "!ERR!: Please provide a valid value!\n");   // Bootless Star's old error messages :) [NG]
+            write(sockfd, sendbuffer, MAXLINE);
+            ClearBuffer(sendbuffer, MAXLINE);
+        }
+        
         sprintf(sendbuffer, "\n");   // Provide an extra line-feed.
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
-		
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
+        
     } while(!cmpResponse);
     
     
@@ -531,34 +531,34 @@ void ManuallyCreateNewUser(struct CustomerData** cList, struct CustomerData** us
     do
     {
         sprintf(sendbuffer, "Provide your Address (ZIP-Code):\n");
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
-		
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
+        
         DisplayPrompt(sockfd);
-		ClearBuffer(addressPostalCode, charSize);
+        ClearBuffer(addressPostalCode, charSize);
         read(sockfd, addressPostalCode, charSize);
-    
+
         // Is the response valid and meaningful?
         cmpResponse = strncmp(addressPostalCode, "\n", 1);
         
         if (!cmpResponse)
         {
-			sprintf(sendbuffer, "!ERR!: Please provide a valid value!\n");   // Bootless Star's old error messages :) [NG]
-			write(sockfd, sendbuffer, MAXLINE);
-			ClearBuffer(sendbuffer, MAXLINE);
-		}
-		
+            sprintf(sendbuffer, "!ERR!: Please provide a valid value!\n");   // Bootless Star's old error messages :) [NG]
+            write(sockfd, sendbuffer, MAXLINE);
+            ClearBuffer(sendbuffer, MAXLINE);
+        }
+        
         sprintf(sendbuffer, "\n");   // Provide an extra line-feed.
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
-		
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
+        
     } while(!cmpResponse);
     
     
     // Tell the user that we creating the account for them.
     sprintf(sendbuffer, "Please wait, creating your account. . .\n");
-	write(sockfd, sendbuffer, MAXLINE);
-	ClearBuffer(sendbuffer, MAXLINE);
+    write(sockfd, sendbuffer, MAXLINE);
+    ClearBuffer(sendbuffer, MAXLINE);
     
     // Filter the values before appending them into the system
     CreateNewUser_ValueFiltering(&firstName,
@@ -605,8 +605,8 @@ void ManuallyCreateNewUser(struct CustomerData** cList, struct CustomerData** us
     
     // Tell the user that their account has been successfully created
     sprintf(sendbuffer, "Your account has been created!\n");
-	write(sockfd, sendbuffer, MAXLINE);
-	ClearBuffer(sendbuffer, MAXLINE);
+    write(sockfd, sendbuffer, MAXLINE);
+    ClearBuffer(sendbuffer, MAXLINE);
 } // ManuallyCreateNewUser()
 
 
@@ -728,9 +728,9 @@ bool FindUser_ReturnUserInfo(CustomerData *cList,
                             char *userID,
                             char *userKey, int sockfd)
 { 
-	char sendbuffer[MAXLINE];			//buffer used to send critical error message
-	ClearBuffer(sendbuffer, MAXLINE);
-	
+    char sendbuffer[MAXLINE];               //buffer used to send critical error message
+    ClearBuffer(sendbuffer, MAXLINE);
+    
     // Traverse through the Linked-List until we find the user's ID or reach NULL.
     while (cList != NULL && (0 != strcmp(cList->userID, userID)))
         cList = cList->next;
@@ -766,9 +766,9 @@ bool FindUser_ReturnUserInfo(CustomerData *cList,
         strcat(sendbuffer, " *Improper Conditional Checks\n");
         strcat(sendbuffer, " *Or worse, a very unknown error\n");
         strcat(sendbuffer, "Please send your complaints to the slave monkey coders.  We don't pay them anything, so please be some-what nice to them!\n");
-		
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
+        
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
         
         // Send a hard-crash-out.
         exit(2);
@@ -799,25 +799,25 @@ void AskUserLogin(char **userID, char **userKey, int sockfd)
     const int inputSize = 128;  // Maximum buffer\char length
     char rawUserID[inputSize];  // Unfiltered User Input - User ID
     char rawUserKey[inputSize]; // Unfiltered User Input - User Key
-	
-	char sendbuffer[MAXLINE];
-	ClearBuffer(sendbuffer, MAXLINE);
+
+    char sendbuffer[MAXLINE];
+    ClearBuffer(sendbuffer, MAXLINE);
     // ----------------------------------
     
     
     // Ask the user for their User ID
     sprintf(sendbuffer, "Please provide your User Name:\n");     // Tell the user what we are wanting
-	write(sockfd, sendbuffer, MAXLINE);
-	
-	
-	DisplayPrompt(sockfd);							// Display the Prompt msg.
+    write(sockfd, sendbuffer, MAXLINE);
+
+
+    DisplayPrompt(sockfd);                          // Display the Prompt msg.
     ClearBuffer(sendbuffer, MAXLINE);
-	
-	ClearBuffer(rawUserID, inputSize);
+
+    ClearBuffer(rawUserID, inputSize);
     read(sockfd, rawUserID, inputSize);             // Capture the user's input
-	
-	
-    
+
+
+
     // Filter the user's input
     FilterUserInputArray(rawUserID, inputSize);     // Filter the user's input; because
                                                     //  it contains the '\n' and will cause
@@ -832,12 +832,12 @@ void AskUserLogin(char **userID, char **userKey, int sockfd)
     
     // Ask the user for their password
     sprintf(sendbuffer, "Please provide the password for this account:\n");// Tell the user what we are wanting
-	write(sockfd, sendbuffer, MAXLINE);
-	ClearBuffer(sendbuffer, MAXLINE);
-	
-    DisplayPrompt(sockfd);                                // Display the Prompt msg.
-	
-	ClearBuffer(rawUserKey, inputSize);
+    write(sockfd, sendbuffer, MAXLINE);
+    ClearBuffer(sendbuffer, MAXLINE);
+
+    DisplayPrompt(sockfd);                          // Display the Prompt msg.
+
+    ClearBuffer(rawUserKey, inputSize);
     read(sockfd, rawUserKey, inputSize);            // Capture the user's input.
     
     // Filter the user's input again
@@ -876,11 +876,11 @@ void UserLogin(CustomerData* cList, CustomerData **userCard, int sockfd)
     char *userKey = malloc(128*sizeof(char));   // User's password for the account
     const int maxRetries = 4;                   // How many times can the user retry to login after so many failed attempts.
     int retryCounter = 0;                       // How many attempts has the user made thus far?
-	
-	char sendbuffer[MAXLINE];
-	ClearBuffer(sendbuffer, MAXLINE);
+
+    char sendbuffer[MAXLINE];
+    ClearBuffer(sendbuffer, MAXLINE);
     // ----------------------------------
-    
+
     do
     {
         // Ask the user for their account details
@@ -893,19 +893,19 @@ void UserLogin(CustomerData* cList, CustomerData **userCard, int sockfd)
         
         // Credentials did not match
         retryCounter++;     // Update the country
-		
+        
         sprintf(sendbuffer, "Incorrect username or password\n\n");
-		write(sockfd, sendbuffer, MAXLINE);
-		ClearBuffer(sendbuffer, MAXLINE);
-		
+        write(sockfd, sendbuffer, MAXLINE);
+        ClearBuffer(sendbuffer, MAXLINE);
+        
     } while (retryCounter <= maxRetries);
-    
+
     // If we are still executing, then the user exceeded the amount of retries.
     // Terminate the session.
-	
+
     sprintf(sendbuffer, "Maximum retries has been exceeded!  Connection to the store has been terminated!\n\n\n");
-	write(sockfd, sendbuffer, MAXLINE);
-	ClearBuffer(sendbuffer, MAXLINE);
-	
+    write(sockfd, sendbuffer, MAXLINE);
+    ClearBuffer(sendbuffer, MAXLINE);
+
     exit(3);
 } // UserLogin()
